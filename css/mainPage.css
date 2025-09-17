@@ -1,0 +1,363 @@
+/* Dont forget common.css */
+
+/* setting */
+#setting {
+    position: fixed;
+    top: 0;
+    right: 0.25vw;
+    width: 3.75vw;
+    height: 3.75vw;
+    border-radius: 0.5vw;
+    background-color: rgba(86, 66, 50, 1);
+    color: rgb(248, 247, 240);
+    transition: all 0.2s 0s linear;
+    box-shadow: 2px 2px 8px 1px black;
+    font-size: 2.25vw;
+    line-height: 3.75vw;
+    text-align: center;
+}
+
+#setting:hover {
+    box-shadow: 1px 1px 5px 1px black;
+    transition: all 0.2s 0s linear;
+}
+
+/* aside part */
+#selectGamePart>*,
+#settingPart>* {
+    margin: 4vh auto 1vh;
+    text-align: center;
+    font-size: 3vh;
+    font-weight: 500;
+}
+
+#ulSelectGame>li,
+#ulSetting>li {
+    margin: 2vh auto;
+    width: 20vw;
+    height: 6vh;
+    line-height: 6vh;
+    border-radius: 10px;
+    background-color: rgba(240, 248, 255, 0.5);
+    transition: all 0.2s 0s linear;
+    box-shadow: 2px 2px 10px 1px rgba(86, 66, 50, 0.685);
+}
+
+#ulSelectGame>li:hover,
+#ulSetting>li:hover {
+    transition: all 0.2s 0s linear;
+    box-shadow: .5px .5px 3px 1px rgba(86, 66, 50, 0.877);
+}
+
+#choose,
+#settingTitle {
+    font-size: 3.75vh !important;
+}
+
+#submit {
+    color: rgb(248, 247, 240);
+    width: 20vw;
+    border-radius: 10px;
+    background-color: rgba(86, 66, 50, 0.685);
+    transition: all 0.2s 0s linear;
+    box-shadow: 2px 2px 10px 1px rgba(86, 66, 50, 0.685);
+    font-size: 3.75vh !important;
+    line-height: 6vh;
+    height: 6vh;
+}
+
+#submit:hover {
+    transition: all 0.2s 0s linear;
+    box-shadow: .5px .5px 3px 1px rgba(86, 66, 50, 0.877);
+}
+
+#selectGamePart {
+    display: block;
+}
+
+#settingPart {
+    display: none;
+}
+
+/* main part by default */
+#login {
+    width: 45vw;
+    height: calc(100vh - 7.5vw - 14vh);
+    margin: 0 auto;
+    padding-top: 14vh;
+    /* 14vh equal two paddingTops 10 plus 4*/
+}
+
+#login>h2 {
+    text-align: center;
+    color: rgba(86, 66, 50, .75);
+    margin: 0 auto 1.5vh;
+    font-size: 3.75vh;
+}
+
+#login>form {
+    width: 45vw;
+    height: 36vh;
+    margin-top: 5vh;
+}
+
+#login>form>div {
+    height: 10vh;
+    margin: 1vh auto;
+    padding: 0 5vw;
+    font-size: 0;
+}
+
+#login>form>div>* {
+    height: 6vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+
+#login>form>div>input {
+    border: 0px;
+    width: 21vw;
+    height: 6vh;
+    float: right;
+    font-size: 2.25vh;
+    line-height: 6vh;
+    border-radius: 10px;
+    background-color: rgba(240, 248, 255, 0.5);
+    transition: all 0.2s 0s linear;
+    box-shadow: 2px 2px 10px 1px rgba(86, 66, 50, 0.685);
+}
+
+#login>form>div>label {
+    color: rgba(86, 66, 50, 0.625);
+    text-shadow: 1px 1px 2px gray;
+    width: 14vw;
+    height: 6vh;
+    font-size: 3vh;
+    font-weight: 700;
+    line-height: 6vh;
+    display: inline-block;
+}
+
+#login>form>div>button {
+    border: 0px;
+    width: 6vw;
+    height: 6vh;
+    line-height: 6vh;
+    font-size: 3vh;
+    border-radius: 10px;
+    background-color: rgba(86, 66, 50, 0.685);
+    color: rgba(240, 248, 255, 0.825);
+    transition: all 0.2s 0s linear;
+    box-shadow: 2px 2px 10px 1px rgba(86, 66, 50, 0.685);
+    display: inline-block;
+}
+
+#login>form>div>button:nth-child(1) {
+    width: 27vw;
+    margin-right: 2vw;
+}
+
+#login>form>div>input:hover,
+#login>form>div>button:hover {
+    transition: all 0.2s 0s linear;
+    box-shadow: .5px .5px 3px 1px rgba(86, 66, 50, 0.877);
+}
+
+/* main part */
+#login,
+#hello,
+#recordContent,
+#accountContent,
+#languageContent,
+#themeContent,
+#otherContent,
+#aboutContent,
+#helpContent {
+    display: none;
+    width: 45vw;
+    height: calc(100vh - 7.5vw);
+    margin: 0 auto;
+    overflow: scroll;
+}
+
+#loginContent>h1,
+#recordContent>h1,
+#accountContent>h1,
+#languageContent>h1,
+#themeContent>h1,
+#otherContent>h1,
+#aboutContent>h1,
+#helpContent>h1 {
+    text-align: center;
+    color: rgba(86, 66, 50, 1);
+    margin: 7.5vh auto 1.5vh;
+}
+
+#aboutContent>p,
+#otherContent>p,
+#helpContent>p {
+    text-align: left;
+    text-indent: 2em;
+    color: rgba(86, 66, 50, .675);
+    white-space: pre-wrap;
+}
+
+#recordContent>div,
+#accountContent>div,
+#languageContent>div,
+#themeContent>div,
+#otherContent>div {
+    margin: 3.75vh auto;
+    width: 30vw;
+    height: 7.5vh;
+    border-radius: 1.5vw;
+    background-color: rgba(240, 248, 255, 0.5);
+    color: rgba(86, 66, 50, .675);
+    transition: all 0.2s 0s linear;
+    box-shadow: 2px 2px 10px 1px rgba(86, 66, 50, 0.685);
+    line-height: 7.5vh;
+    font-size: 3vh;
+    text-align: center;
+}
+
+#recordContent>div:hover,
+#accountContent>div:hover,
+#languageContent>div:hover,
+#themeContent>div:hover,
+#otherContent>div:hover {
+    transition: all 0.2s 0s linear;
+    box-shadow: .5px .5px 3px 1px rgba(86, 66, 50, 0.877);
+}
+
+#hello {
+    text-align: center;
+    color: rgba(86, 66, 50, 1);
+    font-size: 6vh;
+    line-height: calc(100vh - 15vw);
+    margin: 0 auto;
+}
+
+#recordContent>hr {
+    margin-bottom: 2vh;
+}
+
+.recordListChoice {
+    box-sizing: border-box;
+    margin: 1.75vh 10px;
+    width: calc(45vw - 20px);
+    height: 15vh;
+    /* border: 2px solid rgba(86, 66, 50, .675); */
+    border-radius: 1.5vw;
+    background-color: rgba(240, 248, 255, 0.5);
+    color: rgba(86, 66, 50, .675);
+    transition: all 0.2s 0s linear;
+    box-shadow: 2px 2px 10px 1px rgba(86, 66, 50, 0.685);
+    line-height: 3.5vh;
+    font-size: 3.5vh;
+    text-align: center;
+}
+
+.recordListChoice:hover {
+    transition: all 0.2s 0s linear;
+    box-shadow: .5px .5px 3px 1px rgba(86, 66, 50, 0.877);
+}
+
+.recordListChoice>div {
+    width: calc(9vw - 4px);
+    float: left;
+    height: 15vh;
+    line-height: 7vh;
+    font-size: 3vh;
+    text-align: center;
+}
+
+#recordListDateSearch {
+    width: calc(7vw - 4px);
+    margin: 1.5vh 1vw;
+    float: left;
+    height: 5vh;
+    line-height: 5vh;
+    border-radius: 1vw;
+    transition: all 0.2s 0s linear;
+    box-shadow: 2px 2px 8px 1px rgba(86, 66, 50, 0.685);
+    background-color: rgba(86, 66, 50, .675);
+    color: white;
+}
+
+#recordListDateSearch:hover {
+    transition: all 0.2s 0s linear;
+    box-shadow: .5px .5px 3px 1px rgba(86, 66, 50, 0.877);
+}
+
+.recordNav {
+    width: 45vw;
+    margin: 1.5vh 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+    overflow-x: visible;
+}
+
+.recordNav>li {
+    display: inline-block;
+    width: calc(31vw - 20px);
+    height: 5vw;
+    overflow-x: visible;
+}
+
+.recordNav>li>ul {
+    width: calc(31vw - 20px);
+    height: 5vw;
+    white-space: nowrap;
+    overflow-x: visible;
+    scroll-behavior: smooth;    
+}
+
+.recordNav>li>ul>li {
+    display: inline-block;
+    width: 4vw;
+    height: 4vw;
+    line-height: 4vw;
+    font-size: 3vh;
+    border-radius: .75vw;
+    background-color: rgba(240, 248, 255, 0.825);
+    color: rgba(86, 66, 50, .675);
+    transition: all 0.2s 0s linear;
+    box-shadow: 2px 2px .5vw 1px rgba(86, 66, 50, 0.685);
+    text-align: center;
+    margin: .5vw calc(1.1vw - 2px);
+    transition: all 0.2s 0s linear;
+}
+
+.recordNav>li>ul>li:hover {
+    transition: all 0.2s 0s linear;
+    box-shadow: .5px .5px 2px 1px rgba(86, 66, 50, 0.877);
+}
+
+.recordNav>.pre,
+.recordNav>.next {
+    width: 7vw;
+    height: 5vw;
+    line-height: 5vw;
+    font-size: 3vh;
+    border-radius: .75vw;
+    background-color: rgba(86, 66, 50, .675);
+    color: rgba(240, 248, 255, 0.825);
+    transition: all 0.2s 0s linear;
+    box-shadow: 2px 2px 10px 1px rgba(86, 66, 50, 0.685);
+    text-align: center;
+    transition: all 0.2s 0s linear;
+}
+
+.recordNav>.next {
+    float: right;
+}
+
+.recordNav>.pre:hover,
+.recordNav>.next:hover {
+    transition: all 0.2s 0s linear;
+    box-shadow: .5px .5px 2px 1px rgba(86, 66, 50, 0.877);
+}
+
+.recordList {
+    overflow: scroll;
+}
