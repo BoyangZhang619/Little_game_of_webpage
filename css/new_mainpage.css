@@ -1,0 +1,306 @@
+/* ==========通用START========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    user-select: none;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: aliceblue;
+}
+
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+::-webkit-scrollbar-button {
+    display: none;
+}
+/* ==========通用END========== */
+
+
+
+/* ==========封面START========== */
+#cover {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgb(255, 255, 255);
+    z-index: 101;
+    overflow: hidden;
+}
+
+#cover main {
+    position: fixed;
+    top: 0;
+    left: 20vw;
+    width: 60vw;
+    height: 100vh;
+    z-index: 102;
+    transform: rotateZ(-45deg);
+}
+
+.cover {
+    width: 30vw;
+    height: 400vh;
+    float: left;
+    transform: translateY(-150vh);
+    box-shadow: gray 0px 0px 20px 10px;
+}
+
+#leftCover {
+    background-color: rgb(188, 255, 252);
+}
+
+#rightCover {
+    background-color: rgb(255, 204, 150);
+}
+
+#topCover {
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    z-index: 103;
+    text-align: center;
+}
+
+#topCover h1 {
+    font-size: 48px;
+    height: auto;
+    cursor: pointer;
+}
+
+#topCover h3 {
+    font-size: 24px;
+    height: auto;
+    cursor: pointer;
+}
+/* ==========封面END========== */
+
+
+
+/* ==========顶部导航栏START========== */
+#nav {
+    position: fixed;
+    top: -15vh;
+    left: calc(50vw - min(90vw, 1000px) / 2);
+    width: min(90vw, 1000px);
+    height: 8vh;
+    max-height: min(8vh, calc(100vw / 10));
+    z-index: 51;
+    height: 8vh;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 4vh;
+    box-shadow: rgba(1, 1, 1, 0.1) .5px .5px 3px 0.5px;
+    transition: all 0.3s ease-in-out;
+}
+
+#nav>ul {
+    width: min(90vw, 1000px);
+    height: 8vh;
+    max-height: min(8vh, calc(100vw / 10));
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
+}
+
+#nav>ul li {
+    width: min(9vw, 90px);
+    height: min(8vw, 80px);
+    margin: min(0.5vw, 5px) 0;
+    font-size: calc(min(8vw, 80px) / 2);
+    line-height: min(8vw, 80px);
+    align-self: center;
+    overflow: hidden;
+    text-align: center;
+    transition: all 0.3s ease;
+    flex-grow: 1;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+#nav>ul li:hover {
+    cursor: pointer;
+    transform: scale(.95);
+    transition: all 0.3s ease;
+}
+
+#nav>ul li:first-of-type {
+    flex-grow: 12;
+    border: 0px;
+    color: rgb(61, 61, 61);
+}
+
+#navLang:hover ~ .notLang{
+    flex-grow: 0;
+    opacity: 0;
+    width: 0;
+    transition: all 1s linear;
+}
+#navLang:hover{
+    flex-grow: 9;
+}
+/* ==========顶部导航栏END========== */
+
+
+
+/* ==========主内容框架START========== */
+#main {
+    opacity: 0;
+    margin-top: 15vh;
+    min-height: 85vh;
+    display: flex;
+    transition: all 1s ease;
+    flex-direction: column;
+    padding: 5vh calc(50vw - min(90vw, 1000px) / 2) 0;
+}
+#content {
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 2.5vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.gameType {
+    width: 400px;
+    height: 600px;
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 2.5vh 0;
+    box-shadow: 1px 1px 5px 1px rgba(1, 1, 1, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+.gameTypeBGScreen {
+    color: rgba(0, 20, 45, 0.75);
+    transition: all .6s .1s linear;
+    height: 100%;
+}
+.gameType:hover .gameTypeBGScreen{
+    cursor: pointer;
+    background-color: rgb(187, 237, 255);
+    transition: all .6s .1s linear;
+    color: rgb(105, 138, 150);
+}
+.gameTypeMain {
+    width: 100%;
+    height: calc(100% * 2 / 3);
+    border-radius: 12.5% 12.5% 0 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+.gameTypeFooter {
+    width: 100%;
+    height: calc(100% * 1 / 3);
+    border-radius: 0 0 50px 50px;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-sizing: border-box;
+    padding: 0 20px 20px;
+}
+.gameTypeTitle {
+    height: 30%;
+    font-size: 250%;
+    line-height: 200%;
+}
+.gameTypeExplanation {
+    padding: 10px;
+    padding-left: 20px;
+    overflow: scroll;
+    height: 70%;
+    text-align: left;
+    line-height: 1.5em;
+    font-size: 150%;
+}
+.gameTypeExplanation>li {
+    list-style: outside;
+}
+/* ==========主内容框架END========== */
+
+
+
+/* ==========主内容KLOTSKI_START========== */
+#klotski {
+
+}
+/* ==========主内容KLOTSKI_END========== */
+
+
+
+/* ==========页脚START========== */
+#footer {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: rgba(121, 121, 121, 0.5);
+    margin-top: 5vh;
+    display: none;
+}
+/* ==========页脚END========== */
+
+
+/* ==========遮罩START========== */
+#screenBlock {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+#screenBlockMainArea {
+    width: 90vw;
+    max-width: 600px;
+    height: 90vw;
+    max-height: 600px;
+    background-color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    box-shadow: 1.5px 1.5px 10px rgba(255, 255, 255, 0.75);
+    overflow: hidden;
+}
+/* ==========KEYFRAMES_START========== */
+@keyframes navShow {
+    0% {
+        top: -10vh;
+    }
+
+    60% {
+        top: 6vh;
+    }
+
+    100% {
+        top: 5vh;
+    }
+}
+
+@keyframes navHide {
+    0% {
+        top: 5vh;
+    }
+
+    40% {
+        top: 6vh;
+    }
+
+    100% {
+        top: -10vh;
+    }
+}
+/* ==========KEYFRAMES_END========== */
+
+

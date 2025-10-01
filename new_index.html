@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html translate="no">
+
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>𝑹𝑬𝑻𝑹𝑶𝑻𝑶𝑷𝑰𝑪</title>
+    <link rel="stylesheet" href="./css/new_common.css">
+    <link rel="stylesheet" href="./css/new_mainpage.css">
+    <link rel="icon" href="./img/iconB&Wpicture.png" type="image/x-icon">
+</head>
+
+<body>
+    <div id="cover">
+        <div id="topCover">
+            <h1>𝑳𝑰𝑻𝑻𝑳𝑬 𝑮𝑨𝑴𝑬</h1>
+            <h3>Click to enter</h3>
+        </div>
+        <main>
+            <div id="leftCover" class="cover"></div>
+            <div id="rightCover" class="cover"></div>
+        </main>
+    </div>
+    <aside id="nav">
+        <ul>
+            <li class="navClass" onclick="location.href=''">𝑳𝑰𝑻𝑻𝑳𝑬 𝑮𝑨𝑴𝑬</li>
+            <li class="navClass notTheme notSetting" id="navLang">
+                🌐
+                <ul id="langList">
+                    <li onclick="changeLang('en')">English</li>
+                    <li onclick="changeLang('zh')">中文</li>
+                </ul>
+            </li>
+            <li class="navClass notLang notSetting" id="navTheme">🌗</li>
+            <li class="navClass notLang notTheme" id="navSetting">🛠 </li>
+        </ul>
+    </aside>
+    <main id="main">
+        <div id="content">
+            <!-- there are kinds of presentations of game here -->
+            <div class="gameType" id="klotski">
+                <div class="gameTypeBGScreen">
+                    <main class="gameTypeMain">
+                        <ul>
+                            <li>3</li>
+                            <li>1</li>
+                            <li></li>
+                            <li>2</li>
+                        </ul>
+                    </main>
+                    <footer class="gameTypeFooter">
+                        <h2 class="gameTypeTitle">𝗞𝗹𝗼𝘁𝘀𝗸𝗶</h2>
+                        <ul class="gameTypeExplanation">
+                            <li>It’s a sliding block puzzle that originated in China, themed after the historical escape
+                                of General Cao Cao during the Three Kingdoms period.</li>
+                            <li>You have a grid with blocks of different shapes and sizes.</li>
+                            <li>The goal: move the largest block (representing Cao Cao) through the exit at the bottom
+                                of the board.</li>
+                            <li>Rules: you can only slide one block at a time, and blocks can’t overlap or leave the
+                                grid.</li>
+                            <li>It’s a game of spatial reasoning and planning ahead.</li>
+                        </ul>
+                    </footer>
+                </div>
+            </div>
+            <div class="gameType" id="game2048">
+                <div class="gameTypeBGScreen">
+                    <main class="gameTypeMain">
+                    </main>
+                    <footer class="gameTypeFooter">
+                        <h2 class="gameTypeTitle">2048</h2>
+                        <ul class="gameTypeExplanation">
+                            <li>A single-player sliding tile puzzle game.</li>
+                            <li>The board is a 4×4 grid where numbered tiles appear (usually 2 or 4).</li>
+                            <li>Each move slides all tiles in one direction (up, down, left, right).</li>
+                            <li>When two tiles with the same number collide, they merge into a new tile with their sum
+                                (e.g., 2+2=4, 4+4=8).</li>
+                            <li>The goal: combine numbers until you create the tile 2048 (and beyond, if you keep
+                                going).
+                            </li>
+                            <li>It’s simple in mechanics but surprisingly deep in strategy.</li>
+                        </ul>
+                    </footer>
+                </div>
+            </div>
+            <div class="gameType" id="labyrinth">
+                <div class="gameTypeBGScreen">
+                    <main class="gameTypeMain">
+                    </main>
+                    <footer class="gameTypeFooter">
+                        <h2 class="gameTypeTitle">𝗟𝗮𝗯𝘆𝗿𝗶𝗻𝘁𝗵</h2>
+                        <ul class="gameTypeExplanation">
+                            <li>A maze is essentially a puzzle of pathways.</li>
+                            <li>You usually start at an entrance and must find your way to an exit, avoiding dead ends.
+                            </li>
+                            <li>Mazes can be drawn on paper, built physically (like hedge mazes), or generated digitally
+                                in
+                                games.</li>
+                            <li>Algorithms like depth-first search, breadth-first search, or A* pathfinding are commonly
+                                used to solve mazes computationally.</li>
+                            <li>It’s about navigation and problem-solving under uncertainty.</li>
+                        </ul>
+                    </footer>
+                </div>
+            </div>
+            <div class="gameType" id="minesweaping">
+                <div class="gameTypeBGScreen">
+                    <main class="gameTypeMain">
+                    </main>
+                    <footer class="gameTypeFooter">
+                        <h2 class="gameTypeTitle">𝗠𝗶𝗻𝗲𝘀𝘄𝗲𝗲𝗽𝗶𝗻𝗴</h2>
+                        <ul class="gameTypeExplanation">
+                            <li>A classic logic puzzle that comes with many operating systems (famously Windows).</li>
+                            <li>The game is played on a grid of covered cells. Some cells hide mines.</li>
+                            <li>Clicking on a cell reveals either:
+                                <ol>
+                                    <li>A mine (game over)</li>
+                                    <li>A number showing how many adjacent cells contain mines.</li>
+                                </ol>
+                            </li>
+                            <li>Using logic and deduction, you must flag the locations of all mines without triggering
+                                them.
+                            </li>
+                            <li>It blends probability, risk-taking, and careful reasoning.</li>
+                        </ul>
+                    </footer>
+                </div>
+            </div>
+        </div>
+        <div id="footer"></div>
+    </main>
+    <div id="screenBlock">
+        <div id="screenBlockMainArea">
+
+        </div>
+
+    </div>
+    </div>
+    <script src="./js/new_mainpage.js"></script>
+</body>
+
+</html>
