@@ -1,5 +1,5 @@
 window.onload = () => {
-    [isScroll,isRecover] = [false,false]
+    [isScroll,isRecover,isLangShow,theme] = [false,false,false,false];
     if (/mobile/i.test(navigator.userAgent)) setStyleOfMobileDevice();
     console.log("你玩原神吗？");
 }
@@ -44,6 +44,23 @@ addEventListener('scroll', () => {
         return 0
     }
 });
+document.querySelector("#navLang").addEventListener('click', () => {
+    document.querySelectorAll(".notLang").forEach(item => item.style.animation = "showFadeShow 0.6s linear forwards");
+    setTimeout(() => {
+        setNavLang(!isLangShow, null);
+        isLangShow = !isLangShow;
+        document.querySelectorAll(".notLang").forEach(item => item.style.animation = "");
+    }, 300);
+});
+
+document.querySelector("#navTheme").addEventListener('click', () => {
+    if (isLangShow) return 0;
+    document.querySelector("body").style.transition = "all 0.3s ease";
+    document.querySelector("body").style.backgroundColor = theme ? "aliceblue" : "#2f4256";
+    document.querySelector("#content").style.backgroundColor = theme ? "rgba(255, 255, 255, 0.3)" : "#0000";
+    theme = !theme;
+    document.querySelector("#navTheme").textContent = document.querySelector("body").classList.contains("darkTheme") ? "🌞" : "🌗";
+});
 function showmainpage() {
     isRecover = true;
     scrollTo(0,0);
@@ -76,5 +93,9 @@ function setStyleOfMobileDevice() {
 }
 function setScreenBlock(mode = "show", title = "title", explanation = ["explanation"]) {
     document.querySelector("#screenBlock").style.display = mode === "show" ? "block" : "none";
+}
+function setNavLang(show = true, lang = "en-us") {
+    _substitute = show?["中","𝐄𝐧"]:["🌗","🛠"];
+    _substitute.forEach((item, index) => document.querySelectorAll(".notLang")[index].textContent = item);
 }
 
