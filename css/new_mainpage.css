@@ -96,11 +96,11 @@ body {
     height: 8vh;
     max-height: min(8vh, calc(100vw / 10));
     z-index: 51;
-    height: 8vh;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 4vh;
     box-shadow: rgba(1, 1, 1, 0.1) .5px .5px 3px 0.5px;
     transition: all 0.3s ease-in-out;
+    overflow: hidden;
 }
 
 #nav>ul {
@@ -193,9 +193,9 @@ body {
 }
 .gameType:hover .gameTypeBGScreen{
     cursor: pointer;
-    background-color: rgb(187, 237, 255);
+    background-color: rgb(227, 242, 255);;
     transition: all .6s .1s linear;
-    color: rgb(105, 138, 150);
+    /* color: rgb(105, 138, 150); */
 }
 .gameTypeMain {
     width: 100%;
@@ -215,7 +215,7 @@ body {
 .gameTypeTitle {
     height: 30%;
     font-size: 250%;
-    line-height: 200%;
+    line-height: 180%;
 }
 .gameTypeExplanation {
     padding: 10px;
@@ -279,6 +279,81 @@ body {
     box-shadow: 1.5px 1.5px 10px rgba(255, 255, 255, 0.75);
     overflow: hidden;
 }
+/* ==========遮罩END========== */
+
+/* ==========设置START========== */
+#setting{
+    display: none;
+    opacity: 0;
+    position: fixed;
+    top: 50vh;
+    left: 50vw;
+    width: 0px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 4vh;
+    box-shadow: rgba(1, 1, 1, 0.1) .5px .5px 3px 0.5px;
+}
+#mainSetting{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.settingPhone{
+    aspect-ratio: 9 / 16;
+    /* width: min(90vw, 300px); */
+}
+.settingComputer{
+    aspect-ratio: 16 / 9;
+    /* width: min(90vw, 600px); */
+}
+.settingComputer #settingNav{
+    padding: 2vh;
+    height: 100%;
+    width: 20%;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+.settingComputer #settingMain{
+    height: 100%;
+    width: 80%;
+    /* float: left; */
+}
+.settingComputer #settingNav ul{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: left;
+}
+.settingComputer #settingNav ul li{
+    height: 8vh;
+    line-height: 8vh;
+    font-size: 150%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    /* padding-left: 10px; */
+    box-sizing: border-box;
+    text-align: center;
+}
+/* ==========设置END========== */
+/* ==========设置-账号START========== */
+#accountPart{
+    display: flex; /* flex */
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+#accountRegister{
+    width: 30%;
+    height: 100%;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+/* ==========设置-账号END========== */
 /* ==========KEYFRAMES_START========== */
 @keyframes navShow {
     0% {top: -10vh;}

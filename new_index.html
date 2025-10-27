@@ -34,7 +34,7 @@
             <!-- there are kinds of presentations of game here -->
             <div class="gameType" id="klotski">
                 <div class="gameTypeBGScreen">
-                    <main class="gameTypeMain">
+                    <main class="gameTypeMain" onclick="location.href='./subpages/klotski.html'">
                         <ul>
                             <li>3</li>
                             <li>1</li>
@@ -59,10 +59,10 @@
             </div>
             <div class="gameType" id="game2048">
                 <div class="gameTypeBGScreen">
-                    <main class="gameTypeMain">
+                    <main class="gameTypeMain" onclick="location.href='./subpages/game2048.html'">
                     </main>
                     <footer class="gameTypeFooter">
-                        <h2 class="gameTypeTitle">2048</h2>
+                        <h2 class="gameTypeTitle">𝟮𝟬𝟰𝟴</h2>
                         <ul class="gameTypeExplanation">
                             <li>A single-player sliding tile puzzle game.</li>
                             <li>The board is a 4×4 grid where numbered tiles appear (usually 2 or 4).</li>
@@ -79,7 +79,7 @@
             </div>
             <div class="gameType" id="labyrinth">
                 <div class="gameTypeBGScreen">
-                    <main class="gameTypeMain">
+                    <main class="gameTypeMain" onclick="location.href='./subpages/labyrinth.html'">
                     </main>
                     <footer class="gameTypeFooter">
                         <h2 class="gameTypeTitle">𝗟𝗮𝗯𝘆𝗿𝗶𝗻𝘁𝗵</h2>
@@ -99,7 +99,7 @@
             </div>
             <div class="gameType" id="minesweaping">
                 <div class="gameTypeBGScreen">
-                    <main class="gameTypeMain">
+                    <main class="gameTypeMain" onclick="location.href='./subpages/minesweeping.html'">
                     </main>
                     <footer class="gameTypeFooter">
                         <h2 class="gameTypeTitle">𝗠𝗶𝗻𝗲𝘀𝘄𝗲𝗲𝗽𝗶𝗻𝗴</h2>
@@ -127,8 +127,41 @@
         <div id="screenBlockMainArea">
 
         </div>
-
     </div>
+    <div id="setting">
+        <div id="mainSetting">
+            <main id="settingMain">
+                <section id="accountPart">
+                    <div id="accountRegister">
+                        <div id="accountRegisterInfo">
+                            <div id="accountRegisterProfilePhoto"></div>
+                            <div id="accountRegisterName"></div>
+                            <div id="accountRegisterDescription"></div>
+                        </div>
+                    </div>
+                    <div id="accountShow">
+                        <div id="accountShowInfo">
+                            <div id="accountShowName"></div>
+                            <div id="accountShowEmail"></div>
+                            <div id="accountShowPhone"></div>
+                            <div id="accountShowDescription"></div>
+                        </div>
+                    </div>
+                </section>
+                <section id="settingPart">
+
+                </section>
+            </main>
+            <aside id="settingNav">
+                <ul id="settingUl">
+                    <li class="settingClass" id="setting-account">𝙰𝚌𝚌𝚘𝚞𝚗𝚝</li>
+                    <li class="settingClass" id="setting-theme">𝚃𝚑𝚎𝚖𝚎</li>
+                    <li class="settingClass" id="setting-language">𝙻𝚊𝚗𝚐𝚞𝚊𝚐𝚎</li>
+                    <li class="settingClass" id="setting-data">𝙳𝚊𝚝𝚊</li>
+                    <li class="settingClass setting-none">𝚎𝚝𝚌.</li>
+                </ul>
+            </aside>
+        </div>
     </div>
     <script src="./js/new_mainpage.js"></script>
 </body>
