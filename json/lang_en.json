@@ -1,0 +1,24 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "address": "#element1>h2>a",
+            "word": "𝐖𝐨𝐫𝐝"
+        },
+        {
+            "id": 2,
+            "address": "#element2>h2>a",
+            "word": "𝐀𝐧𝐨𝐭𝐡𝐞𝐫 𝐖𝐨𝐫𝐝"
+        }
+    ],
+    "includedParts": {
+        "mainpage": {
+            "cover": 1,
+            "navbar": 0
+        }
+    },
+    "meta": {
+        "version": "1.0",
+        "lastEdited": "2025-11-25"
+    }
+}

@@ -133,18 +133,56 @@
             <main id="settingMain">
                 <section id="accountPart">
                     <div id="accountRegister">
-                        <div id="accountRegisterInfo">
-                            <div id="accountRegisterProfilePhoto"></div>
-                            <div id="accountRegisterName"></div>
-                            <div id="accountRegisterDescription"></div>
+                        <div id="accountRegisterProfilePhoto">
+                            <img id="headSculpture" src="./img/default_head_sculpture.png" alt="Profile Photo">
                         </div>
+                        <div id="accountRegisterName">
+                            <p>Unregistered</p>
+                        </div>
+                        <div id="accountRegisterDescription">......</div>
                     </div>
                     <div id="accountShow">
-                        <div id="accountShowInfo">
-                            <div id="accountShowName"></div>
-                            <div id="accountShowEmail"></div>
-                            <div id="accountShowPhone"></div>
-                            <div id="accountShowDescription"></div>
+                        <div id="waitforregist">
+                            <div>
+                                <div>
+                                    <h2>𝑷𝒍𝒆𝒂𝒔𝒆 𝒓𝒆𝒈𝒊𝒔𝒕𝒆𝒓 𝒂𝒏 𝒂𝒄𝒄𝒐𝒖𝒏𝒕 𝒇𝒊𝒓𝒔𝒕.</h2>
+                                </div>
+                                <div>
+                                    <button id="toRegisterButton">𝑹𝒆𝒈𝒊𝒔𝒕𝒆𝒓
+                                    </button>
+                                    <button id="toLoginButton">𝑳𝒐𝒈𝒊𝒏
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accountShowInfo">
+                            <p>𝙽𝚊𝚖𝚎: </p>
+                            <input class="accountShowInput accountShowNameInput" type="text" placeholder="  Enter your name">
+                            <p>𝙿𝚊𝚜𝚜𝚠𝚘𝚛𝚍: </p>
+                            <input class="accountShowInput accountShowPasswordInput" type="password" placeholder="  Enter your password">
+                            <p>𝙿𝚊𝚜𝚜𝚠𝚘𝚛𝚍 𝙰𝚐𝚊𝚒𝚗: </p>
+                            <input class="accountShowInput accountShowPasswordAgainInput" type="password" placeholder="  Enter your password again">
+                            <p>𝙳𝚎𝚜𝚌𝚛𝚒𝚙𝚝𝚒𝚘𝚗: </p>
+                            <textarea class="accountShowInput accountShowDescriptionInput" placeholder="  Enter your description"></textarea>
+                            <div class="accountShowButtons">
+                                <button id="saveAccountInfo">𝐒𝐚𝐯𝐞</button>
+                                <button class="returnAccountProgram">𝐁𝐚𝐜𝐤</button>
+                            </div>
+                        </div>
+                        <div class="accountShowInfo">
+                            <p>𝙽𝚊𝚖𝚎: </p>
+                            <input class="accountShowInput accountShowNameInput" type="text" placeholder="  Enter your name">
+                            <p>𝙿𝚊𝚜𝚜𝚠𝚘𝚛𝚍: </p>
+                            <input class="accountShowInput accountShowPasswordInput" type="password" placeholder="  Enter your password">
+                            <p>𝙳𝚎𝚜𝚌𝚛𝚒𝚙𝚝𝚒𝚘𝚗: </p>
+                            <textarea class="accountShowInput accountShowDescriptionInput" placeholder="  Enter your description"></textarea>
+                            <div class="accountShowButtons">
+                                <button id="Login">𝐋𝐨𝐠𝐢𝐧</button>
+                                <button class="returnAccountProgram">𝐁𝐚𝐜𝐤</button>
+                            </div>
+                        </div>
+                        <div id="accountGreeting">
+                            <h2>𝑾𝒆𝒍𝒄𝒐𝒎𝒆 𝒃𝒂𝒄𝒌, <span id="accountShowNameSpan" style="color: lightskyblue;">User</span>!</h2>
                         </div>
                     </div>
                 </section>
@@ -164,6 +202,11 @@
         </div>
     </div>
     <script src="./js/new_mainpage.js"></script>
+    <!-- <script type="module">
+        fetch('./json/lang_en.json')
+  .then(res => res.json())
+  .then(data => console.log(data));
+    </script> -->
 </body>
 
 </html>

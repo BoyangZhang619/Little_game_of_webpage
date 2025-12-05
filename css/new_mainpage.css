@@ -56,11 +56,11 @@ body {
 }
 
 #leftCover {
-    background-color: rgb(188, 255, 252);
+    background-color: rgb(217, 217, 217);
 }
 
 #rightCover {
-    background-color: rgb(255, 204, 150);
+    background-color: rgb(91, 91, 91);
 }
 
 #topCover {
@@ -286,13 +286,13 @@ body {
     display: none;
     opacity: 0;
     position: fixed;
-    top: 50vh;
+    top: 18vh;
     left: 50vw;
     width: 0px;
     overflow: hidden;
     transition: all 0.3s ease;
     z-index: 999;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 4vh;
     box-shadow: rgba(1, 1, 1, 0.1) .5px .5px 3px 0.5px;
@@ -339,6 +339,9 @@ body {
     box-sizing: border-box;
     text-align: center;
 }
+#accountShow{
+    width: 70%;
+}
 /* ==========设置END========== */
 /* ==========设置-账号START========== */
 #accountPart{
@@ -348,12 +351,156 @@ body {
     width: 100%;
 }
 #accountRegister{
+    /* 4.8 : 9 */
     width: 30%;
     height: 100%;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
     box-sizing: border-box;
+    /* display: flex;
+    flex-direction: column; */
+    align-items: center;
+    padding-top: 2.5vh;
+}
+#accountRegisterProfilePhoto{
+    margin: 0 auto;
+    aspect-ratio: 1;
+    flex : 3;
+    height: 40%;
+    width: 100%;
+}
+#headSculpture{
+    aspect-ratio: 1;
+    width: 50%;
+    margin: 0 auto;
+    transform: translate(50%, 50%);
+    /* height: 100%; */
+    border-radius: 50%;
+}
+#accountRegisterName{
+    flex : 1;
+    margin: 5% 10%;
+    border-radius: 10%;
+    background-color: #efefef55;
+    height: 10%;
+    width: 80%;
+}
+#accountRegisterName p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+#accountRegisterDescription{
+    margin: 5% 10%;
+    flex : 3;
+    /* margin: 1vh auto; */
+    border-radius: 10%;
+    background-color: #efefef55;
+    height: 35%;
+    width: 80%;
 }
 /* ==========设置-账号END========== */
+/* ==========设置-账号-登录预备页START========== */
+#waitforregist{
+    width: 100%;
+    height: 50%;
+    transform: translateY(50%);
+    margin: 0 auto;
+}
+#waitforregist>div{
+    height: 50%;
+    width: 100%;
+    transform: translateY(50%);
+}
+#waitforregist>div>div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 50%;
+    width: 100%;
+}
+#waitforregist>div>div>h3{
+    display: block;
+    text-align: center;
+}
+#waitforregist>div>div>button{
+    height: 100%;
+    width: 40%;
+    font-size: 150%;
+    border: none;
+    margin: 0 auto;
+    border-radius: 10px;
+    background-color: rgba(240, 248, 255, 0.1);
+    box-shadow: rgba(1, 1, 1, 0.1) .5px .5px 3px 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+#waitforregist>div>div>button:hover{
+    background-color: rgba(240, 248, 255, 0.2);
+    box-shadow: rgba(1, 1, 1, 0.2) .5px .5px 5px 1px;
+    transition: all 0.3s ease;
+}
+.accountShowInfo, #accountGreeting{
+    display: none;
+    text-align: center;
+    margin-top: 5vh;
+}
+/* ==========设置-账号-登录预备页END========== */
+
+/* ==========设置-账号-登录页START========== */
+.accountShowInfo{
+    width: 100%;
+    height: 70%;
+    transform: translateY(15%);
+    margin: 0 auto;
+}
+.accountShowInfo>p{
+    /* float: left; */
+    width: 70%;
+    text-align: left;
+    margin: 0 auto;
+    margin-top: 1vh;
+}
+.accountShowInfo>.accountShowInput,#accountShowButtons {
+    background-color: whitesmoke;
+    border: 0px;
+    border-radius: 15px;
+    height: 12.5%;
+    width: 70%;
+    margin: 0 auto;
+    resize: vertical;
+}
+
+.accountShowButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    height: 12.5%;
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+.accountShowButtons>button{
+    height: 100%;
+    width: 50%;
+    font-size: 150%;
+    border: none;
+    border-radius: 10px;
+    background-color: rgba(240, 248, 255, 0.1);
+    box-shadow: rgba(1, 1, 1, 0.1) .5px .5px 3px 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.accountShowButtons>button:hover{
+    background-color: rgba(240, 248, 255, 0.2);
+    box-shadow: rgba(1, 1, 1, 0.2) .5px .5px 5px 1px;
+    transition: all 0.3s ease;
+}
+#accountGreeting{
+    margin: 40% auto;
+}
+/* ==========设置-账号-登录页END========== */
 /* ==========KEYFRAMES_START========== */
 @keyframes navShow {
     0% {top: -10vh;}
