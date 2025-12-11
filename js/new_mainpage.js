@@ -1,9 +1,10 @@
 window.onload = () => {
     [isScroll, isRecover, isLangShow, theme, isPhone, isSettingShow, isLogin] = [false, false, false, false, /mobile/i.test(navigator.userAgent), false, false];
     if (isPhone) setStyleOfMobileDevice();
+    initializeSettingsPage();
     console.log("你玩原神吗？");
 }
-let db = null;
+// let db = null;
 document.querySelector('#cover').addEventListener('click', () => {
     const cover = document.querySelector('#cover');
     Object.assign(cover.style, {
@@ -150,141 +151,19 @@ Array.from(document.getElementsByClassName("returnAccountProgram")).forEach(butt
         document.getElementsByClassName("accountShowInfo")[1].style.display = "none";
     });
 });
-// document.getElementById("saveAccountInfo").addEventListener("click", () => plusNewUser());
-// // document.getElementById("Login").addEventListener("click", () => refreshLoginUser());
-// document.getElementById("Login").addEventListener("click", () => detectUser());
-
-// function plusNewUser() {
-//     const name = document.getElementsByClassName("accountShowNameInput")[0].value.trim();
-//     if (!name) { alert("𝐏𝐥𝐞𝐚𝐬𝐞 𝐞𝐧𝐭𝐞𝐫 𝐲𝐨𝐮𝐫 𝐧𝐚𝐦𝐞"); return; }
-//     const password = document.getElementsByClassName("accountShowPasswordInput")[0].value.trim();
-//     if (!password) { alert("𝐏𝐥𝐞𝐚𝐬𝐞 𝐞𝐧𝐭𝐞𝐫 𝐲𝐨𝐮𝐫 𝐩𝐚𝐬𝐬𝐰𝐨𝐫𝐝"); return; }
-//     if (!(/^(?=.{9,18}$)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#_])[A-Za-z\d@#_]{9,18}$/.test(password))) { alert("𝐏𝐥𝐞𝐚𝐬𝐞 𝐞𝐧𝐭𝐞𝐫 𝐚 𝐯𝐚𝐥𝐢𝐝 𝐩𝐚𝐬𝐬𝐰𝐨𝐫𝐝\n𝐋𝐞𝐧𝐠𝐭𝐡: 9-18 𝐜𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫𝐬\n𝐂𝐨𝐦𝐩𝐨𝐧𝐞𝐧𝐭𝐬(𝐌𝐔𝐒𝐓): 𝘈-𝘡, 𝘢-𝘻, 0-9, @#_"); return; }
-//     const passwordAgain = document.getElementsByClassName("accountShowPasswordAgainInput")[0].value.trim();
-//     if (passwordAgain !== password) { alert("𝐏𝐥𝐞𝐚𝐬𝐞 𝐞𝐧𝐭𝐞𝐫 𝐚 𝐜𝐨𝐫𝐫𝐞𝐜𝐭 𝐩𝐚𝐬𝐬𝐰𝐨𝐫𝐝"); return; }
-//     const description = document.getElementsByClassName("accountShowDescriptionInput")[0].value.trim();
-//     document.querySelector("#accountRegisterName>p").textContent = name;
-//     document.querySelector("#accountRegisterDescription").textContent = description;
-//     const user = { name, password, description ,headSculpture: "default", email: "", phone: "", theme: "light"};
-//     const encoded = [encodeBase64(String(crypto.randomUUID())), encodeBase64(user)];
-//     console.log(user);
-//     openDB().then(() => dbSet(encoded).then(() => {
-//         alert("𝐑𝐞𝐠𝐢𝐬𝐭𝐞𝐫 𝐒𝐮𝐜𝐜𝐞𝐬𝐬!");
-//         refreshLoginUser(user,encoded[0]);
-//     }));
-// }
-// function refreshLoginUser(data,id="userinfo") {
-//     console.log(data,"has logged in");
-//     // data = dbGet(objectStoreName="userStore",dbInstance=db,id=id).then(raw => {
-//     //     data = decodeBase64(raw);
-//     //     console.log("Decoded user data:", data);
-//     // });
-//     document.querySelector("#accountGreeting").style.display = "block";
-//     document.getElementById("waitforregist").style.display = "none";
-//     document.getElementsByClassName("accountShowInfo")[0].style.display = "none";
-//     document.getElementsByClassName("accountShowInfo")[1].style.display = "none";
-//     document.querySelector("#accountShowNameSpan").textContent = document.querySelector("#accountRegisterName>p").textContent;
-//     const cntDB = openDB(indexedDBName="cntUser",objectStoreName="cntUserData");
-//     cntDB.then(() => dbDelete(objectStoreName="cntUserData",id=".")).then(() => {console.log("Delete the previous current data");});
-//     cntDB.then(() => dbSet(encodeBase64({uid:id}),objectStoreName="cntUserData")).then(() => {
-//         console.log("User data initialized");
-//     });
-// }
-// const encodeBase64=o=>btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(o))));
-// const decodeBase64=s=>{try{return JSON.parse(new TextDecoder().decode(Uint8Array.from(atob(s),c=>c.charCodeAt(0))))}catch{return null}};
-
-// function openDB(indexedDBName = "UserDB", objectStoreName = "userStore") {
-//     return new Promise((resolve, reject) => {
-//         const request = indexedDB.open(indexedDBName, 2);
-
-//         request.onupgradeneeded = event => {
-//             const db = event.target.result;
-//             console.log("Database upgrade needed");
-//             if (!db.objectStoreNames.contains("userStore")) {
-//                 db.createObjectStore("userStore", { keyPath: "id" });
-//             }
-//             if (!db.objectStoreNames.contains("cntUserData")) {
-//                 db.createObjectStore("cntUserData", { keyPath: "id" });
-//             }
-//         };
-//         request.onsuccess = event => {
-//             db = event.target.result;
-//             resolve(db);
-//         };
-
-//         request.onerror = e => reject("IndexedDB 打开失败,请检查浏览器设置" + e.target.errorCode);
-//     });
-// }
-// // 根据对应的openDB函数打开的数据库实例，进行后续的增删改查操作
-// // // 写入数据
-// function dbSet(data,objectStoreName="userStore") {
-//     return new Promise((resolve, reject) => {
-//         const tx = db.transaction(objectStoreName, "readwrite");
-//         const store = tx.objectStore(objectStoreName);
-//         store.put({ id: objectStoreName == "userStore" ?  data[0]: ".", data: data[1] });
-
-//         tx.oncomplete = () => resolve();
-//         tx.onerror = () => reject("数据写入失败");
-//     });
-// }
-
-// // // 读取数据
-// function dbGet(objectStoreName="userStore", dbInstance,id="userinfo") {
-//     return new Promise((resolve, reject) => {
-//         const tx = dbInstance.transaction(objectStoreName, "readonly");
-//         const store = tx.objectStore(objectStoreName);
-//         const request = store.get(id);
-//         request.onsuccess = () => resolve(request.result ?.data);
-//         request.onerror = () => reject("读取失败");
-//     });
-// }
-
-// function dbDelete(objectStoreName = "userStore", id = "userinfo") {
-//     return new Promise((resolve, reject) => {
-//         const tx = db.transaction(objectStoreName, "readwrite");
-//         const store = tx.objectStore(objectStoreName);
-//         store.delete(id);
-//         tx.oncomplete = () => resolve();
-//         tx.onerror = () => reject("删除失败");
-//     });
-// }
-
-// document.querySelectorAll("#settingUl .settingClass").forEach(li => {
-//     li.addEventListener("click", () => {
-//         const target = li.dataset.target;
-//         document.querySelectorAll("#settingPart .settingContent")
-//             .forEach(div => div.style.display = "none");
-
-//         const targetDiv = document.querySelector(`#setting-${target}-content`);
-//         if (targetDiv) targetDiv.style.display = "block";
-//     });
-// });
-
-// async function loadUser(indexedDBName = "cntUser", objectStoreName = "cntUserData") {
-//     console.log("Loading user data...");
-//     const db = await openDB(indexedDBName, objectStoreName);
-//     const raw = await dbGet(objectStoreName, db, id=".");
-//     console.log("Raw user data:", raw);
-//     if (!raw) return;
-
-//     const id = decodeBase64(raw)?.uid;
-//     console.log("Decoded user ID:", id);
-//     if (!id) return;
-
-//     refreshLoginUser({ id: id }, id);
-// }
 
 
 class UserManager {
-    constructor(userDBName = "UserDB", userStoreName = "userStore", currentUserStore = "cntUserData") {
+    constructor(userDBName = "UserDB", userStoreName = "userStore", currentUserStore = "cntUserData", userNameStore = "userNames") {
         this.userDBName = userDBName;
         this.userStoreName = userStoreName;
         this.currentUserStore = currentUserStore;
+        this.userNameStore = userNameStore;
         this.db = null;
     }
 
     // 打开数据库
-    async openDB(version = 2) {
+    async openDB(version = 3) {
         if (this.db) return this.db;
 
         return new Promise((resolve, reject) => {
@@ -297,6 +176,10 @@ class UserManager {
                 }
                 if (!db.objectStoreNames.contains(this.currentUserStore)) {
                     db.createObjectStore(this.currentUserStore, { keyPath: "id" });
+                }
+                if (!db.objectStoreNames.contains(this.userNameStore)) {
+                    // 用户名仓库，用于快速检查重复
+                    db.createObjectStore(this.userNameStore, { keyPath: "name" });
                 }
             };
 
@@ -357,30 +240,107 @@ class UserManager {
         });
     }
 
+    // 检查用户名是否已存在
+    async isUsernameExists(name) {
+        const db = await this.openDB();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction(this.userNameStore, "readonly");
+            const store = tx.objectStore(this.userNameStore);
+            const request = store.get(name);
+            
+            request.onsuccess = () => {
+                resolve(request.result !== undefined);
+            };
+            
+            request.onerror = () => reject("检查用户名失败");
+        });
+    }
+
+    // 添加用户名到用户名仓库
+    async addUsername(name, userId) {
+        const db = await this.openDB();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction(this.userNameStore, "readwrite");
+            const store = tx.objectStore(this.userNameStore);
+            store.put({ name: name, userId: userId, createdAt: new Date().toISOString() });
+            
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject("添加用户名失败");
+        });
+    }
+
+    // 从用户名仓库删除用户名
+    async removeUsername(name) {
+        const db = await this.openDB();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction(this.userNameStore, "readwrite");
+            const store = tx.objectStore(this.userNameStore);
+            store.delete(name);
+            
+            tx.oncomplete = () => resolve();
+            tx.onerror = () => reject("删除用户名失败");
+        });
+    }
+
     // 注册新用户
     async registerUser({ name, password, description = "" }) {
         if (!name?.trim()) throw new Error("请输入用户名");
         if (!password?.trim()) throw new Error("请输入密码");
+        
+        // 检查用户名长度和格式
+        const trimmedName = name.trim();
+        if (trimmedName.length < 2 || trimmedName.length > 20) {
+            throw new Error("用户名长度必须在2-20个字符之间");
+        }
+        
+        // 检查用户名是否包含特殊字符（只允许中文、英文、数字、下划线）
+        if (!/^[a-zA-Z0-9_\u4e00-\u9fa5]+$/.test(trimmedName)) {
+            throw new Error("用户名只能包含中文、英文、数字和下划线");
+        }
+        
+        // 检查用户名是否已存在
+        const usernameExists = await this.isUsernameExists(trimmedName);
+        if (usernameExists) {
+            throw new Error(`用户名 "${trimmedName}" 已被注册，请选择其他用户名`);
+        }
+        
         if (!/^(?=.{9,18}$)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@#_])[A-Za-z\d@#_]{9,18}$/.test(password)) {
             throw new Error("密码格式不正确: 9-18位，必须包含大写、小写、数字和@#_");
         }
 
         const user = {
-            name,
+            name: trimmedName,
             password,
-            description,
+            description: description.trim(),
             headSculpture: "default",
             email: "",
             phone: "",
-            theme: "light"
+            theme: theme ? "dark" : "light", // false为light，true为dark
+            otherSettings: {},
+            registeredAt: new Date().toISOString()
         };
 
-        const encoded = [this.encodeBase64(crypto.randomUUID()), this.encodeBase64(user)];
-        await this.dbSet(encoded, this.userStoreName);
-
-        // 注册后立即登录
-        await this.setCurrentUser(encoded[0]);
-        return user;
+        const userId = this.encodeBase64(crypto.randomUUID());
+        const encoded = [userId, this.encodeBase64(user)];
+        
+        try {
+            // 同时保存用户数据和用户名
+            await this.dbSet(encoded, this.userStoreName);
+            await this.addUsername(trimmedName, userId);
+            
+            // 注册后立即登录
+            await this.setCurrentUser(userId);
+            return user;
+        } catch (error) {
+            // 如果保存失败，清理已保存的数据
+            try {
+                await this.dbDelete(this.userStoreName, userId);
+                await this.removeUsername(trimmedName);
+            } catch (cleanupError) {
+                console.warn("清理失败的注册数据时出错:", cleanupError);
+            }
+            throw new Error("注册失败: " + error.message);
+        }
     }
 
     // 设置当前登录用户
@@ -401,6 +361,7 @@ class UserManager {
 
     // 登录验证
     async login(name, password) {
+        console.log(`尝试登录用户: ${name}, 密码: ${password}`);
         const db = await this.openDB();
         return new Promise((resolve, reject) => {
             const tx = db.transaction(this.userStoreName, "readonly");
@@ -425,6 +386,155 @@ class UserManager {
             request.onerror = () => reject("登录失败");
         });
     }
+
+    // 退出登录（保留用户数据）
+    async logout() {
+        try {
+            await this.dbDelete(this.currentUserStore, ".");
+            
+            // 重置主题为默认（浅色）
+            theme = false;
+            document.querySelector("body").style.backgroundColor = "aliceblue";
+            if (!isPhone) document.querySelector("#content").style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+            
+            // 重置设置页面中的主题选项状态
+            document.querySelectorAll(".themeOption").forEach(opt => {
+                opt.classList.remove("active");
+            });
+            const lightThemeOption = document.querySelector(`.themeOption[data-theme="light"]`);
+            if (lightThemeOption) {
+                lightThemeOption.classList.add("active");
+            }
+            
+            console.log("用户已退出登录");
+            return true;
+        } catch (error) {
+            console.error("退出登录失败:", error);
+            throw new Error("退出登录失败");
+        }
+    }
+
+    // 注销账户（删除用户数据）
+    async deleteAccount() {
+        try {
+            // 首先获取当前用户ID和数据
+            const raw = await this.dbGet(this.currentUserStore, ".");
+            if (!raw) throw new Error("没有找到当前登录用户");
+            
+            const userId = this.decodeBase64(raw)?.uid;
+            if (!userId) throw new Error("无法获取用户ID");
+
+            // 获取用户数据以获取用户名
+            const userData = await this.dbGet(this.userStoreName, userId);
+            const user = this.decodeBase64(userData);
+            const username = user?.name;
+
+            // 删除用户数据
+            await this.dbDelete(this.userStoreName, userId);
+            
+            // 删除用户名记录
+            if (username) {
+                await this.removeUsername(username);
+            }
+            
+            // 清除当前登录状态
+            await this.dbDelete(this.currentUserStore, ".");
+            
+            console.log("用户账户已注销，用户名已释放");
+            return true;
+        } catch (error) {
+            console.error("注销账户失败:", error);
+            throw new Error("注销账户失败: " + error.message);
+        }
+    }
+
+    // 检查用户是否已登录
+    async isLoggedIn() {
+        const user = await this.getCurrentUser();
+        return user !== null;
+    }
+
+    // 获取所有用户列表
+    async getAllUsers() {
+        const db = await this.openDB();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction(this.userStoreName, "readonly");
+            const store = tx.objectStore(this.userStoreName);
+            const request = store.getAll();
+
+            request.onsuccess = () => {
+                const users = request.result.map(item => ({
+                    id: item.id,
+                    ...this.decodeBase64(item.data)
+                }));
+                resolve(users);
+            };
+
+            request.onerror = () => reject("获取用户列表失败");
+        });
+    }
+
+    // 获取所有已注册的用户名（用于管理和调试）
+    async getAllUsernames() {
+        const db = await this.openDB();
+        return new Promise((resolve, reject) => {
+            const tx = db.transaction(this.userNameStore, "readonly");
+            const store = tx.objectStore(this.userNameStore);
+            const request = store.getAll();
+
+            request.onsuccess = () => {
+                const usernames = request.result.map(item => ({
+                    name: item.name,
+                    userId: item.userId,
+                    createdAt: item.createdAt
+                }));
+                resolve(usernames);
+            };
+
+            request.onerror = () => reject("获取用户名列表失败");
+        });
+    }
+
+    // 检查数据库数据一致性（调试用）
+    async checkDataIntegrity() {
+        try {
+            const users = await this.getAllUsers();
+            const usernames = await this.getAllUsernames();
+            
+            console.log("=== 数据库一致性检查 ===");
+            console.log(`用户总数: ${users.length}`);
+            console.log(`用户名记录总数: ${usernames.length}`);
+            
+            // 检查是否有用户没有对应的用户名记录
+            const usersWithoutUsername = users.filter(user => 
+                !usernames.some(un => un.name === user.name)
+            );
+            
+            if (usersWithoutUsername.length > 0) {
+                console.warn("发现没有用户名记录的用户:", usersWithoutUsername);
+            }
+            
+            // 检查是否有用户名记录没有对应的用户
+            const orphanUsernames = usernames.filter(un => 
+                !users.some(user => user.name === un.name)
+            );
+            
+            if (orphanUsernames.length > 0) {
+                console.warn("发现孤立的用户名记录:", orphanUsernames);
+            }
+            
+            return {
+                userCount: users.length,
+                usernameCount: usernames.length,
+                usersWithoutUsername,
+                orphanUsernames,
+                isConsistent: usersWithoutUsername.length === 0 && orphanUsernames.length === 0
+            };
+        } catch (error) {
+            console.error("数据一致性检查失败:", error);
+            throw error;
+        }
+    }
 }
 
 const userManager = new UserManager();
@@ -437,34 +547,145 @@ document.getElementById("saveAccountInfo").addEventListener("click", async () =>
         const passwordAgain = document.querySelector(".accountShowPasswordAgainInput").value.trim();
         const description = document.querySelector(".accountShowDescriptionInput").value.trim();
 
-        if (password !== passwordAgain) throw new Error("两次输入密码不一致");
+        // 基本验证
+        if (!name) {
+            alert("请输入用户名");
+            return;
+        }
+        
+        if (!password) {
+            alert("请输入密码");
+            return;
+        }
 
-        const user = await userManager.registerUser({ name, password, description });
-        alert("注册成功，已自动登录：" + user.name);
+        if (password !== passwordAgain) {
+            alert("两次输入的密码不一致，请重新输入");
+            return;
+        }
 
-        updateUI(user);
+        // 显示注册中状态
+        const registerButton = document.getElementById("saveAccountInfo");
+        const originalText = registerButton.textContent;
+        registerButton.textContent = "registering...";
+        registerButton.disabled = true;
+
+        try {
+            const user = await userManager.registerUser({ name, password, description });
+            alert(`注册成功！欢迎 ${user.name}，已自动为您登录。`);
+            updateUI(user);
+            
+            // 清空输入框
+            document.querySelectorAll(".form-input")
+                .forEach(input => input.value = "");
+                
+        } finally {
+            // 恢复按钮状态
+            registerButton.textContent = originalText;
+            registerButton.disabled = false;
+        }
+        
     } catch (err) {
         alert(err.message);
+        console.error("注册失败:", err);
     }
 });
 
 // 登录用户
 document.getElementById("Login").addEventListener("click", async () => {
     try {
-        const name = document.querySelector(".accountShowNameInput").value.trim();
-        const password = document.querySelector(".accountShowPasswordInput").value.trim();
-        const user = await userManager.login(name, password);
-        alert("登录成功：" + user.name);
-        updateUI(user);
+        const name = document.querySelectorAll(".accountShowNameInput")[1].value.trim();
+        const password = document.querySelectorAll(".accountShowPasswordInput")[1].value.trim();
+        
+        // 基本验证
+        if (!name) {
+            alert("请输入用户名");
+            return;
+        }
+        
+        if (!password) {
+            alert("请输入密码");
+            return;
+        }
+        
+        // 显示登录中状态
+        const loginButton = document.getElementById("Login");
+        const originalText = loginButton.textContent;
+        loginButton.textContent = "logging in...";
+        loginButton.disabled = true;
+        
+        try {
+            const user = await userManager.login(name, password);
+            alert(`登录成功！欢迎回来，${user.name}`);
+            updateUI(user);
+            
+            // 清空登录输入框
+            document.querySelectorAll(".accountShowNameInput")[1].value = "";
+            document.querySelectorAll(".accountShowPasswordInput")[1].value = "";
+            
+        } finally {
+            // 恢复按钮状态
+            loginButton.textContent = originalText;
+            loginButton.disabled = false;
+        }
+        
     } catch (err) {
         alert(err);
+        console.error("登录失败:", err);
     }
 });
 
 // 页面加载时检查当前登录用户
 window.addEventListener("load", async () => {
-    const user = await userManager.getCurrentUser();
-    if (user) updateUI(user);
+    try {
+        const user = await userManager.getCurrentUser();
+        if (user) {
+            updateUI(user);
+            console.log(`页面加载时发现用户 ${user.name} 已登录`);
+        } else {
+            // 如果没有登录用户，确保UI为默认状态
+            resetUI();
+            console.log("页面加载时未发现登录用户，UI已设置为默认状态");
+        }
+    } catch (error) {
+        console.error("页面加载时检查用户状态失败:", error);
+        // 发生错误时也重置为默认状态
+        resetUI();
+    }
+});
+
+// 退出登录按钮
+document.getElementById("logoutButton")?.addEventListener("click", async () => {
+    try {
+        const confirmed = confirm("确定要退出登录吗？");
+        if (!confirmed) return;
+        
+        await userManager.logout();
+        alert("已退出登录");
+        
+        // 重置UI到未登录状态
+        resetUI();
+    } catch (err) {
+        alert("退出登录失败: " + err.message);
+    }
+});
+
+// 注销账户按钮
+document.getElementById("deleteAccountButton")?.addEventListener("click", async () => {
+    try {
+        const confirmed = confirm("警告：注销账户将永久删除您的所有数据，此操作不可恢复！\n确定要注销账户吗？");
+        if (!confirmed) return;
+        
+        const doubleConfirm = confirm("请再次确认：您真的要永久删除账户吗？");
+        if (!doubleConfirm) return;
+        
+        await userManager.deleteAccount();
+        alert("账户已注销");
+        
+        // 重置UI到未登录状态
+        resetUI();
+    } catch (err) {
+        alert("注销账户失败: " + err.message);
+    }
 });
 
 // 更新页面 UI
@@ -473,4 +694,274 @@ function updateUI(user) {
     document.querySelector("#waitforregist").style.display = "none";
     document.querySelectorAll(".accountShowInfo").forEach(el => el.style.display = "none");
     document.querySelector("#accountShowNameSpan").textContent = user.name;
+    
+    // 更新用户注册信息显示
+    const registerNameElement = document.querySelector("#accountRegisterName");
+    const registerDescriptionElement = document.querySelector("#accountRegisterDescription");
+    
+    if (registerNameElement) {
+        registerNameElement.textContent = user.name;
+    }
+    
+    if (registerDescriptionElement) {
+        registerDescriptionElement.textContent = user.description || "This user is very lazy and hasn't written anything~~~";
+    }
+    
+    // 根据用户主题设置更新全局主题
+    const userTheme = user.theme;
+    if (userTheme === "dark") {
+        theme = true;
+        document.querySelector("body").style.backgroundColor = "#2f4256";
+        if (!isPhone) document.querySelector("#content").style.backgroundColor = "#0000";
+    } else {
+        theme = false;
+        document.querySelector("body").style.backgroundColor = "aliceblue";
+        if (!isPhone) document.querySelector("#content").style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+    }
+    
+    // 同步设置页面中的主题选项状态
+    document.querySelectorAll(".themeOption").forEach(opt => {
+        opt.classList.remove("active");
+    });
+    const activeThemeOption = document.querySelector(`.themeOption[data-theme="${userTheme}"]`);
+    if (activeThemeOption) {
+        activeThemeOption.classList.add("active");
+    }
+    
+    console.log(`用户 ${user.name} 已登录，主题设置为: ${userTheme}`);
 }
+
+// 重置UI到未登录状态
+function resetUI() {
+    document.querySelector("#accountGreeting").style.display = "none";
+    document.querySelector("#waitforregist").style.display = "block";
+    document.querySelectorAll(".accountShowInfo").forEach(el => el.style.display = "none");
+    document.querySelector("#accountShowNameSpan").textContent = "";
+    
+    // 重置用户注册信息显示为默认值
+    const registerNameElement = document.querySelector("#accountRegisterName");
+    const registerDescriptionElement = document.querySelector("#accountRegisterDescription");
+    
+    if (registerNameElement) {
+        registerNameElement.textContent = "Unregistered";
+    }
+    
+    if (registerDescriptionElement) {
+        registerDescriptionElement.textContent = "This user is very lazy and hasn't written anything~~~";
+    }
+    
+    // 重置主题为默认（浅色主题）
+    theme = false;
+    document.querySelector("body").style.transition = "all 0.3s ease";
+    document.querySelector("body").style.backgroundColor = "aliceblue";
+    if (!isPhone) {
+        document.querySelector("#content").style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+    }
+    
+    // 清空输入框
+    document.querySelectorAll(".form-input")
+        .forEach(input => input.value = "");
+    
+    console.log("UI已重置为默认状态，主题已设置为浅色");
+}
+
+// 兼容原有代码的 loadUser 函数
+async function loadUser() {
+    try {
+        const user = await userManager.getCurrentUser();
+        if (user) {
+            updateUI(user);
+            console.log("当前登录用户:", user.name);
+        } else {
+            console.log("没有用户登录");
+            // 如果没有登录用户，重置为默认状态
+            resetUI();
+        }
+    } catch (error) {
+        console.error("加载用户失败:", error);
+        // 发生错误时重置为默认状态
+        resetUI();
+    }
+}
+
+// 设置页面分类切换功能
+document.querySelectorAll(".settingClass").forEach(settingTab => {
+    settingTab.addEventListener("click", () => {
+        const targetSetting = settingTab.getAttribute("data-target");
+        
+        // 移除所有活跃状态
+        document.querySelectorAll(".settingClass").forEach(tab => {
+            tab.classList.remove("active");
+        });
+        
+        // 添加当前活跃状态
+        settingTab.classList.add("active");
+        
+        // 隐藏所有设置内容
+        document.querySelectorAll(".settingContent").forEach(content => {
+            content.style.display = "none";
+        });
+        
+        // 显示对应的设置内容
+        const targetContent = document.querySelector(`.settingContent[data-setting="${targetSetting}"]`);
+        if (targetContent) {
+            targetContent.style.display = "block";
+        }
+        
+        console.log(`切换到设置页面: ${targetSetting}`);
+    });
+});
+
+// 主题选择功能
+document.querySelectorAll(".themeOption").forEach(option => {
+    option.addEventListener("click", async () => {
+        const selectedTheme = option.getAttribute("data-theme");
+        
+        // 移除所有主题选项的活跃状态
+        document.querySelectorAll(".themeOption").forEach(opt => {
+            opt.classList.remove("active");
+        });
+        
+        // 添加当前选项的活跃状态
+        option.classList.add("active");
+        
+        // 应用主题
+        if (selectedTheme === "dark") {
+            theme = true;
+            document.querySelector("body").style.backgroundColor = "#2f4256";
+            if (!isPhone) document.querySelector("#content").style.backgroundColor = "#0000";
+        } else {
+            theme = false;
+            document.querySelector("body").style.backgroundColor = "aliceblue";
+            if (!isPhone) document.querySelector("#content").style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+        }
+        
+        // 如果用户已登录，保存主题设置到用户数据
+        try {
+            const currentUser = await userManager.getCurrentUser();
+            if (currentUser) {
+                // 更新用户的主题设置
+                currentUser.theme = selectedTheme;
+                const userId = await getCurrentUserId();
+                if (userId) {
+                    await userManager.dbSet([userId, userManager.encodeBase64(currentUser)], userManager.userStoreName);
+                    console.log(`主题设置已保存到用户数据: ${selectedTheme}`);
+                }
+            }
+        } catch (error) {
+            console.log("未登录用户，主题设置仅在当前会话有效");
+        }
+        
+        console.log(`主题已切换为: ${selectedTheme}`);
+    });
+});
+
+// 语言选择功能（暂时禁用）
+document.querySelectorAll(".languageOption").forEach(option => {
+    option.addEventListener("click", () => {
+        alert("语言切换功能正在制作中，敬请期待！");
+    });
+});
+
+// 辅助函数：获取当前用户ID
+async function getCurrentUserId() {
+    try {
+        const raw = await userManager.dbGet(userManager.currentUserStore, ".");
+        return userManager.decodeBase64(raw)?.uid || null;
+    } catch (error) {
+        return null;
+    }
+}
+
+// 初始化设置页面状态
+function initializeSettingsPage() {
+    // 设置默认活跃的主题选项
+    const currentThemeOption = theme ? 
+        document.querySelector('.themeOption[data-theme="dark"]') : 
+        document.querySelector('.themeOption[data-theme="light"]');
+    
+    if (currentThemeOption) {
+        currentThemeOption.classList.add("active");
+    }
+    
+    // 清除语言选项的活跃状态（因为功能禁用）
+    document.querySelectorAll(".languageOption").forEach(opt => {
+        opt.classList.remove("active");
+    });
+}
+
+// 在页面加载时初始化设置页面
+// 放window.onload中调用了
+// window.addEventListener("DOMContentLoaded", initializeSettingsPage);
+
+// 数据管理功能
+document.getElementById("exportDataButton")?.addEventListener("click", () => {
+    console.log("导出数据功能（待实现）");
+    alert("导出数据功能正在开发中...");
+});
+
+document.getElementById("importDataButton")?.addEventListener("click", () => {
+    console.log("导入数据功能（待实现）");
+    alert("导入数据功能正在开发中...");
+});
+
+document.getElementById("clearDataButton")?.addEventListener("click", () => {
+    const confirmed = confirm("警告：此操作将清除所有本地数据，包括用户信息和游戏记录！\n确定要继续吗？");
+    if (confirmed) {
+        const doubleConfirmed = confirm("请再次确认：您真的要清除所有数据吗？此操作不可恢复！");
+        if (doubleConfirmed) {
+            // 清除数据的逻辑（待实现）
+            console.log("清除所有数据功能（待实现）");
+            alert("清除数据功能正在开发中...");
+        }
+    }
+});
+
+// 调试方法
+window.debugUserManager = {
+    async showAllUsers() {
+        try {
+            const users = await userManager.getAllUsers();
+            console.table(users.map(user => ({
+                用户名: user.name,
+                描述: user.description,
+                注册时间: user.registeredAt,
+                主题: user.theme
+            })));
+        } catch (error) {
+            console.error("获取用户列表失败:", error);
+        }
+    },
+    
+    async showAllUsernames() {
+        try {
+            const usernames = await userManager.getAllUsernames();
+            console.table(usernames);
+        } catch (error) {
+            console.error("获取用户名列表失败:", error);
+        }
+    },
+    
+    async checkIntegrity() {
+        try {
+            const result = await userManager.checkDataIntegrity();
+            console.log("数据一致性检查结果:", result);
+            return result;
+        } catch (error) {
+            console.error("数据一致性检查失败:", error);
+        }
+    },
+    
+    async getCurrentUser() {
+        try {
+            const user = await userManager.getCurrentUser();
+            console.log("当前用户:", user);
+            return user;
+        } catch (error) {
+            console.error("获取当前用户失败:", error);
+        }
+    }
+};
+
+// console.log("调试工具已加载，使用 debugUserManager.方法名() 进行调试");
+// console.log("可用方法: showAllUsers(), showAllUsernames(), checkIntegrity(), getCurrentUser()");

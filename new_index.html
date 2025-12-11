@@ -131,72 +131,192 @@
     <div id="setting">
         <div id="mainSetting">
             <main id="settingMain">
-                <section id="accountPart">
-                    <div id="accountRegister">
-                        <div id="accountRegisterProfilePhoto">
-                            <img id="headSculpture" src="./img/default_head_sculpture.png" alt="Profile Photo">
+                <section id="accountPart" class="settingContent" data-setting="account">
+                    <!-- 用户信息卡片 -->
+                    <div class="user-profile-card">
+                        <div class="profile-avatar">
+                            <img id="headSculpture" src="./img/default_head_sculpture.png" alt="Profile Avatar">
+                            <div class="avatar-ring"></div>
                         </div>
-                        <div id="accountRegisterName">
-                            <p>Unregistered</p>
+                        <div class="profile-info">
+                            <h3 id="accountRegisterName" class="profile-name">Unregistered</h3>
+                            <p id="accountRegisterDescription" class="profile-desc">This user is very lazy and hasn't written anything~~~</p>
                         </div>
-                        <div id="accountRegisterDescription">......</div>
                     </div>
-                    <div id="accountShow">
-                        <div id="waitforregist">
-                            <div>
-                                <div>
-                                    <h2>𝑷𝒍𝒆𝒂𝒔𝒆 𝒓𝒆𝒈𝒊𝒔𝒕𝒆𝒓 𝒂𝒏 𝒂𝒄𝒄𝒐𝒖𝒏𝒕 𝒇𝒊𝒓𝒔𝒕.</h2>
-                                </div>
-                                <div>
-                                    <button id="toRegisterButton">𝑹𝒆𝒈𝒊𝒔𝒕𝒆𝒓
+
+                    <!-- 账户操作区域 -->
+                    <div class="account-actions">
+                        <!-- 初始界面 -->
+                        <div id="waitforregist" class="welcome-screen">
+                            <div class="welcome-content">
+                                <h2 class="welcome-title">Welcome to LITTLE GAME</h2>
+                                <p class="welcome-subtitle">Please create an account or sign in to continue</p>
+                                <div class="action-buttons">
+                                    <button id="toRegisterButton" class="primary-btn">
+                                        <span>Create Account</span>
+                                        <i class="btn-icon">→</i>
                                     </button>
-                                    <button id="toLoginButton">𝑳𝒐𝒈𝒊𝒏
+                                    <button id="toLoginButton" class="secondary-btn">
+                                        <span>Sign In</span>
+                                        <i class="btn-icon">↑</i>
                                     </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="accountShowInfo">
-                            <p>𝙽𝚊𝚖𝚎: </p>
-                            <input class="accountShowInput accountShowNameInput" type="text" placeholder="  Enter your name">
-                            <p>𝙿𝚊𝚜𝚜𝚠𝚘𝚛𝚍: </p>
-                            <input class="accountShowInput accountShowPasswordInput" type="password" placeholder="  Enter your password">
-                            <p>𝙿𝚊𝚜𝚜𝚠𝚘𝚛𝚍 𝙰𝚐𝚊𝚒𝚗: </p>
-                            <input class="accountShowInput accountShowPasswordAgainInput" type="password" placeholder="  Enter your password again">
-                            <p>𝙳𝚎𝚜𝚌𝚛𝚒𝚙𝚝𝚒𝚘𝚗: </p>
-                            <textarea class="accountShowInput accountShowDescriptionInput" placeholder="  Enter your description"></textarea>
-                            <div class="accountShowButtons">
-                                <button id="saveAccountInfo">𝐒𝐚𝐯𝐞</button>
-                                <button class="returnAccountProgram">𝐁𝐚𝐜𝐤</button>
+
+                        <!-- 注册表单 -->
+                        <div class="accountShowInfo register-form">
+                            <div class="form-header">
+                                <h3>Create Your Account</h3>
+                                <p>Join our gaming community</p>
                             </div>
+                            <form class="auth-form">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input class="form-input accountShowNameInput" type="text" placeholder="Enter your username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input class="form-input accountShowPasswordInput" type="password" placeholder="Create a strong password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input class="form-input accountShowPasswordAgainInput" type="password" placeholder="Confirm your password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="form-input accountShowDescriptionInput" placeholder="Tell us about yourself (optional)"></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" id="saveAccountInfo" class="submit-btn">Create Account</button>
+                                    <button type="button" class="returnAccountProgram cancel-btn">Back</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="accountShowInfo">
-                            <p>𝙽𝚊𝚖𝚎: </p>
-                            <input class="accountShowInput accountShowNameInput" type="text" placeholder="  Enter your name">
-                            <p>𝙿𝚊𝚜𝚜𝚠𝚘𝚛𝚍: </p>
-                            <input class="accountShowInput accountShowPasswordInput" type="password" placeholder="  Enter your password">
-                            <p>𝙳𝚎𝚜𝚌𝚛𝚒𝚙𝚝𝚒𝚘𝚗: </p>
-                            <textarea class="accountShowInput accountShowDescriptionInput" placeholder="  Enter your description"></textarea>
-                            <div class="accountShowButtons">
-                                <button id="Login">𝐋𝐨𝐠𝐢𝐧</button>
-                                <button class="returnAccountProgram">𝐁𝐚𝐜𝐤</button>
+
+                        <!-- 登录表单 -->
+                        <div class="accountShowInfo login-form">
+                            <div class="form-header">
+                                <h3>Welcome Back</h3>
+                                <p>Sign in to your account</p>
                             </div>
+                            <form class="auth-form">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input class="form-input accountShowNameInput" type="text" placeholder="Enter your username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input class="form-input accountShowPasswordInput" type="password" placeholder="Enter your password">
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <label>Description (Hidden)</label>
+                                    <textarea class="form-input accountShowDescriptionInput" readonly style="display: none;"></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" id="Login" class="submit-btn">Sign In</button>
+                                    <button type="button" class="returnAccountProgram cancel-btn">Back</button>
+                                </div>
+                            </form>
                         </div>
-                        <div id="accountGreeting">
-                            <h2>𝑾𝒆𝒍𝒄𝒐𝒎𝒆 𝒃𝒂𝒄𝒌, <span id="accountShowNameSpan" style="color: lightskyblue;">User</span>!</h2>
+
+                        <!-- 用户已登录界面 -->
+                        <div id="accountGreeting" class="user-dashboard">
+                            <div class="dashboard-header">
+                                <h2 class="greeting-title">Welcome back, <span id="accountShowNameSpan" class="user-highlight">User</span>!</h2>
+                                <p class="greeting-subtitle">Ready to play some games?</p>
+                            </div>
+                            <div class="dashboard-actions">
+                                <button id="logoutButton" class="dashboard-btn logout-btn">
+                                    <span>Sign Out</span>
+                                    <i class="btn-icon">⤴</i>
+                                </button>
+                                <button id="deleteAccountButton" class="dashboard-btn delete-btn">
+                                    <span>Delete Account</span>
+                                    <i class="btn-icon">⚠</i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </section>
-                <section id="settingPart">
-
+                <section id="themePart" class="settingContent" data-setting="theme" style="display: none;">
+                    <div class="settingSection">
+                        <h2>𝚃𝚑𝚎𝚖𝚎 𝚂𝚎𝚝𝚝𝚒𝚗𝚐𝚜</h2>
+                        <div class="settingItem">
+                            <h3>𝙰𝚙𝚙𝚎𝚊𝚛𝚊𝚗𝚌𝚎</h3>
+                            <div class="themeOptions">
+                                <div class="themeOption" data-theme="light">
+                                    <div class="themePreview light-preview"></div>
+                                    <span>𝙻𝚒𝚐𝚑𝚝 𝚃𝚑𝚎𝚖𝚎</span>
+                                </div>
+                                <div class="themeOption" data-theme="dark">
+                                    <div class="themePreview dark-preview"></div>
+                                    <span>𝙳𝚊𝚛𝚔 𝚃𝚑𝚎𝚖𝚎</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="languagePart" class="settingContent" data-setting="language" style="display: none;">
+                    <div class="settingSection">
+                        <h2>𝙻𝚊𝚗𝚐𝚞𝚊𝚐𝚎 𝚂𝚎𝚝𝚝𝚒𝚗𝚐𝚜</h2>
+                        <div class="settingItem">
+                            <h3>𝙸𝚗𝚝𝚎𝚛𝚏𝚊𝚌𝚎 𝙻𝚊𝚗𝚐𝚞𝚊𝚐𝚎</h3>
+                            <div class="languageOptions">
+                                <div class="languageOption disabled" data-lang="en-us">
+                                    <span>🇺🇸 English</span>
+                                </div>
+                                <div class="languageOption disabled" data-lang="zh-cn">
+                                    <span>🇨🇳 中文</span>
+                                </div>
+                            </div>
+                            <div class="workInProgress">
+                                <p>🚧 此功能正在制作中，敬请期待！</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="dataPart" class="settingContent" data-setting="data" style="display: none;">
+                    <div class="settingSection">
+                        <h2>𝙳𝚊𝚝𝚊 𝙼𝚊𝚗𝚊𝚐𝚎𝚖𝚎𝚗𝚝</h2>
+                        <div class="settingItem">
+                            <h3>𝚄𝚜𝚎𝚛 𝙳𝚊𝚝𝚊</h3>
+                            <div class="dataActions">
+                                <button class="dataButton" id="exportDataButton">𝐄𝐱𝐩𝐨𝐫𝐭 𝐃𝐚𝐭𝐚</button>
+                                <button class="dataButton" id="importDataButton">𝐈𝐦𝐩𝐨𝐫𝐭 𝐃𝐚𝐭𝐚</button>
+                                <button class="dataButton danger" id="clearDataButton">𝐂𝐥𝐞𝐚𝐫 𝐀𝐥𝐥 𝐃𝐚𝐭𝐚</button>
+                            </div>
+                        </div>
+                        <div class="settingItem">
+                            <h3>𝚂𝚝𝚘𝚛𝚊𝚐𝚎 𝙸𝚗𝚏𝚘</h3>
+                            <div class="storageInfo">
+                                <p>𝚄𝚜𝚎𝚍 𝚂𝚝𝚘𝚛𝚊𝚐𝚎: <span id="usedStorage">--</span></p>
+                                <p>𝚃𝚘𝚝𝚊𝚕 𝚁𝚎𝚌𝚘𝚛𝚍𝚜: <span id="totalRecords">--</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="etcPart" class="settingContent" data-setting="etc" style="display: none;">
+                    <div class="settingSection">
+                        <h2>𝙾𝚝𝚑𝚎𝚛 𝚂𝚎𝚝𝚝𝚒𝚗𝚐𝚜</h2>
+                        <div class="settingItem">
+                            <h3>𝙰𝚋𝚘𝚞𝚝</h3>
+                            <div class="aboutInfo">
+                                <p>𝚅𝚎𝚛𝚜𝚒𝚘𝚗: 1.0.0</p>
+                                <p>𝙰𝚞𝚝𝚑𝚘𝚛: BoyangZhang619</p>
+                                <p>𝙿𝚛𝚘𝚓𝚎𝚌𝚝: Little Game of Webpage</p>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </main>
             <aside id="settingNav">
                 <ul id="settingUl">
-                    <li class="settingClass" id="setting-account">𝙰𝚌𝚌𝚘𝚞𝚗𝚝</li>
-                    <li class="settingClass" id="setting-theme">𝚃𝚑𝚎𝚖𝚎</li>
-                    <li class="settingClass" id="setting-language">𝙻𝚊𝚗𝚐𝚞𝚊𝚐𝚎</li>
-                    <li class="settingClass" id="setting-data">𝙳𝚊𝚝𝚊</li>
-                    <li class="settingClass setting-none">𝚎𝚝𝚌.</li>
+                    <li class="settingClass active" data-target="account">𝙰𝚌𝚌𝚘𝚞𝚗𝚝</li>
+                    <li class="settingClass" data-target="theme">𝚃𝚑𝚎𝚖𝚎</li>
+                    <li class="settingClass" data-target="language">𝙻𝚊𝚗𝚐𝚞𝚊𝚐𝚎</li>
+                    <li class="settingClass" data-target="data">𝙳𝚊𝚝𝚊</li>
+                    <li class="settingClass" data-target="etc">𝚎𝚝𝚌.</li>
                 </ul>
             </aside>
         </div>

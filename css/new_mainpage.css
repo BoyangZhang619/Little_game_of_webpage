@@ -234,9 +234,9 @@ body {
 
 
 /* ==========主内容KLOTSKI_START========== */
-#klotski {
+/* #klotski {
 
-}
+} */
 /* ==========主内容KLOTSKI_END========== */
 
 
@@ -334,173 +334,757 @@ body {
     height: 8vh;
     line-height: 8vh;
     font-size: 150%;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    /* padding-left: 10px; */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     box-sizing: border-box;
     text-align: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 8px;
+    margin: 0.5vh 0;
+    position: relative;
+    overflow: hidden;
 }
-#accountShow{
-    width: 70%;
+
+.settingComputer #settingNav ul li::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
 }
-/* ==========设置END========== */
+
+.settingComputer #settingNav ul li:hover::before {
+    left: 100%;
+}
+
+.settingClass:hover {
+    background-color: rgba(135, 206, 250, 0.1);
+    transform: translateX(5px);
+    color: #4a90e2;
+    box-shadow: 0 2px 8px rgba(135, 206, 250, 0.3);
+}
+
+/* 侧边导航活跃状态 */
+.settingClass.active {
+    background: linear-gradient(135deg, rgba(135, 206, 250, 0.15), rgba(100, 149, 237, 0.1));
+    color: #2c5282;
+    font-weight: bold;
+    border-left: 4px solid #4a90e2;
+    transform: translateX(8px);
+    box-shadow: 0 4px 12px rgba(135, 206, 250, 0.4);
+}
+
 /* ==========设置-账号START========== */
-#accountPart{
-    display: flex; /* flex */
-    flex-direction: row;
-    height: 100%;
-    width: 100%;
-}
-#accountRegister{
-    /* 4.8 : 9 */
-    width: 30%;
-    height: 100%;
-    border-right: 1px solid rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
-    /* display: flex;
-    flex-direction: column; */
-    align-items: center;
-    padding-top: 2.5vh;
-}
-#accountRegisterProfilePhoto{
-    margin: 0 auto;
-    aspect-ratio: 1;
-    flex : 3;
-    height: 40%;
-    width: 100%;
-}
-#headSculpture{
-    aspect-ratio: 1;
-    width: 50%;
-    margin: 0 auto;
-    transform: translate(50%, 50%);
-    /* height: 100%; */
-    border-radius: 50%;
-}
-#accountRegisterName{
-    flex : 1;
-    margin: 5% 10%;
-    border-radius: 10%;
-    background-color: #efefef55;
-    height: 10%;
-    width: 80%;
-}
-#accountRegisterName p{
+#accountPart {
     display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+    gap: 2rem;
+    overflow-y: auto;
+}
+
+/* 用户资料卡片 */
+.user-profile-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.user-profile-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+}
+
+.profile-avatar {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+#headSculpture {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    transition: all 0.3s ease;
+}
+
+.avatar-ring {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+    background-size: 400% 400%;
+    animation: gradientRotate 6s ease infinite;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.user-profile-card:hover .avatar-ring {
+    opacity: 1;
+}
+
+@keyframes gradientRotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.profile-desc {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* 账户操作区域 */
+.account-actions {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 欢迎屏幕 */
+.welcome-screen {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    animation: fadeIn 0.6s ease;
+}
+
+.welcome-content {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.welcome-title {
+    margin: 0 0 1rem 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.welcome-subtitle {
+    margin: 0 0 3rem 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* 按钮样式 */
+.primary-btn, .secondary-btn, .submit-btn, .cancel-btn, .dashboard-btn {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    height: 100%;
-}
-#accountRegisterDescription{
-    margin: 5% 10%;
-    flex : 3;
-    /* margin: 1vh auto; */
-    border-radius: 10%;
-    background-color: #efefef55;
-    height: 35%;
-    width: 80%;
-}
-/* ==========设置-账号END========== */
-/* ==========设置-账号-登录预备页START========== */
-#waitforregist{
-    width: 100%;
-    height: 50%;
-    transform: translateY(50%);
-    margin: 0 auto;
-}
-#waitforregist>div{
-    height: 50%;
-    width: 100%;
-    transform: translateY(50%);
-}
-#waitforregist>div>div{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    height: 50%;
-    width: 100%;
-}
-#waitforregist>div>div>h3{
-    display: block;
-    text-align: center;
-}
-#waitforregist>div>div>button{
-    height: 100%;
-    width: 40%;
-    font-size: 150%;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
     border: none;
-    margin: 0 auto;
-    border-radius: 10px;
-    background-color: rgba(240, 248, 255, 0.1);
-    box-shadow: rgba(1, 1, 1, 0.1) .5px .5px 3px 0.5px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+/* 按钮样式 */
+.primary-btn, .secondary-btn, .submit-btn, .cancel-btn, .dashboard-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
-#waitforregist>div>div>button:hover{
-    background-color: rgba(240, 248, 255, 0.2);
-    box-shadow: rgba(1, 1, 1, 0.2) .5px .5px 5px 1px;
-    transition: all 0.3s ease;
+
+/* 按钮点击动画 */
+.primary-btn:active,
+.secondary-btn:active,
+.submit-btn:active,
+.cancel-btn:active,
+.dashboard-btn:active {
+    transform: translateY(0) scale(0.98);
 }
-.accountShowInfo, #accountGreeting{
+
+.primary-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.2);
+    color: #667eea;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+}
+
+.secondary-btn:hover {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: rgba(102, 126, 234, 0.6);
+    transform: translateY(-2px);
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 172, 254, 0.6);
+}
+
+.cancel-btn {
+    background: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.6);
+    width: 100%;
+}
+
+.cancel-btn:hover {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+/* 表单样式 */
+.accountShowInfo {
     display: none;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.form-header {
     text-align: center;
-    margin-top: 5vh;
+    margin-bottom: 2.5rem;
 }
-/* ==========设置-账号-登录预备页END========== */
 
-/* ==========设置-账号-登录页START========== */
-.accountShowInfo{
+.form-header h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.form-header p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1rem;
+}
+
+.auth-form {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-input {
     width: 100%;
-    height: 70%;
-    transform: translateY(15%);
-    margin: 0 auto;
-}
-.accountShowInfo>p{
-    /* float: left; */
-    width: 70%;
-    text-align: left;
-    margin: 0 auto;
-    margin-top: 1vh;
-}
-.accountShowInfo>.accountShowInput,#accountShowButtons {
-    background-color: whitesmoke;
-    border: 0px;
-    border-radius: 15px;
-    height: 12.5%;
-    width: 70%;
-    margin: 0 auto;
-    resize: vertical;
+    padding: 1rem 1.5rem;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+    box-sizing: border-box;
 }
 
-.accountShowButtons{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    height: 12.5%;
-    width: 70%;
-    margin: 0 auto;
-    margin-top: 5%;
+.form-input:focus {
+    outline: none;
+    border-color: #667eea;
+    background: rgba(255, 255, 255, 0.95);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
 }
-.accountShowButtons>button{
+
+.form-input::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+textarea.form-input {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* 用户仪表盘 */
+.user-dashboard {
+    display: none;
+    background: linear-gradient(135deg, rgba(67, 206, 162, 0.1) 0%, rgba(24, 90, 157, 0.1) 100%);
+    border-radius: 20px;
+    padding: 3rem;
+    text-align: center;
+    border: 1px solid rgba(67, 206, 162, 0.2);
+    animation: fadeIn 0.6s ease;
+}
+
+.dashboard-header {
+    margin-bottom: 2.5rem;
+}
+
+.greeting-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.user-highlight {
+    background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.greeting-subtitle {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 1.1rem;
+}
+
+.dashboard-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.logout-btn {
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+    color: #d4572a;
+}
+
+.logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 87, 42, 0.3);
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    color: #c53030;
+}
+
+.delete-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(197, 48, 48, 0.3);
+}
+
+.btn-icon {
+    font-style: normal;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+.primary-btn:hover .btn-icon,
+.secondary-btn:hover .btn-icon,
+.submit-btn:hover .btn-icon {
+    transform: translateX(2px);
+}
+
+/* 表单输入框增强动画 */
+.form-group:hover .form-input:not(:focus) {
+    border-color: rgba(102, 126, 234, 0.3);
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-1px);
+}
+
+/* 加载状态动画 */
+@keyframes buttonLoading {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.submit-btn:disabled {
+    background: linear-gradient(270deg, #667eea, #764ba2, #667eea);
+    background-size: 200% 200%;
+    animation: buttonLoading 2s ease-in-out infinite;
+    cursor: not-allowed;
+}
+
+/* 卡片悬浮增强 */
+.user-profile-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 56px rgba(0, 0, 0, 0.2);
+}
+
+/* 头像悬浮效果 */
+.profile-avatar:hover #headSculpture {
+    transform: scale(1.05);
+}
+
+/* 表单标签动画 */
+.form-group label {
+    transition: all 0.3s ease;
+}
+
+.form-group:hover label {
+    color: #667eea;
+    transform: translateY(-1px);
+}
+
+/* 按钮涟漪效果 */
+.primary-btn:before,
+.submit-btn:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.primary-btn:hover:before,
+.submit-btn:hover:before {
+    width: 300px;
+    height: 300px;
+}
+
+/* 增强动画时间曲线 */
+* {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 表单验证状态 */
+.form-input.error {
+    border-color: #ff4444;
+    background: rgba(255, 68, 68, 0.05);
+    animation: shake 0.4s ease-in-out;
+}
+
+.form-input.success {
+    border-color: #00b894;
+    background: rgba(0, 184, 148, 0.05);
+}
+
+@keyframes shake {
+    0%, 20%, 40%, 60%, 80% {
+        transform: translateX(-2px);
+    }
+    10%, 30%, 50%, 70% {
+        transform: translateX(2px);
+    }
+    90%, 100% {
+        transform: translateX(0);
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    #accountPart {
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .user-profile-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+    
+    .welcome-screen {
+        padding: 2rem;
+    }
+    
+    .welcome-title {
+        font-size: 2rem;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .dashboard-actions {
+        flex-direction: column;
+    }
+    
+    .accountShowInfo {
+        padding: 2rem 1.5rem;
+    }
+}
+
+/* ==========设置-账号END========== */
+
+/* ==========设置-通用内容样式START========== */
+.settingContent {
+    width: 100%;
     height: 100%;
-    width: 50%;
-    font-size: 150%;
-    border: none;
+    padding: 2vh;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.settingSection {
+    height: 100%;
+}
+
+.settingSection h2 {
+    margin-bottom: 3vh;
+    color: #333;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 1vh;
+}
+
+.settingItem {
+    margin-bottom: 3vh;
+}
+
+.settingItem h3 {
+    margin-bottom: 1.5vh;
+    color: #555;
+}
+
+/* 主题设置样式 */
+.themeOptions {
+    display: flex;
+    gap: 2vh;
+}
+
+.themeOption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5vh;
+    border: 2px solid transparent;
     border-radius: 10px;
-    background-color: rgba(240, 248, 255, 0.1);
-    box-shadow: rgba(1, 1, 1, 0.1) .5px .5px 3px 0.5px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
-.accountShowButtons>button:hover{
-    background-color: rgba(240, 248, 255, 0.2);
-    box-shadow: rgba(1, 1, 1, 0.2) .5px .5px 5px 1px;
+
+.themeOption:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(240, 248, 255, 0.1);
+}
+
+.themeOption.active {
+    border-color: lightskyblue;
+    background-color: rgba(135, 206, 250, 0.1);
+}
+
+.themePreview {
+    width: 60px;
+    height: 40px;
+    border-radius: 5px;
+    margin-bottom: 1vh;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.light-preview {
+    background: linear-gradient(45deg, aliceblue 50%, #f0f8ff 50%);
+}
+
+.dark-preview {
+    background: linear-gradient(45deg, #2f4256 50%, #1a252f 50%);
+}
+
+/* 语言设置样式 */
+.languageOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.languageOption {
+    padding: 1.5vh;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
-#accountGreeting{
-    margin: 40% auto;
+
+.languageOption:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(240, 248, 255, 0.1);
 }
-/* ==========设置-账号-登录页END========== */
+
+.languageOption.active {
+    border-color: lightskyblue;
+    background-color: rgba(135, 206, 250, 0.1);
+}
+
+.languageOption.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: rgba(200, 200, 200, 0.1);
+}
+
+.languageOption.disabled:hover {
+    border-color: transparent;
+    background-color: rgba(200, 200, 200, 0.1);
+}
+
+.workInProgress {
+    margin-top: 2vh;
+    padding: 1.5vh;
+    background: linear-gradient(45deg, rgba(255, 193, 7, 0.1), rgba(255, 152, 0, 0.1));
+    border: 2px dashed rgba(255, 193, 7, 0.5);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.workInProgress p {
+    margin: 0;
+    color: #f57c00;
+    font-weight: bold;
+}
+
+/* 数据管理样式 */
+.dataActions {
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.dataButton {
+    padding: 1vh 2vh;
+    border: none;
+    border-radius: 10px;
+    font-size: 120%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: rgba(240, 248, 255, 0.1);
+    box-shadow: rgba(1, 1, 1, 0.1) .5px .5px 3px 0.5px;
+}
+
+.dataButton:hover {
+    background-color: rgba(240, 248, 255, 0.2);
+    box-shadow: rgba(1, 1, 1, 0.2) .5px .5px 5px 1px;
+}
+
+.dataButton.danger {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #d32f2f;
+}
+
+.dataButton.danger:hover {
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+.storageInfo {
+    background-color: rgba(240, 248, 255, 0.1);
+    padding: 1.5vh;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.storageInfo p {
+    margin: 0.5vh 0;
+    font-family: monospace;
+}
+
+/* 关于信息样式 */
+.aboutInfo {
+    background-color: rgba(240, 248, 255, 0.1);
+    padding: 1.5vh;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.aboutInfo p {
+    margin: 0.5vh 0;
+}
+/* ==========设置-通用内容样式END========== */
+
 /* ==========KEYFRAMES_START========== */
 @keyframes navShow {
     0% {top: -10vh;}
