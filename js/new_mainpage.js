@@ -965,3 +965,34 @@ window.debugUserManager = {
 
 // console.log("调试工具已加载，使用 debugUserManager.方法名() 进行调试");
 // console.log("可用方法: showAllUsers(), showAllUsernames(), checkIntegrity(), getCurrentUser()");
+
+// 游戏导航功能
+function initializeGameNavigation() {
+    // 为所有游戏主区域添加点击事件
+    document.querySelectorAll('.gameTypeMain').forEach(gameMain => {
+        const gameUrl = gameMain.dataset.gameUrl;
+        if (gameUrl) {
+            gameMain.addEventListener('click', (e) => {
+                // 如果点击的是演示动画元素，不触发导航
+                if (e.target.closest('.klotski-demo-container') || 
+                    e.target.classList.contains('klotski-block')) {
+                    return;
+                }
+                
+                // 导航到游戏页面
+                window.location.href = gameUrl;
+            });
+            
+            // 添加hover效果
+            gameMain.style.cursor = 'pointer';
+        }
+    });
+}
+
+// 页面加载完成后初始化游戏导航
+document.addEventListener('DOMContentLoaded', initializeGameNavigation);
+
+// 如果已经加载完成，立即初始化
+if (document.readyState !== 'loading') {
+    initializeGameNavigation();
+}

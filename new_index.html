@@ -34,13 +34,8 @@
             <!-- there are kinds of presentations of game here -->
             <div class="gameType" id="klotski">
                 <div class="gameTypeBGScreen">
-                    <main class="gameTypeMain" onclick="location.href='./subpages/klotski.html'">
-                        <ul>
-                            <li>3</li>
-                            <li>1</li>
-                            <li></li>
-                            <li>2</li>
-                        </ul>
+                    <main class="gameTypeMain" data-game-url="./subpages/klotski.html">
+                        <!-- 华容道演示动画将在这里生成 -->
                     </main>
                     <footer class="gameTypeFooter">
                         <h2 class="gameTypeTitle">𝗞𝗹𝗼𝘁𝘀𝗸𝗶</h2>
@@ -59,7 +54,7 @@
             </div>
             <div class="gameType" id="game2048">
                 <div class="gameTypeBGScreen">
-                    <main class="gameTypeMain" onclick="location.href='./subpages/game2048.html'">
+                    <main class="gameTypeMain" data-game-url="./subpages/game2048.html">
                     </main>
                     <footer class="gameTypeFooter">
                         <h2 class="gameTypeTitle">𝟮𝟬𝟰𝟴</h2>
@@ -79,7 +74,7 @@
             </div>
             <div class="gameType" id="labyrinth">
                 <div class="gameTypeBGScreen">
-                    <main class="gameTypeMain" onclick="location.href='./subpages/labyrinth.html'">
+                    <main class="gameTypeMain" data-game-url="./subpages/labyrinth.html">
                     </main>
                     <footer class="gameTypeFooter">
                         <h2 class="gameTypeTitle">𝗟𝗮𝗯𝘆𝗿𝗶𝗻𝘁𝗵</h2>
@@ -99,7 +94,7 @@
             </div>
             <div class="gameType" id="minesweaping">
                 <div class="gameTypeBGScreen">
-                    <main class="gameTypeMain" onclick="location.href='./subpages/minesweeping.html'">
+                    <main class="gameTypeMain" data-game-url="./subpages/mineClearance.html">
                     </main>
                     <footer class="gameTypeFooter">
                         <h2 class="gameTypeTitle">𝗠𝗶𝗻𝗲𝘀𝘄𝗲𝗲𝗽𝗶𝗻𝗴</h2>
@@ -322,6 +317,7 @@
         </div>
     </div>
     <script src="./js/new_mainpage.js"></script>
+    <script src="./js/game_demo.js"></script>
     <!-- <script type="module">
         fetch('./json/lang_en.json')
   .then(res => res.json())
