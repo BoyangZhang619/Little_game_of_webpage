@@ -24,9 +24,9 @@
     <aside id="nav">
         <ul>
             <li class="navClass" onclick="location.href=''">𝑳𝑰𝑻𝑻𝑳𝑬 𝑮𝑨𝑴𝑬</li>
-            <li class="navClass notTheme notSetting" id="navLang">🌐</li>
-            <li class="navClass notLang notSetting" id="navTheme">🌗</li>
-            <li class="navClass notLang notTheme" id="navSetting">🛠 </li>
+            <li class="navClass notTheme notSetting" id="navProgress">📊</li>
+            <li class="navClass notProgress notSetting" id="navEasterEgg">🎉</li>
+            <li class="navClass notProgress notEasterEgg" id="navSetting">🛠 </li>
         </ul>
     </aside>
     <main id="main">
@@ -121,6 +121,39 @@
     <div id="screenBlock">
         <div id="screenBlockMainArea">
 
+        </div>
+    </div>
+    
+    <!-- 彩蛋模态框 -->
+    <div id="easterEggModal" class="easter-egg-modal">
+        <div class="easter-egg-content">
+            <button class="easter-egg-close" id="closeEasterEgg">×</button>
+            <h2 class="easter-egg-title">🎉 Surprise Easter Eggs! 🎉</h2>
+            <p>发现隐藏功能！选择你想体验的彩蛋效果：</p>
+            
+            <div class="easter-egg-options">
+                <button class="easter-option" data-egg="rainbow-rain">
+                    🌈<br>彩虹雨
+                </button>
+                <button class="easter-option" data-egg="random-quote">
+                    💭<br>随机名言
+                </button>
+                <button class="easter-option" data-egg="snake-game">
+                    🐍<br>贪吃蛇
+                </button>
+                <button class="easter-option" data-egg="particle-bg">
+                    ✨<br>动态背景
+                </button>
+                <button class="easter-option" data-egg="konami-code">
+                    🎮<br>秘技代码
+                </button>
+                <button class="easter-option" data-egg="time-machine">
+                    ⏰<br>时光机
+                </button>
+            </div>
+            
+            <!-- 动态内容区域 -->
+            <div id="easterEggContent"></div>
         </div>
     </div>
     <div id="setting">
@@ -234,6 +267,166 @@
                         </div>
                     </div>
                 </section>
+                <section id="progressPart" class="settingContent" data-setting="progress" style="display: none;">
+                    <!-- 进度总览卡片 -->
+                    <div class="progress-profile-card">
+                        <div class="progress-avatar">
+                            <div class="progress-icon">📊</div>
+                            <div class="avatar-ring"></div>
+                        </div>
+                        <div class="progress-info">
+                            <h3 class="profile-name">Game Progress</h3>
+                            <p id="progressSummary" class="profile-desc">Track your gaming achievements and statistics</p>
+                        </div>
+                    </div>
+
+                    <!-- 游戏数据操作区域 -->
+                    <div class="progress-actions">
+                        <!-- 数据筛选控制 -->
+                        <div class="filter-controls">
+                            <div class="filter-header">
+                                <h3>📈 Data Analytics</h3>
+                                <p>Filter and analyze your gaming performance</p>
+                            </div>
+                            <div class="filter-form">
+                                <div class="filter-row">
+                                    <div class="filter-group">
+                                        <label>Game Type</label>
+                                        <select id="gameTypeFilter" class="form-input">
+                                            <option value="all">All Games</option>
+                                            <option value="klotski">Klotski (华容道)</option>
+                                            <option value="game2048">2048</option>
+                                            <option value="labyrinth">Labyrinth</option>
+                                            <option value="minesweeping">Minesweeping</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Sort By</label>
+                                        <select id="sortByFilter" class="form-input">
+                                            <option value="date">Date (Latest)</option>
+                                            <option value="score">Score (Highest)</option>
+                                            <option value="duration">Duration (Shortest)</option>
+                                            <option value="moves">Moves (Fewest)</option>
+                                            <option value="difficulty">Difficulty</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Result Filter</label>
+                                        <select id="resultFilter" class="form-input">
+                                            <option value="all">All Results</option>
+                                            <option value="won">Completed</option>
+                                            <option value="lost">Failed</option>
+                                            <option value="ongoing">In Progress</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="filter-actions">
+                                    <button id="applyFilters" class="submit-btn">Apply Filters</button>
+                                    <button id="clearFilters" class="cancel-btn">Clear All</button>
+                                    <button id="exportProgress" class="dashboard-btn">Export Data</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 游戏统计卡片 -->
+                        <div class="game-stats-grid">
+                            <div class="stat-card" data-game="klotski">
+                                <div class="stat-header">
+                                    <h4>🧩 Klotski</h4>
+                                    <span class="stat-badge" id="klotskiTotal">0 plays</span>
+                                </div>
+                                <div class="stat-content">
+                                    <p>Best Score: <span id="klotskiBestScore">--</span></p>
+                                    <p>Average Duration: <span id="klotskiAvgTime">--</span></p>
+                                    <p>Win Rate: <span id="klotskiWinRate">--%</span></p>
+                                </div>
+                            </div>
+                            <div class="stat-card" data-game="game2048">
+                                <div class="stat-header">
+                                    <h4>🎯 2048</h4>
+                                    <span class="stat-badge" id="game2048Total">0 plays</span>
+                                </div>
+                                <div class="stat-content">
+                                    <p>Best Score: <span id="game2048BestScore">--</span></p>
+                                    <p>Average Duration: <span id="game2048AvgTime">--</span></p>
+                                    <p>Win Rate: <span id="game2048WinRate">--%</span></p>
+                                </div>
+                            </div>
+                            <div class="stat-card" data-game="labyrinth">
+                                <div class="stat-header">
+                                    <h4>🌀 Labyrinth</h4>
+                                    <span class="stat-badge" id="labyrinthTotal">0 plays</span>
+                                </div>
+                                <div class="stat-content">
+                                    <p>Best Score: <span id="labyrinthBestScore">--</span></p>
+                                    <p>Average Duration: <span id="labyrinthAvgTime">--</span></p>
+                                    <p>Win Rate: <span id="labyrinthWinRate">--%</span></p>
+                                </div>
+                            </div>
+                            <div class="stat-card" data-game="minesweeping">
+                                <div class="stat-header">
+                                    <h4>💣 Minesweeping</h4>
+                                    <span class="stat-badge" id="minesweepingTotal">0 plays</span>
+                                </div>
+                                <div class="stat-content">
+                                    <p>Best Score: <span id="minesweepingBestScore">--</span></p>
+                                    <p>Average Duration: <span id="minesweepingAvgTime">--</span></p>
+                                    <p>Win Rate: <span id="minesweepingWinRate">--%</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 详细数据表格 -->
+                        <div class="progress-table-container">
+                            <div class="table-header">
+                                <h4>📋 Detailed Records</h4>
+                                <div class="table-controls">
+                                    <span id="recordsCount">0 records found</span>
+                                    <button id="refreshData" class="table-btn">🔄 Refresh</button>
+                                    <button id="clearSelectedData" class="table-btn danger">🗑️ Delete Selected</button>
+                                </div>
+                            </div>
+                            <div class="table-wrapper">
+                                <table id="progressTable" class="progress-table">
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" id="selectAll"></th>
+                                            <th>Game</th>
+                                            <th>Date</th>
+                                            <th>Duration</th>
+                                            <th>Score</th>
+                                            <th>Moves</th>
+                                            <th>Result</th>
+                                            <th>Difficulty</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="progressTableBody">
+                                        <tr class="no-data-row">
+                                            <td colspan="9">
+                                                <div class="no-data">
+                                                    <div class="no-data-icon">📭</div>
+                                                    <p>No game records found</p>
+                                                    <p class="sub-text">Start playing games to see your progress here!</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-pagination">
+                                <div class="pagination-info">
+                                    <span id="pageInfo">Showing 0 of 0 records</span>
+                                </div>
+                                <div class="pagination-controls">
+                                    <button id="prevPage" class="page-btn" disabled>← Prev</button>
+                                    <span id="currentPage">1</span>
+                                    <button id="nextPage" class="page-btn" disabled>Next →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
                 <section id="themePart" class="settingContent" data-setting="theme" style="display: none;">
                     <div class="settingSection">
                         <h2>𝚃𝚑𝚎𝚖𝚎 𝚂𝚎𝚝𝚝𝚒𝚗𝚐𝚜</h2>
@@ -255,18 +448,23 @@
                 <section id="languagePart" class="settingContent" data-setting="language" style="display: none;">
                     <div class="settingSection">
                         <h2>𝙻𝚊𝚗𝚐𝚞𝚊𝚐𝚎 𝚂𝚎𝚝𝚝𝚒𝚗𝚐𝚜</h2>
-                        <div class="settingItem">
-                            <h3>𝙸𝚗𝚝𝚎𝚛𝚏𝚊𝚌𝚎 𝙻𝚊𝚗𝚐𝚞𝚊𝚐𝚎</h3>
-                            <div class="languageOptions">
-                                <div class="languageOption disabled" data-lang="en-us">
-                                    <span>🇺🇸 English</span>
-                                </div>
-                                <div class="languageOption disabled" data-lang="zh-cn">
-                                    <span>🇨🇳 中文</span>
+                        <div class="settingRow">
+                            <div class="settingItem">
+                                <h3>𝙸𝚗𝚝𝚎𝚛𝚏𝚊𝚌𝚎 𝙻𝚊𝚗𝚐𝚞𝚊𝚐𝚎</h3>
+                                <div class="languageOptions">
+                                    <div class="languageOption disabled" data-lang="en-us">
+                                        <span>🇺🇸 English</span>
+                                    </div>
+                                    <div class="languageOption disabled" data-lang="zh-cn">
+                                        <span>🇨🇳 中文</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="workInProgress">
-                                <p>🚧 此功能正在制作中，敬请期待！</p>
+                            <div class="settingItem">
+                                <h3>𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚖𝚎𝚗𝚝 𝚂𝚝𝚊𝚝𝚞𝚜</h3>
+                                <div class="workInProgress">
+                                    <p>🚧 此功能正在制作中，敬请期待！</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -274,19 +472,21 @@
                 <section id="dataPart" class="settingContent" data-setting="data" style="display: none;">
                     <div class="settingSection">
                         <h2>𝙳𝚊𝚝𝚊 𝙼𝚊𝚗𝚊𝚐𝚎𝚖𝚎𝚗𝚝</h2>
-                        <div class="settingItem">
-                            <h3>𝚄𝚜𝚎𝚛 𝙳𝚊𝚝𝚊</h3>
-                            <div class="dataActions">
-                                <button class="dataButton" id="exportDataButton">𝐄𝐱𝐩𝐨𝐫𝐭 𝐃𝐚𝐭𝐚</button>
-                                <button class="dataButton" id="importDataButton">𝐈𝐦𝐩𝐨𝐫𝐭 𝐃𝐚𝐭𝐚</button>
-                                <button class="dataButton danger" id="clearDataButton">𝐂𝐥𝐞𝐚𝐫 𝐀𝐥𝐥 𝐃𝐚𝐭𝐚</button>
+                        <div class="settingRow">
+                            <div class="settingItem">
+                                <h3>𝚄𝚜𝚎𝚛 𝙳𝚊𝚝𝚊</h3>
+                                <div class="dataActions">
+                                    <button class="dataButton" id="exportDataButton">𝐄𝐱𝐩𝐨𝐫𝐭 𝐃𝐚𝐭𝐚</button>
+                                    <button class="dataButton" id="importDataButton">𝐈𝐦𝐩𝐨𝐫𝐭 𝐃𝐚𝐭𝐚</button>
+                                    <button class="dataButton danger" id="clearDataButton">𝐂𝐥𝐞𝐚𝐫 𝐀𝐥𝐥 𝐃𝐚𝐭𝐚</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="settingItem">
-                            <h3>𝚂𝚝𝚘𝚛𝚊𝚐𝚎 𝙸𝚗𝚏𝚘</h3>
-                            <div class="storageInfo">
-                                <p>𝚄𝚜𝚎𝚍 𝚂𝚝𝚘𝚛𝚊𝚐𝚎: <span id="usedStorage">--</span></p>
-                                <p>𝚃𝚘𝚝𝚊𝚕 𝚁𝚎𝚌𝚘𝚛𝚍𝚜: <span id="totalRecords">--</span></p>
+                            <div class="settingItem">
+                                <h3>𝚂𝚝𝚘𝚛𝚊𝚐𝚎 𝙸𝚗𝚏𝚘</h3>
+                                <div class="storageInfo">
+                                    <p>𝚄𝚜𝚎𝚍 𝚂𝚝𝚘𝚛𝚊𝚐𝚎: <span id="usedStorage">--</span></p>
+                                    <p>𝚃𝚘𝚝𝚊𝚕 𝚁𝚎𝚌𝚘𝚛𝚍𝚜: <span id="totalRecords">--</span></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -308,6 +508,7 @@
             <aside id="settingNav">
                 <ul id="settingUl">
                     <li class="settingClass active" data-target="account">𝙰𝚌𝚌𝚘𝚞𝚗𝚝</li>
+                    <li class="settingClass" data-target="progress">𝙿𝚛𝚘𝚐𝚛𝚎𝚜𝚜</li>
                     <li class="settingClass" data-target="theme">𝚃𝚑𝚎𝚖𝚎</li>
                     <li class="settingClass" data-target="language">𝙻𝚊𝚗𝚐𝚞𝚊𝚐𝚎</li>
                     <li class="settingClass" data-target="data">𝙳𝚊𝚝𝚊</li>

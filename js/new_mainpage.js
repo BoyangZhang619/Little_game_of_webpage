@@ -46,24 +46,36 @@ addEventListener('scroll', () => {
         return 0
     }
 });
-document.querySelector("#navLang").addEventListener('click', () => {
-    document.querySelectorAll(".notLang").forEach(item => item.style.animation = "showFadeShow 0.6s linear forwards");
+document.querySelector("#navProgress").addEventListener('click', () => {
+    // 快捷方式跳转到设置中的进度页面
+    if (!isSettingShow) {
+        isSettingShow = true;
+        setSetting("show");
+    }
+    // 切换到进度页面
     setTimeout(() => {
-        setNavLang(!isLangShow, null);
-        isLangShow = !isLangShow;
-        document.querySelectorAll(".notLang").forEach(item => item.style.animation = "");
-    }, 300);
+        const progressTab = document.querySelector('[data-target="progress"]');
+        if (progressTab) {
+            // 移除其他tab的active状态
+            document.querySelectorAll('.settingClass').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.settingContent').forEach(content => content.style.display = 'none');
+            
+            // 激活进度tab
+            progressTab.classList.add('active');
+            document.querySelector('#progressPart').style.display = 'block';
+            
+            // 加载进度数据
+            loadProgressData();
+        }
+    }, 800);
 });
 
-document.querySelector("#navTheme").addEventListener('click', () => {
-    if (isLangShow) return 0;
-    document.querySelector("body").style.transition = "all 0.3s ease";
-    document.querySelector("body").style.backgroundColor = theme ? "aliceblue" : "#2f4256";
-    if (!isPhone) document.querySelector("#content").style.backgroundColor = theme ? "rgba(255, 255, 255, 0.3)" : "#0000";
-    theme = !theme;
+document.querySelector("#navEasterEgg").addEventListener('click', () => {
+    // 彩蛋功能
+    showEasterEgg();
 });
+
 document.querySelector("#navSetting").addEventListener('click', async () => {
-    if (isLangShow) return 0;
     isSettingShow = !isSettingShow;
     setSetting(isSettingShow ? "show" : "hide");
     await loadUser();
@@ -805,7 +817,7 @@ document.querySelectorAll(".settingClass").forEach(settingTab => {
         // 显示对应的设置内容
         const targetContent = document.querySelector(`.settingContent[data-setting="${targetSetting}"]`);
         if (targetContent) {
-            targetContent.style.display = "block";
+            targetContent.style.display = "flex";
         }
         
         console.log(`切换到设置页面: ${targetSetting}`);
