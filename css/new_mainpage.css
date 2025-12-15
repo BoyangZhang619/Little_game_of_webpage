@@ -1843,10 +1843,20 @@ textarea.form-input {
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    display: none;
+    display: flex;
     justify-content: center;
-    align-items: center;
-    animation: modalFadeIn 0.5s ease;
+    align-items: flex-start;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 2rem 0;
+}
+
+.easter-egg-modal.show {
+    opacity: 1;
+    visibility: visible;
 }
 
 .easter-egg-content {
@@ -1859,12 +1869,16 @@ textarea.form-input {
     padding: 2rem;
     max-width: 500px;
     width: 90%;
+    max-height: calc(100vh - 4rem);
+    min-height: auto;
     text-align: center;
-    border: 2px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
     animation: contentSlideIn 0.6s ease;
     position: relative;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: auto 0;
+    flex-shrink: 0;
 }
 
 .easter-egg-close {
@@ -1885,7 +1899,7 @@ textarea.form-input {
 }
 
 .easter-egg-title {
-    font-size: 2rem;
+    font-size: 1.875rem;
     margin-bottom: 1rem;
     background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #f093fb);
     background-size: 300% 300%;
@@ -2131,9 +2145,16 @@ textarea.form-input {
 
 /* 移动端适配 */
 @media (max-width: 768px) {
+    .easter-egg-modal {
+        padding: 1rem 0;
+    }
+    
     .easter-egg-content {
         padding: 1.5rem;
-        margin: 1rem;
+        margin: 0;
+        width: 95%;
+        max-height: calc(100vh - 2rem);
+        border-radius: 16px;
     }
     
     .easter-egg-title {

@@ -70,9 +70,27 @@ document.querySelector("#navProgress").addEventListener('click', () => {
     }, 800);
 });
 
+// 彩蛋功能事件监听器
 document.querySelector("#navEasterEgg").addEventListener('click', () => {
-    // 彩蛋功能
     showEasterEgg();
+});
+
+document.querySelector("#closeEasterEgg").addEventListener('click', () => {
+    hideEasterEgg();
+});
+
+// 点击彩蛋模态框背景关闭
+document.querySelector("#easterEggModal").addEventListener('click', (e) => {
+    if (e.target.id === 'easterEggModal') {
+        hideEasterEgg();
+    }
+});
+
+// ESC键关闭彩蛋模态框
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.querySelector("#easterEggModal").classList.contains('show')) {
+        hideEasterEgg();
+    }
 });
 
 document.querySelector("#navSetting").addEventListener('click', async () => {
@@ -1007,4 +1025,28 @@ document.addEventListener('DOMContentLoaded', initializeGameNavigation);
 // 如果已经加载完成，立即初始化
 if (document.readyState !== 'loading') {
     initializeGameNavigation();
+}
+
+// 彩蛋显示函数
+function showEasterEgg() {
+    const modal = document.querySelector("#easterEggModal");
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden'; // 禁止背景滚动
+    
+    // 初始化彩蛋功能
+    if (typeof EasterEggFeatures !== 'undefined') {
+        EasterEggFeatures.init();
+    }
+}
+
+// 彩蛋隐藏函数
+function hideEasterEgg() {
+    const modal = document.querySelector("#easterEggModal");
+    modal.classList.remove('show');
+    document.body.style.overflow = ''; // 恢复背景滚动
+    
+    // 清理彩蛋功能
+    if (typeof EasterEggFeatures !== 'undefined') {
+        EasterEggFeatures.cleanup();
+    }
 }
