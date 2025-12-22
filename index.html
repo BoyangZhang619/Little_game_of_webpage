@@ -1,90 +1,524 @@
 <!DOCTYPE html>
-<html>
+<html translate="no">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Intelligent webgame</title>
-    <link rel="stylesheet" href="./css/common.css">
-    <link rel="stylesheet" href="./css/mainPage.css">
-    <link rel="icon" href="./img/icon.jpg" type="image/x-icon">
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>𝑹𝑬𝑻𝑹𝑶𝑻𝑶𝑷𝑰𝑪</title>
+    <link rel="stylesheet" href="./css/new_common.css">
+    <link rel="stylesheet" href="./css/new_mainpage.css">
+    <link rel="icon" href="./img/iconB&Wpicture.png" type="image/x-icon">
 </head>
 
-<body translate="no">
-    <script>if (confirm("如果你要前往新的主页面请确认，否则你将留在此页面。点击取消将留在此页面，点击确认将前往新的主页面。")) location.href = "./new_index.html";</script>
-    <header id="header">
-        <h2 class="interpElem">The Webpage of Intelligent Game</h2><!-- interpElem means interpretableElement -->
-        <div id="setting" onclick="partsSwitch()">≡</div>
-    </header>
-    <main id="main">
+<body>
+    <div id="cover">
+        <div id="topCover">
+            <h1>𝑳𝑰𝑻𝑻𝑳𝑬 𝑮𝑨𝑴𝑬</h1>
+            <h3>Click to enter</h3>
+        </div>
         <main>
-            <div id="login">
-                <h2 class="interpElem">LOGIN</h2>
-                <form method="post" action="">
-                    <!-- actually it can't post to backend,because i haven't learned that yet,so that all the data are stored in local-->
-                    <div>
-                        <label for="username" class="interpElem">Username:</label>
-                        <input type="text" id="username" name="username" required placeholder="Enter your username">
-                    </div>
-                    <div>
-                        <label for="password" class="interpElem">Password:&nbsp;</label>
-                        <input type="password" id="password" name="password" required placeholder="Enter your password">
-                    </div>
-                    <div>
-                        <button type="submit" class="interpElem" onclick="login()">Login</button>
-                        <button type="button" class="interpElem" onclick="register()">Reg</button>
-                    </div>
-                </form>
-            </div>
-            <div id="hello"></div>
-            <div id="recordContent"></div>
-            <div id="accountContent"></div>
-            <div id="languageContent"></div>
-            <div id="themeContent"></div>
-            <div id="otherContent"></div>
-            <div id="aboutContent"></div>
-            <div id="helpContent"></div>
+            <div id="leftCover" class="cover"></div>
+            <div id="rightCover" class="cover"></div>
         </main>
-        <aside id="aside">
-            <div id="selectGamePart">
-                <div id="choose" class="interpElem">SELECT GAME</div>
-                <ul id="ulSelectGame">
-                    <li class="interpElem" onclick='selectGame(this,"game2048")'>2048</li>
-                    <li class="interpElem" onclick='selectGame(this,"labyrinth")'>labyrinth</li>
-                    <li class="interpElem" onclick='selectGame(this,"mineClearance")'>mineClearance</li>
-                    <li class="interpElem" onclick='selectGame(this,"klotski")'>klotski</li>
-                </ul>
-                <div id="submit" class="interpElem" onclick="selectGame(this,0)">ENTER</div>
+    </div>
+    <aside id="nav">
+        <ul>
+            <li class="navClass" onclick="location.href=''">𝑳𝑰𝑻𝑻𝑳𝑬 𝑮𝑨𝑴𝑬</li>
+            <li class="navClass notTheme notSetting" id="navProgress">📊</li>
+            <li class="navClass notProgress notSetting" id="navEasterEgg">🎉</li>
+            <li class="navClass notProgress notEasterEgg" id="navSetting">🛠 </li>
+        </ul>
+    </aside>
+    <main id="main">
+        <div id="content">
+            <!-- there are kinds of presentations of game here -->
+            <div class="gameType" id="klotski">
+                <div class="gameTypeBGScreen">
+                    <main class="gameTypeMain" data-game-url="./subpages/klotski.html">
+                        <!-- 华容道演示动画将在这里生成 -->
+                    </main>
+                    <footer class="gameTypeFooter">
+                        <h2 class="gameTypeTitle">𝗞𝗹𝗼𝘁𝘀𝗸𝗶</h2>
+                        <ul class="gameTypeExplanation">
+                            <li>It’s a sliding block puzzle that originated in China, themed after the historical escape
+                                of General Cao Cao during the Three Kingdoms period.</li>
+                            <li>You have a grid with blocks of different shapes and sizes.</li>
+                            <li>The goal: move the largest block (representing Cao Cao) through the exit at the bottom
+                                of the board.</li>
+                            <li>Rules: you can only slide one block at a time, and blocks can’t overlap or leave the
+                                grid.</li>
+                            <li>It’s a game of spatial reasoning and planning ahead.</li>
+                        </ul>
+                    </footer>
+                </div>
             </div>
-            <div id="settingPart"><!-- settingPart hidden by default -->
-                <div id="settingTitle" class="interpElem">SETTING</div>
-                <ul id="ulSetting">
-                    <li class="interpElem" id="setting-record" onclick='settings("record")'>record</li>
-                    <li class="interpElem" id="setting-account" onclick='settings("account")'>account</li>
-                    <li class="interpElem" id="setting-language" onclick='settings("language")'>language</li>
-                    <li class="interpElem" id="setting-theme" onclick='settings("theme")'>theme</li>
-                    <li class="interpElem" id="setting-other" onclick='settings("other")'>other</li>
-                    <li class="interpElem" id="setting-about" onclick='settings("about")'>about</li>
-                    <li class="interpElem" id="setting-help" onclick='settings("help")'>help</li>
-                </ul>
+            <div class="gameType" id="game2048">
+                <div class="gameTypeBGScreen">
+                    <main class="gameTypeMain" data-game-url="./subpages/game2048.html">
+                    </main>
+                    <footer class="gameTypeFooter">
+                        <h2 class="gameTypeTitle">𝟮𝟬𝟰𝟴</h2>
+                        <ul class="gameTypeExplanation">
+                            <li>A single-player sliding tile puzzle game.</li>
+                            <li>The board is a 4×4 grid where numbered tiles appear (usually 2 or 4).</li>
+                            <li>Each move slides all tiles in one direction (up, down, left, right).</li>
+                            <li>When two tiles with the same number collide, they merge into a new tile with their sum
+                                (e.g., 2+2=4, 4+4=8).</li>
+                            <li>The goal: combine numbers until you create the tile 2048 (and beyond, if you keep
+                                going).
+                            </li>
+                            <li>It’s simple in mechanics but surprisingly deep in strategy.</li>
+                        </ul>
+                    </footer>
+                </div>
             </div>
-        </aside>
+            <div class="gameType" id="labyrinth">
+                <div class="gameTypeBGScreen">
+                    <main class="gameTypeMain" data-game-url="./subpages/labyrinth.html">
+                    </main>
+                    <footer class="gameTypeFooter">
+                        <h2 class="gameTypeTitle">𝗟𝗮𝗯𝘆𝗿𝗶𝗻𝘁𝗵</h2>
+                        <ul class="gameTypeExplanation">
+                            <li>A maze is essentially a puzzle of pathways.</li>
+                            <li>You usually start at an entrance and must find your way to an exit, avoiding dead ends.
+                            </li>
+                            <li>Mazes can be drawn on paper, built physically (like hedge mazes), or generated digitally
+                                in
+                                games.</li>
+                            <li>Algorithms like depth-first search, breadth-first search, or A* pathfinding are commonly
+                                used to solve mazes computationally.</li>
+                            <li>It’s about navigation and problem-solving under uncertainty.</li>
+                        </ul>
+                    </footer>
+                </div>
+            </div>
+            <div class="gameType" id="minesweaping">
+                <div class="gameTypeBGScreen">
+                    <main class="gameTypeMain" data-game-url="./subpages/mineClearance.html">
+                    </main>
+                    <footer class="gameTypeFooter">
+                        <h2 class="gameTypeTitle">𝗠𝗶𝗻𝗲𝘀𝘄𝗲𝗲𝗽𝗶𝗻𝗴</h2>
+                        <ul class="gameTypeExplanation">
+                            <li>A classic logic puzzle that comes with many operating systems (famously Windows).</li>
+                            <li>The game is played on a grid of covered cells. Some cells hide mines.</li>
+                            <li>Clicking on a cell reveals either:
+                                <ol>
+                                    <li>A mine (game over)</li>
+                                    <li>A number showing how many adjacent cells contain mines.</li>
+                                </ol>
+                            </li>
+                            <li>Using logic and deduction, you must flag the locations of all mines without triggering
+                                them.
+                            </li>
+                            <li>It blends probability, risk-taking, and careful reasoning.</li>
+                        </ul>
+                    </footer>
+                </div>
+            </div>
+        </div>
+        <div id="footer"></div>
     </main>
     <div id="screenBlock">
-        <div id="alertInfo">
-            <div id="info">
-                <h2>Alert</h2>
-                <p></p>
-            </div>
-            <div id="determine">OK</div>
+        <div id="screenBlockMainArea">
+
         </div>
     </div>
-    <div id="themeBlock"></div>
-    <!-- special chars ≡⋯⋮⨉ -->
-    <script src="./js/mainPage.js"></script>
-    <script src="./js/common.js"></script>
+    
+    <!-- 彩蛋模态框 -->
+    <div id="easterEggModal" class="easter-egg-modal">
+        <div class="easter-egg-content">
+            <button class="easter-egg-close" id="closeEasterEgg">×</button>
+            <h2 class="easter-egg-title">🎉 Surprise Easter Eggs! 🎉</h2>
+            <p>发现隐藏功能！选择你想体验的彩蛋效果：</p>
+            
+            <div class="easter-egg-options">
+                <button class="easter-option" data-egg="rainbow-rain">
+                    🌈<br>彩虹雨
+                </button>
+                <button class="easter-option" data-egg="random-quote">
+                    💭<br>随机名言
+                </button>
+                <button class="easter-option" data-egg="konami-code">
+                    🎮<br>秘技代码
+                </button>
+                <button class="easter-option" data-egg="time-machine">
+                    ⏰<br>时光机
+                </button>
+            </div>
+            
+            <!-- 动态内容区域 -->
+            <div id="easterEggContent"></div>
+        </div>
+    </div>
+    <div id="setting">
+        <div id="mainSetting">
+            <main id="settingMain">
+                <section id="accountPart" class="settingContent" data-setting="account">
+                    <!-- 用户信息卡片 -->
+                    <div class="user-profile-card">
+                        <div class="profile-avatar">
+                            <img id="headSculpture" src="./img/default_head_sculpture.png" alt="Profile Avatar">
+                            <div class="avatar-ring"></div>
+                        </div>
+                        <div class="profile-info">
+                            <h3 id="accountRegisterName" class="profile-name">Unregistered</h3>
+                            <p id="accountRegisterDescription" class="profile-desc">This user is very lazy and hasn't written anything~~~</p>
+                        </div>
+                    </div>
+
+                    <!-- 账户操作区域 -->
+                    <div class="account-actions">
+                        <!-- 初始界面 -->
+                        <div id="waitforregist" class="welcome-screen">
+                            <div class="welcome-content">
+                                <h2 class="welcome-title">Welcome to LITTLE GAME</h2>
+                                <p class="welcome-subtitle">Please create an account or sign in to continue</p>
+                                <div class="action-buttons">
+                                    <button id="toRegisterButton" class="primary-btn">
+                                        <span>Create Account</span>
+                                        <i class="btn-icon">→</i>
+                                    </button>
+                                    <button id="toLoginButton" class="secondary-btn">
+                                        <span>Sign In</span>
+                                        <i class="btn-icon">↑</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 注册表单 -->
+                        <div class="accountShowInfo register-form">
+                            <div class="form-header">
+                                <h3>Create Your Account</h3>
+                                <p>Join our gaming community</p>
+                            </div>
+                            <form class="auth-form">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input class="form-input accountShowNameInput" type="text" placeholder="Enter your username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input class="form-input accountShowPasswordInput" type="password" placeholder="Create a strong password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input class="form-input accountShowPasswordAgainInput" type="password" placeholder="Confirm your password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea class="form-input accountShowDescriptionInput" placeholder="Tell us about yourself (optional)"></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" id="saveAccountInfo" class="submit-btn">Create Account</button>
+                                    <button type="button" class="returnAccountProgram cancel-btn">Back</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- 登录表单 -->
+                        <div class="accountShowInfo login-form">
+                            <div class="form-header">
+                                <h3>Welcome Back</h3>
+                                <p>Sign in to your account</p>
+                            </div>
+                            <form class="auth-form">
+                                <div class="form-group">
+                                    <label>Username</label>
+                                    <input class="form-input accountShowNameInput" type="text" placeholder="Enter your username">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input class="form-input accountShowPasswordInput" type="password" placeholder="Enter your password">
+                                </div>
+                                <div class="form-group" style="display: none;">
+                                    <label>Description (Hidden)</label>
+                                    <textarea class="form-input accountShowDescriptionInput" readonly style="display: none;"></textarea>
+                                </div>
+                                <div class="form-actions">
+                                    <button type="button" id="Login" class="submit-btn">Sign In</button>
+                                    <button type="button" class="returnAccountProgram cancel-btn">Back</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- 用户已登录界面 -->
+                        <div id="accountGreeting" class="user-dashboard">
+                            <div class="dashboard-header">
+                                <h2 class="greeting-title">Welcome back, <span id="accountShowNameSpan" class="user-highlight">User</span>!</h2>
+                                <p class="greeting-subtitle">Ready to play some games?</p>
+                            </div>
+                            <div class="dashboard-actions">
+                                <button id="logoutButton" class="dashboard-btn logout-btn">
+                                    <span>Sign Out</span>
+                                    <i class="btn-icon">⤴</i>
+                                </button>
+                                <button id="deleteAccountButton" class="dashboard-btn delete-btn">
+                                    <span>Delete Account</span>
+                                    <i class="btn-icon">⚠</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="progressPart" class="settingContent" data-setting="progress" style="display: none;">
+                    <!-- 进度总览卡片 -->
+                    <div class="progress-profile-card">
+                        <div class="progress-avatar">
+                            <div class="progress-icon">📊</div>
+                            <div class="avatar-ring"></div>
+                        </div>
+                        <div class="progress-info">
+                            <h3 class="profile-name">Game Progress</h3>
+                            <p id="progressSummary" class="profile-desc">Track your gaming achievements and statistics</p>
+                        </div>
+                    </div>
+
+                    <!-- 游戏数据操作区域 -->
+                    <div class="progress-actions">
+                        <!-- 数据筛选控制 -->
+                        <div class="filter-controls">
+                            <div class="filter-header">
+                                <h3>📈 Data Analytics</h3>
+                                <p>Filter and analyze your gaming performance</p>
+                            </div>
+                            <div class="filter-form">
+                                <div class="filter-row">
+                                    <div class="filter-group">
+                                        <label>Game Type</label>
+                                        <select id="gameTypeFilter" class="form-input">
+                                            <option value="all">All Games</option>
+                                            <option value="klotski">Klotski (华容道)</option>
+                                            <option value="game2048">2048</option>
+                                            <option value="labyrinth">Labyrinth</option>
+                                            <option value="minesweeping">Minesweeping</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Sort By</label>
+                                        <select id="sortByFilter" class="form-input">
+                                            <option value="date">Date (Latest)</option>
+                                            <option value="score">Score (Highest)</option>
+                                            <option value="duration">Duration (Shortest)</option>
+                                            <option value="moves">Moves (Fewest)</option>
+                                            <option value="difficulty">Difficulty</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Result Filter</label>
+                                        <select id="resultFilter" class="form-input">
+                                            <option value="all">All Results</option>
+                                            <option value="won">Completed</option>
+                                            <option value="lost">Failed</option>
+                                            <option value="ongoing">In Progress</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="filter-actions">
+                                    <button id="applyFilters" class="submit-btn">Apply Filters</button>
+                                    <button id="clearFilters" class="cancel-btn">Clear All</button>
+                                    <button id="exportProgress" class="dashboard-btn">Export Data</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 游戏统计卡片 -->
+                        <div class="game-stats-grid">
+                            <div class="stat-card" data-game="klotski">
+                                <div class="stat-header">
+                                    <h4>🧩 Klotski</h4>
+                                    <span class="stat-badge" id="klotskiTotal">0 plays</span>
+                                </div>
+                                <div class="stat-content">
+                                    <p>Best Score: <span id="klotskiBestScore">--</span></p>
+                                    <p>Average Duration: <span id="klotskiAvgTime">--</span></p>
+                                    <p>Win Rate: <span id="klotskiWinRate">--%</span></p>
+                                </div>
+                            </div>
+                            <div class="stat-card" data-game="game2048">
+                                <div class="stat-header">
+                                    <h4>🎯 2048</h4>
+                                    <span class="stat-badge" id="game2048Total">0 plays</span>
+                                </div>
+                                <div class="stat-content">
+                                    <p>Best Score: <span id="game2048BestScore">--</span></p>
+                                    <p>Average Duration: <span id="game2048AvgTime">--</span></p>
+                                    <p>Win Rate: <span id="game2048WinRate">--%</span></p>
+                                </div>
+                            </div>
+                            <div class="stat-card" data-game="labyrinth">
+                                <div class="stat-header">
+                                    <h4>🌀 Labyrinth</h4>
+                                    <span class="stat-badge" id="labyrinthTotal">0 plays</span>
+                                </div>
+                                <div class="stat-content">
+                                    <p>Best Score: <span id="labyrinthBestScore">--</span></p>
+                                    <p>Average Duration: <span id="labyrinthAvgTime">--</span></p>
+                                    <p>Win Rate: <span id="labyrinthWinRate">--%</span></p>
+                                </div>
+                            </div>
+                            <div class="stat-card" data-game="minesweeping">
+                                <div class="stat-header">
+                                    <h4>💣 Minesweeping</h4>
+                                    <span class="stat-badge" id="minesweepingTotal">0 plays</span>
+                                </div>
+                                <div class="stat-content">
+                                    <p>Best Score: <span id="minesweepingBestScore">--</span></p>
+                                    <p>Average Duration: <span id="minesweepingAvgTime">--</span></p>
+                                    <p>Win Rate: <span id="minesweepingWinRate">--%</span></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 详细数据表格 -->
+                        <div class="progress-table-container">
+                            <div class="table-header">
+                                <h4>📋 Detailed Records</h4>
+                                <div class="table-controls">
+                                    <span id="recordsCount">0 records found</span>
+                                    <button id="refreshData" class="table-btn">🔄 Refresh</button>
+                                    <button id="clearSelectedData" class="table-btn danger">🗑️ Delete Selected</button>
+                                </div>
+                            </div>
+                            <div class="table-wrapper">
+                                <table id="progressTable" class="progress-table">
+                                    <thead>
+                                        <tr>
+                                            <th><input type="checkbox" id="selectAll"></th>
+                                            <th>Game</th>
+                                            <th>Date</th>
+                                            <th>Duration</th>
+                                            <th>Score</th>
+                                            <th>Moves</th>
+                                            <th>Result</th>
+                                            <th>Difficulty</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="progressTableBody">
+                                        <tr class="no-data-row">
+                                            <td colspan="9">
+                                                <div class="no-data">
+                                                    <div class="no-data-icon">📭</div>
+                                                    <p>No game records found</p>
+                                                    <p class="sub-text">Start playing games to see your progress here!</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-pagination">
+                                <div class="pagination-info">
+                                    <span id="pageInfo">Showing 0 of 0 records</span>
+                                </div>
+                                <div class="pagination-controls">
+                                    <button id="prevPage" class="page-btn" disabled>← Prev</button>
+                                    <span id="currentPage">1</span>
+                                    <button id="nextPage" class="page-btn" disabled>Next →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="themePart" class="settingContent" data-setting="theme" style="display: none;">
+                    <div class="settingSection">
+                        <h2>𝚃𝚑𝚎𝚖𝚎 𝚂𝚎𝚝𝚝𝚒𝚗𝚐𝚜</h2>
+                        <div class="settingItem">
+                            <h3>𝙰𝚙𝚙𝚎𝚊𝚛𝚊𝚗𝚌𝚎</h3>
+                            <div class="themeOptions">
+                                <div class="themeOption" data-theme="light">
+                                    <div class="themePreview light-preview"></div>
+                                    <span>𝙻𝚒𝚐𝚑𝚝 𝚃𝚑𝚎𝚖𝚎</span>
+                                </div>
+                                <div class="themeOption" data-theme="dark">
+                                    <div class="themePreview dark-preview"></div>
+                                    <span>𝙳𝚊𝚛𝚔 𝚃𝚑𝚎𝚖𝚎</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="languagePart" class="settingContent" data-setting="language" style="display: none;">
+                    <div class="settingSection">
+                        <h2>𝙻𝚊𝚗𝚐𝚞𝚊𝚐𝚎 𝚂𝚎𝚝𝚝𝚒𝚗𝚐𝚜</h2>
+                        <div class="settingRow">
+                            <div class="settingItem">
+                                <h3>𝙸𝚗𝚝𝚎𝚛𝚏𝚊𝚌𝚎 𝙻𝚊𝚗𝚐𝚞𝚊𝚐𝚎</h3>
+                                <div class="languageOptions">
+                                    <div class="languageOption disabled" data-lang="en-us">
+                                        <span>🇺🇸 English</span>
+                                    </div>
+                                    <div class="languageOption disabled" data-lang="zh-cn">
+                                        <span>🇨🇳 中文</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="settingItem">
+                                <h3>𝙳𝚎𝚟𝚎𝚕𝚘𝚙𝚖𝚎𝚗𝚝 𝚂𝚝𝚊𝚝𝚞𝚜</h3>
+                                <div class="workInProgress">
+                                    <p>🚧 此功能正在制作中，敬请期待！</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="dataPart" class="settingContent" data-setting="data" style="display: none;">
+                    <div class="settingSection">
+                        <h2>𝙳𝚊𝚝𝚊 𝙼𝚊𝚗𝚊𝚐𝚎𝚖𝚎𝚗𝚝</h2>
+                        <div class="settingRow">
+                            <div class="settingItem">
+                                <h3>𝚄𝚜𝚎𝚛 𝙳𝚊𝚝𝚊</h3>
+                                <div class="dataActions">
+                                    <button class="dataButton" id="exportDataButton">𝐄𝐱𝐩𝐨𝐫𝐭 𝐃𝐚𝐭𝐚</button>
+                                    <button class="dataButton" id="importDataButton">𝐈𝐦𝐩𝐨𝐫𝐭 𝐃𝐚𝐭𝐚</button>
+                                    <button class="dataButton danger" id="clearDataButton">𝐂𝐥𝐞𝐚𝐫 𝐀𝐥𝐥 𝐃𝐚𝐭𝐚</button>
+                                </div>
+                            </div>
+                            <div class="settingItem">
+                                <h3>𝚂𝚝𝚘𝚛𝚊𝚐𝚎 𝙸𝚗𝚏𝚘</h3>
+                                <div class="storageInfo">
+                                    <p>𝚄𝚜𝚎𝚍 𝚂𝚝𝚘𝚛𝚊𝚐𝚎: <span id="usedStorage">--</span></p>
+                                    <p>𝚃𝚘𝚝𝚊𝚕 𝚁𝚎𝚌𝚘𝚛𝚍𝚜: <span id="totalRecords">--</span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="etcPart" class="settingContent" data-setting="etc" style="display: none;">
+                    <div class="settingSection">
+                        <h2>𝙾𝚝𝚑𝚎𝚛 𝚂𝚎𝚝𝚝𝚒𝚗𝚐𝚜</h2>
+                        <div class="settingItem">
+                            <h3>𝙰𝚋𝚘𝚞𝚝</h3>
+                            <div class="aboutInfo">
+                                <p>𝚅𝚎𝚛𝚜𝚒𝚘𝚗: 1.0.0</p>
+                                <p>𝙰𝚞𝚝𝚑𝚘𝚛: BoyangZhang619</p>
+                                <p>𝙿𝚛𝚘𝚓𝚎𝚌𝚝: Little Game of Webpage</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+            <aside id="settingNav">
+                <ul id="settingUl">
+                    <li class="settingClass active" data-target="account">𝙰𝚌𝚌𝚘𝚞𝚗𝚝</li>
+                    <li class="settingClass" data-target="progress">𝙿𝚛𝚘𝚐𝚛𝚎𝚜𝚜</li>
+                    <li class="settingClass" data-target="theme">𝚃𝚑𝚎𝚖𝚎</li>
+                    <li class="settingClass" data-target="language">𝙻𝚊𝚗𝚐𝚞𝚊𝚐𝚎</li>
+                    <li class="settingClass" data-target="data">𝙳𝚊𝚝𝚊</li>
+                    <li class="settingClass" data-target="etc">𝚎𝚝𝚌.</li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+    <script src="./js/new_mainpage.js"></script>
+    <script src="./js/game_demo.js"></script>
+    <script src="./js/easterEgg.js"></script>
+    <!-- <script type="module">
+        fetch('./json/lang_en.json')
+  .then(res => res.json())
+  .then(data => console.log(data));
+    </script> -->
 </body>
 
 </html>
-<!-- i'm delight that you're looking my code.i cant tell who you're,but i think you definitely possess the enthusiasm for coding at least.-->
-<!-- editor:Boyang Zhang -->

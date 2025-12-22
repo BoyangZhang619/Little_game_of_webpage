@@ -1,0 +1,63 @@
+{
+    "meta": {
+        "version": "2.0",
+        "language": "zh-CN",
+        "languageName": "简体中文",
+        "lastEdited": "2025-12-15",
+        "author": "System",
+        "encoding": "UTF-8"
+    },
+    "pages": {
+        "index": {
+            "meta": {
+                "title": "𝑹𝑬𝑻𝑹𝑶𝑻𝑶𝑷𝑰𝑪",
+                "description": "小游戏合集"
+            },
+            "elements": [
+                {
+                    "uuid": "a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6",
+                    "selector": "#topCover h1",
+                    "text": "小游戏合集",
+                    "type": "heading",
+                    "context": "main_title"
+                },
+                {
+                    "uuid": "b2c3d4e5-f6g7-8h9i-0j1k-l2m3n4o5p6q7",
+                    "selector": "#topCover h3",
+                    "text": "点击进入",
+                    "type": "text",
+                    "context": "entrance_prompt"
+                }
+            ]
+        }
+    },
+    "common": {
+        "ui": [
+            {
+                "uuid": "c3d4e5f6-g7h8-9i0j-1k2l-m3n4o5p6q7r8",
+                "key": "loading",
+                "text": "加载中...",
+                "context": "system_message"
+            },
+            {
+                "uuid": "d4e5f6g7-h8i9-0j1k-2l3m-n4o5p6q7r8s9",
+                "key": "error",
+                "text": "发生错误",
+                "context": "system_message"
+            }
+        ],
+        "games": [
+            {
+                "uuid": "e5f6g7h8-i9j0-1k2l-3m4n-o5p6q7r8s9t0",
+                "key": "klotski_title",
+                "text": "华容道",
+                "context": "game_title"
+            }
+        ]
+    },
+    "validation": {
+        "schema_version": "2.0",
+        "required_fields": ["uuid", "text"],
+        "checksum": "auto_generated"
+    }
+}

@@ -1,24 +1,761 @@
 {
-    "data": [
-        {
-            "id": 1,
-            "address": "#element1>h2>a",
-            "word": "𝐖𝐨𝐫𝐝"
-        },
-        {
-            "id": 2,
-            "address": "#element2>h2>a",
-            "word": "𝐀𝐧𝐨𝐭𝐡𝐞𝐫 𝐖𝐨𝐫𝐝"
-        }
-    ],
-    "includedParts": {
-        "mainpage": {
-            "cover": 1,
-            "navbar": 0
+    "meta": {
+        "version": "2.0",
+        "language": "en",
+        "languageName": "English",
+        "lastEdited": "2025-12-15",
+        "author": "Auto-generated",
+        "encoding": "UTF-8",
+        "generated_from": "http://127.0.0.1:5500/"
+    },
+    "pages": {
+        "index": {
+            "meta": {
+                "title": "𝑹𝑬𝑻𝑹𝑶𝑻𝑶𝑷𝑰𝑪",
+                "description": "",
+                "url": "http://127.0.0.1:5500/"
+            },
+            "elements": [
+                {
+                    "uuid": "8eb23614-41ad-4ce5-9f47-5a5b8506b32c",
+                    "selector": "#topCover > h3",
+                    "text": "Click to enter",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h3",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "04049b46-2ee1-4d28-aeef-7db262854697",
+                    "selector": "div.easter-egg-content > h2.easter-egg-title",
+                    "text": "🎉 Surprise Easter Eggs! 🎉",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h2",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "522aa7fe-9101-433b-a5f6-a298963bbd95",
+                    "selector": "#accountRegisterName",
+                    "text": "zby",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h3",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "c605616b-0f9e-429b-a9fd-4ec56250db88",
+                    "selector": "div.welcome-content > h2.welcome-title",
+                    "text": "Welcome to LITTLE GAME",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h2",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "e58d987f-3903-4242-8cf9-362377f5b8fa",
+                    "selector": "div.form-header > h3",
+                    "text": "Create Your Account",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h3",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "77d23a63-f12a-47a4-b4c3-70107fb95c1c",
+                    "selector": "div.form-header > h3",
+                    "text": "Welcome Back",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h3",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "7ada6971-da1a-437d-9776-3f4b3509e485",
+                    "selector": "div.dashboard-header > h2.greeting-title",
+                    "text": "Welcome back, !",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h2",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "8aa8de35-a576-4d48-a068-5074314e00e0",
+                    "selector": "div.progress-info > h3.profile-name",
+                    "text": "Game Progress",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h3",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "f23c24dd-1ac6-448c-b57d-3d07d49d4596",
+                    "selector": "div.filter-header > h3",
+                    "text": "📈 Data Analytics",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h3",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "1ea1de5f-7e16-4d3e-9842-2f1dac5355a1",
+                    "selector": "div.stat-header > h4",
+                    "text": "🧩 Klotski",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h4",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "6912fd97-6219-4ad6-af9f-d700036466b7",
+                    "selector": "div.stat-header > h4",
+                    "text": "🌀 Labyrinth",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h4",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "262d304c-1951-4f7e-94f8-17ac33dd2974",
+                    "selector": "div.stat-header > h4",
+                    "text": "💣 Minesweeping",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h4",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "cd388a3b-c40a-4a5a-aa43-d5f678417c39",
+                    "selector": "div.table-header > h4",
+                    "text": "📋 Detailed Records",
+                    "type": "heading",
+                    "context": "heading",
+                    "tagName": "h4",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "2b10120f-a207-4da1-a81b-055f6672393a",
+                    "selector": "div.easter-egg-options > button.easter-option:nth-of-type(1)",
+                    "text": "🌈彩虹雨",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.350Z"
+                },
+                {
+                    "uuid": "e6eb4b5d-e82c-404b-a03e-aa8a9d3bff92",
+                    "selector": "div.easter-egg-options > button.easter-option:nth-of-type(2)",
+                    "text": "💭随机名言",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.350Z"
+                },
+                {
+                    "uuid": "62e95a0d-8e74-492e-b98c-01eeedadb133",
+                    "selector": "div.easter-egg-options > button.easter-option:nth-of-type(3)",
+                    "text": "🎮秘技代码",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.350Z"
+                },
+                {
+                    "uuid": "56b1b105-c0b2-4b66-bc6c-0399f4ccab07",
+                    "selector": "div.easter-egg-options > button.easter-option:nth-of-type(4)",
+                    "text": "⏰时光机",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.350Z"
+                },
+                {
+                    "uuid": "45725b6b-9104-482b-a177-6596ef6dca97",
+                    "selector": "#saveAccountInfo",
+                    "text": "Create Account",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.350Z"
+                },
+                {
+                    "uuid": "44713579-1218-41fc-a261-679311f3e413",
+                    "selector": "div.form-actions > button.returnAccountProgram.cancel-btn:nth-of-type(2)",
+                    "text": "Back",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.350Z"
+                },
+                {
+                    "uuid": "256efde5-aefa-4012-8b00-dd130062bf60",
+                    "selector": "#Login",
+                    "text": "Sign In",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.350Z"
+                },
+                {
+                    "uuid": "26eb13b7-99cc-424f-8515-317b1992fdf8",
+                    "selector": "#applyFilters",
+                    "text": "Apply Filters",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "d2bf6bd1-ec05-47f4-8a85-61b1605fbec0",
+                    "selector": "#clearFilters",
+                    "text": "Clear All",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "9fe4317c-77c8-43ee-8448-0fbb6337b155",
+                    "selector": "#exportProgress",
+                    "text": "Export Data",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "2c179e70-4411-4bac-bfc2-cd587e869967",
+                    "selector": "#refreshData",
+                    "text": "🔄 Refresh",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "39d7eafb-f0a1-4991-9bc3-a80100ed7ece",
+                    "selector": "#clearSelectedData",
+                    "text": "🗑️ Delete Selected",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "6039bd5f-db3a-418a-842b-bd534025c23e",
+                    "selector": "#prevPage",
+                    "text": "← Prev",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "18a0e351-6eb6-4cce-bf23-571e4a860cd6",
+                    "selector": "#nextPage",
+                    "text": "Next →",
+                    "type": "clickable",
+                    "context": "content",
+                    "tagName": "button",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "a1a7ca63-995b-4cde-80f1-71e68e0dffbf",
+                    "selector": "div.easter-egg-content > p",
+                    "text": "发现隐藏功能！选择你想体验的彩蛋效果：",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "abe07396-a66a-4f19-8731-cda59d751047",
+                    "selector": "#accountRegisterDescription",
+                    "text": "This user is very lazy and hasn't written anything~~~",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "397ae7b4-0d8c-4bbc-ba03-1ab243a475e5",
+                    "selector": "div.welcome-content > p.welcome-subtitle",
+                    "text": "Please create an account or sign in to continue",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "b653baca-3fa6-4671-ae79-b073705feb00",
+                    "selector": "div.form-header > p",
+                    "text": "Join our gaming community",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "8d5264a1-9e84-4cf7-88f7-1cb4ec9ad05e",
+                    "selector": "div.form-header > p",
+                    "text": "Sign in to your account",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "8dd882d8-184d-4523-aaeb-318c78bccd9d",
+                    "selector": "div.dashboard-header > p.greeting-subtitle",
+                    "text": "Ready to play some games?",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "5bc64689-4817-4f65-afd1-4b40ffc94da7",
+                    "selector": "#progressSummary",
+                    "text": "Track your gaming achievements and statistics",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "928cc4ac-ecc9-4068-90db-47b2a6d8c51b",
+                    "selector": "div.filter-header > p",
+                    "text": "Filter and analyze your gaming performance",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "e768e805-39ee-4e8c-913e-6e5a7e425ba8",
+                    "selector": "div.stat-content > p:nth-of-type(1)",
+                    "text": "Best Score:",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "f0cfb388-f09f-40d0-b0ab-76ccf311bb88",
+                    "selector": "div.stat-content > p:nth-of-type(2)",
+                    "text": "Average Duration:",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "98a17029-0081-48aa-8664-14fa0c2bf1e5",
+                    "selector": "div.stat-content > p:nth-of-type(3)",
+                    "text": "Win Rate:",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.347Z"
+                },
+                {
+                    "uuid": "c152fa92-263f-42b1-b035-a808c5ab4cf5",
+                    "selector": "div.no-data > p:nth-of-type(1)",
+                    "text": "No game records found",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.350Z"
+                },
+                {
+                    "uuid": "f3101641-59b1-4c60-a667-6f30cdcb6c4b",
+                    "selector": "div.no-data > p.sub-text:nth-of-type(2)",
+                    "text": "Start playing games to see your progress here!",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.350Z"
+                },
+                {
+                    "uuid": "700d808a-b6b6-4bab-aac3-f080021793b2",
+                    "selector": "div.workInProgress > p",
+                    "text": "🚧 此功能正在制作中，敬请期待！",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.350Z"
+                },
+                {
+                    "uuid": "58be8194-a812-4966-a5d0-71cd0ddbd85f",
+                    "selector": "div.aboutInfo > p:nth-of-type(2)",
+                    "text": "𝙰𝚞𝚝𝚑𝚘𝚛: BoyangZhang619",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.350Z"
+                },
+                {
+                    "uuid": "cf918a95-7a95-41f9-9df7-319ec989f434",
+                    "selector": "div.aboutInfo > p:nth-of-type(3)",
+                    "text": "𝙿𝚛𝚘𝚓𝚎𝚌𝚝: Little Game of Webpage",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "p",
+                    "extracted_at": "2025-12-15T11:46:15.350Z"
+                },
+                {
+                    "uuid": "a97e1898-6b51-4bd1-8609-af8b3a930aca",
+                    "selector": "#logoutButton > span",
+                    "text": "Sign Out",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "span",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "513a9eab-fda1-4d58-bf13-a2935e4d763e",
+                    "selector": "#deleteAccountButton > span",
+                    "text": "Delete Account",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "span",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "fdc478cd-6d4c-49bc-886b-2d67449a67b7",
+                    "selector": "#klotskiTotal",
+                    "text": "0 plays",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "span",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "8de0a2c3-1941-4c01-bd77-42b8ba1d9ab3",
+                    "selector": "#recordsCount",
+                    "text": "0 records found",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "span",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "a8cb5b94-b833-4ac3-92e6-942b30c02a39",
+                    "selector": "#pageInfo",
+                    "text": "Showing 0 of 0 records",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "span",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "e15aaba7-6398-456f-98fc-34f494cff594",
+                    "selector": "div.languageOption > span",
+                    "text": "🇺🇸 English",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "span",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "a944dd34-15d9-411a-bcab-32c32ec54dd9",
+                    "selector": "div.languageOption > span",
+                    "text": "🇨🇳 中文",
+                    "type": "text",
+                    "context": "content",
+                    "tagName": "span",
+                    "extracted_at": "2025-12-15T11:46:15.351Z"
+                },
+                {
+                    "uuid": "b0d18112-3d36-4094-9d97-3fbf55076da1",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(1)",
+                    "text": "It’s a sliding block puzzle that originated in China, themed after the historical escape of General Cao Cao during the Three Kingdoms period.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "2ae3e84d-954c-4598-874b-5bd941807fed",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(2)",
+                    "text": "You have a grid with blocks of different shapes and sizes.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "9f81bb73-0cfd-4566-975c-3e1a9b05e150",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(3)",
+                    "text": "The goal: move the largest block (representing Cao Cao) through the exit at the bottom of the board.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "b5975ee3-72aa-4bc3-b281-07c658b5df22",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(4)",
+                    "text": "Rules: you can only slide one block at a time, and blocks can’t overlap or leave the grid.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "90123d10-e781-4741-92aa-70459c282979",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(5)",
+                    "text": "It’s a game of spatial reasoning and planning ahead.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "d75ac99e-4c71-4320-81d9-4eabef28f43b",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(1)",
+                    "text": "A single-player sliding tile puzzle game.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "d05bca95-ce60-464b-99d5-99a752fb7b5a",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(2)",
+                    "text": "The board is a 4×4 grid where numbered tiles appear (usually 2 or 4).",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "ef195ed9-4c6f-45d7-90ae-83fc81257e32",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(3)",
+                    "text": "Each move slides all tiles in one direction (up, down, left, right).",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "6878ec05-dfe1-469c-b93d-bb437eff9894",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(4)",
+                    "text": "When two tiles with the same number collide, they merge into a new tile with their sum (e.g., 2+2=4, 4+4=8).",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "44a8ca51-7e65-49ab-a285-2b15e46b4df1",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(5)",
+                    "text": "The goal: combine numbers until you create the tile 2048 (and beyond, if you keep going).",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "2a2191ef-53b9-48ef-a5d3-008f5aec621b",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(6)",
+                    "text": "It’s simple in mechanics but surprisingly deep in strategy.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "fc70d0a0-9de9-40f7-92c6-7a0530b72d07",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(1)",
+                    "text": "A maze is essentially a puzzle of pathways.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "57314acc-07f5-4c4f-9a31-5dfccb72afdf",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(2)",
+                    "text": "You usually start at an entrance and must find your way to an exit, avoiding dead ends.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "c5bd2d33-13e2-4458-973d-370b03e5fd9a",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(3)",
+                    "text": "Mazes can be drawn on paper, built physically (like hedge mazes), or generated digitally in games.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "6d5ace25-f2ec-42fb-b342-9aaa89ae88cb",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(4)",
+                    "text": "Algorithms like depth-first search, breadth-first search, or A* pathfinding are commonly used to solve mazes computationally.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "c00a9997-33da-4b8f-8722-9d894072adb7",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(5)",
+                    "text": "It’s about navigation and problem-solving under uncertainty.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "426ea786-14a7-4025-bc34-34991e2bd73e",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(1)",
+                    "text": "A classic logic puzzle that comes with many operating systems (famously Windows).",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "88f82bef-7b7e-4887-8a36-a8b08572cae4",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(2)",
+                    "text": "The game is played on a grid of covered cells. Some cells hide mines.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "0d41c38c-15a1-48d0-b1be-b3d5f578a645",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(3)",
+                    "text": "Clicking on a cell reveals either:",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "f9c3c017-0d2d-44fc-9c95-381011e24aaf",
+                    "selector": "ol > li:nth-of-type(1)",
+                    "text": "A mine (game over)",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "d1c0ecbe-e20a-47ec-ad8a-24b47c2ba02e",
+                    "selector": "ol > li:nth-of-type(2)",
+                    "text": "A number showing how many adjacent cells contain mines.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "4f1ed51e-398f-471d-906b-0dce2160cb76",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(4)",
+                    "text": "Using logic and deduction, you must flag the locations of all mines without triggeringthem.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "2cda5893-329e-4d50-8b5b-937abefc89b4",
+                    "selector": "ul.gameTypeExplanation > li:nth-of-type(5)",
+                    "text": "It blends probability, risk-taking, and careful reasoning.",
+                    "type": "text",
+                    "context": "footer",
+                    "tagName": "li",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "f6b56ffe-a4f2-4199-a580-c5d2f475e2f0",
+                    "selector": "div.form-group > input.form-input.accountShowNameInput",
+                    "text": "Enter your username",
+                    "type": "placeholder",
+                    "context": "content",
+                    "tagName": "input",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "8c0dbfb1-9261-4fdd-9ec9-35b18667dc01",
+                    "selector": "div.form-group > input.form-input.accountShowPasswordInput",
+                    "text": "Create a strong password",
+                    "type": "placeholder",
+                    "context": "content",
+                    "tagName": "input",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "7dc3d732-b1c0-4389-ba50-abad77863426",
+                    "selector": "div.form-group > input.form-input.accountShowPasswordAgainInput",
+                    "text": "Confirm your password",
+                    "type": "placeholder",
+                    "context": "content",
+                    "tagName": "input",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "9bc3e369-39a8-4b98-bfb9-eca1ef0b8907",
+                    "selector": "div.form-group > textarea.form-input.accountShowDescriptionInput",
+                    "text": "Tell us about yourself (optional)",
+                    "type": "placeholder",
+                    "context": "content",
+                    "tagName": "textarea",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                },
+                {
+                    "uuid": "722cc6a6-7813-48ba-bbf9-34d2f9322aad",
+                    "selector": "div.form-group > input.form-input.accountShowPasswordInput",
+                    "text": "Enter your password",
+                    "type": "placeholder",
+                    "context": "content",
+                    "tagName": "input",
+                    "extracted_at": "2025-12-15T11:46:15.359Z"
+                }
+            ]
         }
     },
-    "meta": {
-        "version": "1.0",
-        "lastEdited": "2025-11-25"
+    "common": {
+        "ui": [
+            {
+                "uuid": "9c4b784e-2176-4085-9c40-2a4967b125b3",
+                "key": "loading",
+                "text": "Loading...",
+                "context": "system_message"
+            },
+            {
+                "uuid": "ace802f9-12f9-4395-a497-2e688c68d121",
+                "key": "error",
+                "text": "An error occurred",
+                "context": "system_message"
+            },
+            {
+                "uuid": "03148c8f-9dd4-4334-ae84-78d5f0802bd6",
+                "key": "confirm",
+                "text": "Confirm",
+                "context": "system_message"
+            },
+            {
+                "uuid": "9d8da93c-4197-4695-8205-c5240af55552",
+                "key": "cancel",
+                "text": "Cancel",
+                "context": "system_message"
+            }
+        ]
+    },
+    "validation": {
+        "schema_version": "2.0",
+        "required_fields": [
+            "uuid",
+            "text"
+        ],
+        "total_elements": 78,
+        "checksum": "auto_generated"
     }
 }

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多语言系统使用示例</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .demo-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background: #fafafa;
+        }
+        
+        .demo-title {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+        }
+        
+        .button {
+            background: #007ACC;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .button:hover {
+            background: #005999;
+        }
+        
+        #output {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 15px;
+            border-radius: 5px;
+            min-height: 100px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="main-title" data-uuid="main-title-uuid">多语言系统使用指南</h1>
+        
+        <div class="demo-section">
+            <h2 class="demo-title">1. 基本使用方法</h2>
+            
+            <h3>在HTML中引入脚本：</h3>
+            <div class="code-block">
+&lt;!-- 引入多语言管理器 --&gt;
+&lt;script src="./js/language-manager.js"&gt;&lt;/script&gt;
+&lt;script src="./js/language-examples.js"&gt;&lt;/script&gt;
+            </div>
+            
+            <h3>使用方式：</h3>
+            <div class="code-block">
+// 1. 通过UUID获取文本
+const text1 = langManager.getText('a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6', '默认文本');
+
+// 2. 通过key获取文本（用于通用文本）
+const text2 = langManager.getTextByKey('loading', '加载中...');
+
+// 3. 使用简化函数
+const text3 = t('uuid-here', '默认文本');
+const text4 = tk('loading', '加载中...');
+
+// 4. 切换语言
+await langManager.switchLanguage('en');
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">2. 实时演示</h2>
+            
+            <button class="button" onclick="demoGetText()">获取文本示例</button>
+            <button class="button" onclick="demoSwitchLanguage()">切换语言示例</button>
+            <button class="button" onclick="demoGenerateUUID()">生成UUID</button>
+            <button class="button" onclick="demoExtractText()">提取页面文本</button>
+            
+            <div id="output"></div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">3. JSON结构说明</h2>
+            
+            <h3>语言文件结构：</h3>
+            <div class="code-block">
+{
+    "meta": {
+        "version": "2.0",              // 版本号
+        "language": "zh-CN",           // 语言代码
+        "languageName": "简体中文",    // 语言显示名称
+        "lastEdited": "2025-12-15"     // 最后编辑日期
+    },
+    "pages": {                         // 页面特定文本
+        "index": {
+            "elements": [
+                {
+                    "uuid": "uuid-here",       // 唯一标识符
+                    "selector": "#topCover h1", // CSS选择器
+                    "text": "页面标题",        // 显示文本
+                    "type": "heading",         // 元素类型
+                    "context": "main_title"    // 上下文信息
+                }
+            ]
+        }
+    },
+    "common": {                        // 通用文本
+        "ui": [
+            {
+                "uuid": "uuid-here",
+                "key": "loading",          // 关键字（用于快速查找）
+                "text": "加载中...",
+                "context": "system_message"
+            }
+        ]
+    }
+}
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">4. 页面文本提取工具使用</h2>
+            
+            <h3>在浏览器控制台中运行：</h3>
+            <div class="code-block">
+// 1. 首先引入提取脚本
+// &lt;script src="./js/text-extractor.js"&gt;&lt;/script&gt;
+
+// 2. 或者直接在控制台运行脚本内容
+
+// 3. 脚本会自动提取页面文本并生成JSON结构
+
+// 4. 使用以下命令复制数据：
+copy(window.extractedLanguageData.chinese);  // 复制中文数据
+copy(window.extractedLanguageData.english);  // 复制英文数据
+            </div>
+            
+            <p><strong>提示：</strong>打开浏览器开发者工具(F12)，在控制台中运行text-extractor.js脚本即可自动提取当前页面的所有文本元素。</p>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">5. 安全特性</h2>
+            
+            <ul>
+                <li><strong>UUID唯一标识：</strong>每个文本元素都有唯一的UUID标识，避免冲突</li>
+                <li><strong>数据验证：</strong>加载语言文件时会验证数据结构的完整性</li>
+                <li><strong>回退机制：</strong>如果某个文本找不到，会使用默认文本</li>
+                <li><strong>版本控制：</strong>支持版本号和校验和验证</li>
+                <li><strong>上下文信息：</strong>每个文本都包含上下文信息，便于管理</li>
+            </ul>
+        </div>
+
+        <div class="demo-section">
+            <h2 class="demo-title">6. 扩展特性</h2>
+            
+            <ul>
+                <li><strong>观察者模式：</strong>可以监听语言变更事件</li>
+                <li><strong>模块化设计：</strong>易于扩展新功能</li>
+                <li><strong>自动检测：</strong>自动检测浏览器语言偏好</li>
+                <li><strong>本地存储：</strong>记住用户的语言选择</li>
+                <li><strong>异步加载：</strong>支持按需加载语言文件</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 引入多语言系统 -->
+    <script src="./js/language-manager.js"></script>
+    <script src="./js/language-examples.js"></script>
+    
+    <script>
+        // 演示函数
+        function demoGetText() {
+            const output = document.getElementById('output');
+            const currentLang = langManager.getCurrentLanguage();
+            
+            output.innerHTML = `
+                <h4>当前语言: ${currentLang}</h4>
+                <p>通过UUID获取文本: ${t('a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6', '默认文本示例')}</p>
+                <p>通过Key获取文本: ${tk('loading', '加载中...')}</p>
+                <p>错误示例 (UUID不存在): ${t('non-existent-uuid', '这是默认文本')}</p>
+            `;
+        }
+        
+        async function demoSwitchLanguage() {
+            const output = document.getElementById('output');
+            const currentLang = langManager.getCurrentLanguage();
+            const newLang = currentLang === 'zh-CN' ? 'en' : 'zh-CN';
+            
+            try {
+                await langManager.switchLanguage(newLang);
+                output.innerHTML = `
+                    <h4>✅ 语言切换成功!</h4>
+                    <p>从 ${currentLang} 切换到 ${newLang}</p>
+                    <p>当前语言: ${langManager.getCurrentLanguage()}</p>
+                `;
+            } catch (error) {
+                output.innerHTML = `
+                    <h4>❌ 语言切换失败</h4>
+                    <p>错误: ${error.message}</p>
+                `;
+            }
+        }
+        
+        function demoGenerateUUID() {
+            const output = document.getElementById('output');
+            const uuid1 = langManager.generateUUID();
+            const uuid2 = LanguageUtils.uuid();
+            
+            output.innerHTML = `
+                <h4>生成的UUID示例:</h4>
+                <p>UUID 1: <code>${uuid1}</code></p>
+                <p>UUID 2: <code>${uuid2}</code></p>
+                <p><small>每次调用都会生成不同的UUID</small></p>
+            `;
+        }
+        
+        function demoExtractText() {
+            const output = document.getElementById('output');
+            
+            // 模拟提取结果
+            const mockExtraction = {
+                "uuid": langManager.generateUUID(),
+                "selector": "#main-title",
+                "text": document.getElementById('main-title').textContent,
+                "type": "heading",
+                "context": "page_title"
+            };
+            
+            output.innerHTML = `
+                <h4>页面文本提取示例:</h4>
+                <pre><code>${JSON.stringify(mockExtraction, null, 2)}</code></pre>
+                <p><small>在实际使用中，在控制台运行 text-extractor.js 可以提取整个页面的文本</small></p>
+            `;
+        }
+    </script>
+</body>
+</html>
