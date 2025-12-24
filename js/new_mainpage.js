@@ -46,29 +46,7 @@ addEventListener('scroll', () => {
         return 0
     }
 });
-document.querySelector("#navProgress").addEventListener('click', () => {
-    // 快捷方式跳转到设置中的进度页面
-    if (!isSettingShow) {
-        isSettingShow = true;
-        setSetting("show");
-    }
-    // 切换到进度页面
-    setTimeout(() => {
-        const progressTab = document.querySelector('[data-target="progress"]');
-        if (progressTab) {
-            // 移除其他tab的active状态
-            document.querySelectorAll('.settingClass').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('.settingContent').forEach(content => content.style.display = 'none');
-            
-            // 激活进度tab
-            progressTab.classList.add('active');
-            document.querySelector('#progressPart').style.display = 'block';
-            
-            // 加载进度数据
-            loadProgressData();
-        }
-    }, 800);
-});
+
 
 // 彩蛋功能事件监听器
 document.querySelector("#navEasterEgg").addEventListener('click', () => {
