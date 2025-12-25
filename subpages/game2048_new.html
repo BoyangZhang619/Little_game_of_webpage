@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2048 - Simple & Clean</title>
+    <link rel="stylesheet" href="../css/game2048_new.css">
+    <link rel="icon" href="../img/icon.jpg" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="game-title">2048</h1>
+            <div class="score-container">
+                <div class="score-box">
+                    <div class="score-label">Score</div>
+                    <div class="score-value" id="current-score">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Best</div>
+                    <div class="score-value" id="best-score">0</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Game Info -->
+        <div class="game-info">
+            <div class="info-item">
+                <span class="info-label">Time:</span>
+                <span class="info-value" id="game-time">00:00</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Moves:</span>
+                <span class="info-value" id="move-count">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Difficulty:</span>
+                <select id="difficulty-select" class="difficulty-select">
+                    <option value="easy">Easy (3x3)</option>
+                    <option value="normal" selected>Normal (4x4)</option>
+                    <option value="hard">Hard (5x5)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-container">
+            <div class="game-grid" id="game-grid">
+                <!-- Game tiles will be dynamically generated here -->
+            </div>
+            <div class="tile-container" id="tile-container">
+                <!-- Moving tiles will be placed here -->
+            </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="controls">
+            <button class="control-btn primary" id="new-game-btn">New Game</button>
+            <button class="control-btn" id="pause-btn">Pause</button>
+            <button class="control-btn" id="undo-btn" disabled>Undo</button>
+            <button class="control-btn" id="back-btn" onclick="history.back()">Back</button>
+        </div>
+
+        <!-- Game Instructions -->
+        <div class="instructions">
+            <p>Use <kbd>WASD</kbd> or <kbd>Arrow Keys</kbd> to move tiles</p>
+            <p>Combine tiles with the same number to reach <strong>2048</strong>!</p>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Game Over!</h2>
+            <div class="modal-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Final Score:</span>
+                    <span class="stat-value" id="final-score">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Time Played:</span>
+                    <span class="stat-value" id="final-time">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Total Moves:</span>
+                    <span class="stat-value" id="final-moves">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Highest Tile:</span>
+                    <span class="stat-value" id="highest-tile">0</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" id="try-again-btn">Try Again</button>
+                <button class="modal-btn" id="close-modal-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div class="pause-overlay" id="pause-overlay">
+        <div class="pause-content">
+            <h2>Game Paused</h2>
+            <p>Press any key or click to continue</p>
+        </div>
+    </div>
+
+    <script src="../js/gameStorageManager.js"></script>
+    <script src="../js/game2048_new.js"></script>
+</body>
+</html>

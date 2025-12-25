@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klotski - Sliding Puzzle</title>
+    <link rel="stylesheet" href="../css/klotski_new.css">
+    <link rel="icon" href="../img/icon.jpg" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="game-title">🧩 Klotski</h1>
+            <div class="score-container">
+                <div class="score-box">
+                    <div class="score-label">Moves</div>
+                    <div class="score-value" id="move-count">0</div>
+                </div>
+                <div class="score-box best">
+                    <div class="score-label">Best</div>
+                    <div class="score-value" id="best-moves">--</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Game Info -->
+        <div class="game-info">
+            <div class="info-item">
+                <span class="info-label">⏱️ Time:</span>
+                <span class="info-value" id="game-time">00:00</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">📐 Size:</span>
+                <select id="grid-size-select" class="size-select">
+                    <option value="3">3×3 (Easy)</option>
+                    <option value="4" selected>4×4 (Normal)</option>
+                    <option value="5">5×5 (Hard)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-container">
+            <div class="puzzle-grid" id="puzzle-grid">
+                <!-- Puzzle tiles will be dynamically generated here -->
+            </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="controls">
+            <button class="control-btn primary" id="new-game-btn">🔄 New Game</button>
+            <button class="control-btn" id="pause-btn">⏸️ Pause</button>
+            <button class="control-btn" id="shuffle-btn">🎲 Shuffle</button>
+            <button class="control-btn" id="back-btn" onclick="history.back()">↩️ Back</button>
+        </div>
+
+        <!-- Game Instructions -->
+        <div class="instructions">
+            <p>Click on a tile adjacent to the empty space to move it</p>
+            <p>Or use <kbd>WASD</kbd> / <kbd>Arrow Keys</kbd> to slide tiles</p>
+            <p>Arrange numbers in order from <strong>1</strong> to <strong>N</strong> to win!</p>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2 id="modal-title">🎉 Congratulations!</h2>
+            <div class="modal-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Total Moves:</span>
+                    <span class="stat-value" id="final-moves">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Time Taken:</span>
+                    <span class="stat-value" id="final-time">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Grid Size:</span>
+                    <span class="stat-value" id="final-size">4×4</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Score:</span>
+                    <span class="stat-value" id="final-score">0</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" id="play-again-btn">Play Again</button>
+                <button class="modal-btn" id="close-modal-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div class="pause-overlay" id="pause-overlay">
+        <div class="pause-content">
+            <h2>⏸️ Game Paused</h2>
+            <p>Press any key or click to continue</p>
+        </div>
+    </div>
+
+    <script src="../js/gameStorageManager.js"></script>
+    <script src="../js/klotski_new.js"></script>
+</body>
+</html>

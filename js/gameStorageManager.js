@@ -7,6 +7,81 @@ class GameStorageManager {
         this.storeName = storeName;
         this.version = version;
         this.db = null;
+        
+        // UserDB 配置（用于获取当前登录用户）
+        this.userDBName = 'UserDB';
+        this.currentUserStore = 'cntUserData';
+        this.userDB = null;
+    }
+
+    /**
+     * 打开 UserDB 以获取当前登录用户
+     */
+    async openUserDB() {
+        if (this.userDB) return this.userDB;
+        return new Promise((resolve, reject) => {
+            const request = indexedDB.open(this.userDBName, 3);
+            request.onsuccess = (event) => {
+                this.userDB = event.target.result;
+                resolve(this.userDB);
+            };
+            request.onerror = (event) => {
+                console.warn('无法打开 UserDB:', event.target.error);
+                resolve(null);
+            };
+        });
+    }
+
+    /**
+     * 获取当前登录用户的 ID
+     * @returns {Promise<string|null>} 用户ID，未登录返回 null
+     */
+    async getCurrentUserId() {
+        try {
+            const db = await this.openUserDB();
+            if (!db || !db.objectStoreNames.contains(this.currentUserStore)) {
+                console.warn('UserDB 或 cntUserData store 不存在');
+                return null;
+            }
+            
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction(this.currentUserStore, 'readonly');
+                const store = tx.objectStore(this.currentUserStore);
+                const request = store.get('.');
+                
+                request.onsuccess = () => {
+                    const result = request.result;
+                    if (!result || !result.data) {
+                        resolve(null);
+                        return;
+                    }
+                    // 解码 Base64 获取 uid
+                    try {
+                        const decoded = JSON.parse(decodeURIComponent(escape(atob(result.data))));
+                        resolve(decoded?.uid || null);
+                    } catch (e) {
+                        console.warn('解码当前用户数据失败:', e);
+                        resolve(null);
+                    }
+                };
+                request.onerror = () => {
+                    console.warn('获取当前用户失败');
+                    resolve(null);
+                };
+            });
+        } catch (error) {
+            console.warn('获取当前用户ID时发生错误:', error);
+            return null;
+        }
+    }
+
+    /**
+     * 检查用户是否已登录
+     * @returns {Promise<boolean>}
+     */
+    async isUserLoggedIn() {
+        const userId = await this.getCurrentUserId();
+        return userId !== null;
     }
 
     // 打开数据库
@@ -34,15 +109,27 @@ class GameStorageManager {
         });
     }
 
-    // 保存记录 (自动生成UUID)
+    // 保存记录 (自动生成UUID，自动获取当前登录用户ID)
     async saveRecord(recordData) {
         await this.open();
+        
+        // 如果没有提供 userId，自动从 UserDB 获取当前登录用户
+        let userId = recordData.userId;
+        if (!userId) {
+            userId = await this.getCurrentUserId();
+            if (!userId) {
+                console.warn('用户未登录，游戏记录不会被保存');
+                return null; // 未登录则不保存记录
+            }
+        }
+        
         // 确保必要的字段存在
         const finalRecord = {
             id: recordData.id || crypto.randomUUID(),
             timestamp: Date.now(),
             meta: {}, // 默认空对象防止报错
-            ...recordData
+            ...recordData,
+            userId: userId // 确保使用正确的 userId
         };
 
         return new Promise((resolve, reject) => {
@@ -86,6 +173,7 @@ class GameStorageManager {
         return Promise.all(promises);
     }
 }
+
 
 /**
  * 生成随机测试数据并注入 IndexedDB
@@ -189,25 +277,25 @@ async function seedRandomData(userId, count, storageManager) {
     console.log(`✅ 成功生成并写入 ${count} 条记录！`);
     return records;
 }
-// 1. 初始化存储管理器
-const storage = new GameStorageManager();
+// // 1. 初始化存储管理器
+// const storage = new GameStorageManager();
 
-// 2. 定义当前用户ID (和你的业务逻辑保持一致)
-const myUserId = "user_10086";
+// // 2. 定义当前用户ID (和你的业务逻辑保持一致)
+// const myUserId = "user_10086";
 
-// 3. 执行生成函数 (例如生成 50 条数据)
-// 注意：seedRandomData 是异步的，如果在控制台直接跑，可以直接 .then
-seedRandomData(myUserId, 50, storage).then(() => {
+// // 3. 执行生成函数 (例如生成 50 条数据)
+// // 注意：seedRandomData 是异步的，如果在控制台直接跑，可以直接 .then
+// seedRandomData(myUserId, 50, storage).then(() => {
     
-    // 4. 数据生成完后，刷新你的界面
-    // 假设你已经在页面里初始化了 dashboard
-    if (window.dashboard) {
-        console.log("刷新仪表盘视图...");
-        window.dashboard.loadData();
-    } else {
-        // 如果还没初始化，现在初始化并加载
-        window.dashboard = new GameProgressDashboard(myUserId, storage);
-        window.dashboard.loadData();
-    }
+//     // 4. 数据生成完后，刷新你的界面
+//     // 假设你已经在页面里初始化了 dashboard
+//     if (window.dashboard) {
+//         console.log("刷新仪表盘视图...");
+//         window.dashboard.loadData();
+//     } else {
+//         // 如果还没初始化，现在初始化并加载
+//         window.dashboard = new GameProgressDashboard(myUserId, storage);
+//         window.dashboard.loadData();
+//     }
     
-});
+// });

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper - Simple & Clean</title>
+    <link rel="stylesheet" href="../css/mineSweeper_new.css">
+    <link rel="icon" href="../img/icon.jpg" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="game-title">💣 Minesweeper</h1>
+            <div class="score-container">
+                <div class="score-box">
+                    <div class="score-label">Mines</div>
+                    <div class="score-value" id="remaining-mines">10</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Best Time</div>
+                    <div class="score-value" id="best-time">--:--</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Game Info -->
+        <div class="game-info">
+            <div class="info-item">
+                <span class="info-label">Time:</span>
+                <span class="info-value" id="game-time">00:00</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Flags:</span>
+                <span class="info-value" id="flag-count">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Difficulty:</span>
+                <select id="difficulty-select" class="difficulty-select">
+                    <option value="easy">Easy (9x9, 10 mines)</option>
+                    <option value="normal" selected>Normal (16x16, 40 mines)</option>
+                    <option value="hard">Hard (20x20, 80 mines)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-container">
+            <div class="mine-grid" id="mine-grid">
+                <!-- Mine cells will be dynamically generated here -->
+            </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="controls">
+            <button class="control-btn primary" id="new-game-btn">New Game</button>
+            <button class="control-btn" id="pause-btn">Pause</button>
+            <button class="control-btn" id="hint-btn">Hint</button>
+            <button class="control-btn" id="back-btn" onclick="history.back()">Back</button>
+        </div>
+
+        <!-- Game Instructions -->
+        <div class="instructions">
+            <p><strong>Left Click</strong> to reveal a cell</p>
+            <p><strong>Right Click</strong> to place/remove a flag 🚩</p>
+            <p>Find all mines without triggering any!</p>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Game Over!</h2>
+            <div class="modal-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Result:</span>
+                    <span class="stat-value" id="game-result">Lost</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Time Played:</span>
+                    <span class="stat-value" id="final-time">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Cells Revealed:</span>
+                    <span class="stat-value" id="cells-revealed">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Flags Used:</span>
+                    <span class="stat-value" id="final-flags">0</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" id="try-again-btn">Try Again</button>
+                <button class="modal-btn" id="close-modal-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div class="pause-overlay" id="pause-overlay">
+        <div class="pause-content">
+            <h2>Game Paused</h2>
+            <p>Press any key or click to continue</p>
+        </div>
+    </div>
+
+    <script src="../js/gameStorageManager.js"></script>
+    <script src="../js/mineSweeper_new.js"></script>
+</body>
+</html>

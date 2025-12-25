@@ -1398,6 +1398,17 @@ textarea.form-input {
 /* ==========KEYFRAMES_END========== */
 
 /* ==========进度页面样式START========== */
+
+/* Progress部分需要更宽的容器以显示表格 */
+#progressPart {
+    max-width: 100%;
+}
+
+#progressPart .settingSection {
+    max-width: 100%;
+    width: 100%;
+}
+
 .progress-profile-card {
     display: flex;
     align-items: center;
@@ -1621,13 +1632,38 @@ textarea.form-input {
 
 .table-wrapper {
     overflow-x: auto;
+    overflow-y: visible;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(5px);
+    max-width: 100%;
+    /* 美化滚动条 */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(120, 119, 198, 0.5) rgba(120, 119, 198, 0.1);
+}
+
+/* Webkit 浏览器滚动条样式 */
+.table-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: rgba(120, 119, 198, 0.1);
+    border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 4px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #5a6fd6 0%, #6a4190 100%);
 }
 
 .progress-table {
     width: 100%;
+    min-width: 800px; /* 确保表格有最小宽度以触发横向滚动 */
     border-collapse: collapse;
     font-size: 0.9rem;
 }
@@ -1637,6 +1673,7 @@ textarea.form-input {
     padding: 1rem;
     text-align: left;
     border-bottom: 1px solid rgba(120, 119, 198, 0.1);
+    white-space: nowrap; /* 防止文字换行 */
 }
 
 .progress-table th {

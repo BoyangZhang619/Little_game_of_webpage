@@ -1,11 +1,11 @@
-document.querySelector("#navProgress").addEventListener('click', () => {
+document.querySelector("#navProgress").addEventListener('click', async () => {
     // 快捷方式跳转到设置中的进度页面
     if (!isSettingShow) {
         isSettingShow = true;
         setSetting("show");
     }
     // 切换到进度页面
-    setTimeout(() => {
+    setTimeout(async () => {
         const progressTab = document.querySelector('[data-target="progress"]');
         if (progressTab) {
             // 移除其他tab的active状态
@@ -20,16 +20,28 @@ document.querySelector("#navProgress").addEventListener('click', () => {
             // 1. 初始化存储层
             const storage = new GameStorageManager();
 
-            // 2. 假设当前登录用户ID
-            const currentUserId = "user_v1_001";
+            // 2. 从 UserDB 获取当前登录用户ID
+            const currentUserId = await storage.getCurrentUserId();
+            console.log("Progress页面获取到的用户ID:", currentUserId);
+            
+            if (!currentUserId) {
+                console.log('用户未登录，无法显示游戏进度');
+                // 可以在这里显示一个提示让用户登录
+                const tableBody = document.getElementById('progressTableBody');
+                if (tableBody) {
+                    tableBody.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:20px;">请先登录以查看游戏进度</td></tr>';
+                }
+                return;
+            }
 
             // 3. 初始化 UI 仪表盘
             const dashboard = new GameProgressDashboard(currentUserId, storage);
+            
+            // 保存到 window 供其他地方使用（如刷新按钮）
+            window.dashboard = dashboard;
 
-            // 4. 页面加载完成后拉取数据
-            document.addEventListener('DOMContentLoaded', () => {
-                dashboard.loadData();
-            });
+            // 4. 直接加载数据（页面已加载完成，不需要等待 DOMContentLoaded）
+            await dashboard.loadData();
         }
     }, 800);
 });
@@ -97,7 +109,7 @@ class GameProgressDashboard {
 
     initEvents() {
         this.dom.applyBtn.addEventListener('click', () => this.applyFilters());
-        this.dom.refreshBtn.addEventListener('click', () => dashboard.loadData());
+        this.dom.refreshBtn.addEventListener('click', () => this.loadData());
         this.dom.prevBtn.addEventListener('click', () => this.changePage(-1));
         this.dom.nextBtn.addEventListener('click', () => this.changePage(1));
 
@@ -113,7 +125,10 @@ class GameProgressDashboard {
     // 1. 加载数据的主入口
     async loadData() {
         try {
+            console.log("正在加载用户记录，用户ID:", this.userId);
             this.allRecords = await this.storage.getUserRecords(this.userId);
+            console.log("加载到的记录数量:", this.allRecords.length, this.allRecords);
+            
             // 默认按时间倒序
             this.allRecords.sort((a, b) => b.timestamp - a.timestamp);
 

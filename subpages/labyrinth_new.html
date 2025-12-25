@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labyrinth - Maze Game</title>
+    <link rel="stylesheet" href="../css/labyrinth_new.css">
+    <link rel="icon" href="../img/icon.jpg" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="game-title">🧭 Labyrinth</h1>
+            <div class="score-container">
+                <div class="score-box">
+                    <div class="score-label">Steps</div>
+                    <div class="score-value" id="step-count">0</div>
+                </div>
+                <div class="score-box best">
+                    <div class="score-label">Best</div>
+                    <div class="score-value" id="best-steps">--</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Game Info -->
+        <div class="game-info">
+            <div class="info-item">
+                <span class="info-label">⏱️ Time:</span>
+                <span class="info-value" id="game-time">00:00</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">📐 Size:</span>
+                <select id="maze-size-select" class="size-select">
+                    <option value="11">11×11 (Easy)</option>
+                    <option value="21" selected>21×21 (Normal)</option>
+                    <option value="31">31×31 (Hard)</option>
+                    <option value="41">41×41 (Expert)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-container">
+            <div class="maze-grid" id="maze-grid">
+                <!-- Maze cells will be dynamically generated here -->
+            </div>
+            <!-- Loading overlay -->
+            <div class="loading-overlay" id="loading-overlay">
+                <div class="loading-content">
+                    <div class="spinner"></div>
+                    <p id="loading-text">Generating maze...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="controls">
+            <button class="control-btn primary" id="new-game-btn">🔄 New Game</button>
+            <button class="control-btn" id="pause-btn">⏸️ Pause</button>
+            <button class="control-btn" id="hint-btn">💡 Hint</button>
+            <button class="control-btn" id="back-btn" onclick="history.back()">↩️ Back</button>
+        </div>
+
+        <!-- Game Instructions -->
+        <div class="instructions">
+            <p>Navigate from <strong>S</strong> (Start) to <strong>E</strong> (End)</p>
+            <p>Use <kbd>WASD</kbd> / <kbd>Arrow Keys</kbd> or swipe to move</p>
+            <p>Find the shortest path through the maze!</p>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2 id="modal-title">🎉 Congratulations!</h2>
+            <div class="modal-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Total Steps:</span>
+                    <span class="stat-value" id="final-steps">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Time Taken:</span>
+                    <span class="stat-value" id="final-time">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Maze Size:</span>
+                    <span class="stat-value" id="final-size">21×21</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Score:</span>
+                    <span class="stat-value" id="final-score">0</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" id="play-again-btn">Play Again</button>
+                <button class="modal-btn" id="close-modal-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div class="pause-overlay" id="pause-overlay">
+        <div class="pause-content">
+            <h2>⏸️ Game Paused</h2>
+            <p>Press any key or click to continue</p>
+        </div>
+    </div>
+
+    <script src="../js/gameStorageManager.js"></script>
+    <script src="../js/labyrinth_new.js"></script>
+</body>
+</html>
