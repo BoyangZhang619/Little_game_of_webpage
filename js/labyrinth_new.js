@@ -299,7 +299,7 @@ class LabyrinthGame {
         };
         
         // 从中心开始生成
-        this.maze[startY][startX] = 0;
+        // this.maze[startY][startX] = 0;
         carve(startX, startY);
         
         // 起点：左上角 (1,1)
