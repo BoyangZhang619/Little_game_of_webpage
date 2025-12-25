@@ -194,111 +194,86 @@ class GameDemoManager {
         style.id = 'klotski-demo-styles';
         style.textContent = `
             .klotski-demo-container {
-                position: relative;
-                width: 255px;
-                height: 255px;
-                margin: auto;
+                position: absolute;
+                width: 70%;
+                max-width: 200px;
+                aspect-ratio: 1;
                 top: 50%;
-                transform: translateY(-50%);
+                left: 50%;
+                transform: translate(-50%, -50%);
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 grid-template-rows: 1fr 1fr;
-                gap: 15px;
-                padding: 18px;
+                gap: 8px;
+                padding: 12px;
+                background: rgba(255, 255, 255, 0.6);
+                border-radius: 12px;
+                backdrop-filter: blur(8px);
             }
 
             .klotski-cell {
-                width: 112px;
-                height: 112px;
-                background: rgba(0, 0, 0, 0.02);
-                border-radius: 6px;
+                aspect-ratio: 1;
+                background: rgba(0, 0, 0, 0.03);
+                border-radius: 8px;
                 position: relative;
-                border: 1px solid rgba(0, 0, 0, 0.05);
             }
 
             .klotski-block {
                 width: 100%;
                 height: 100%;
-                background: #f8f9fa;
-                border-radius: 6px;
+                background: #ffffff;
+                border-radius: 8px;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                color: #495057;
-                font-weight: 500;
-                font-size: 27px;
+                color: #374151;
+                font-weight: 600;
+                font-size: 1.5rem;
                 transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
                 position: absolute;
                 top: 0;
                 left: 0;
                 cursor: pointer;
-                border: 1px solid rgba(0, 0, 0, 0.08);
             }
 
             .klotski-block:hover {
-                transform: translateY(-1px);
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
             }
 
             .klotski-block.moving {
                 z-index: 10;
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
-                animation: moveGlow 0.3s ease-out;
+                transform: scale(1.02);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
             }
 
-            @keyframes moveGlow {
-                0% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1); }
-                50% { box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2), 0 6px 15px rgba(0, 0, 0, 0.15); }
-                100% { box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1); }
-            }
-
-            /* 统一的灰度配色方案 - 现代简约 */
             .klotski-block[data-number="1"] {
-                background: #f1f3f4;
-                color: #3c4043;
-                border-left: 3px solid #5f6368;
+                background: linear-gradient(135deg, #fef3c7, #fcd34d);
+                color: #92400e;
             }
 
             .klotski-block[data-number="2"] {
-                background: #e8eaed;
-                color: #3c4043;
-                border-left: 3px solid #80868b;
+                background: linear-gradient(135deg, #e0e7ff, #a5b4fc);
+                color: #3730a3;
             }
 
             .klotski-block[data-number="3"] {
-                background: #dadce0;
-                color: #3c4043;
-                border-left: 3px solid #9aa0a6;
+                background: linear-gradient(135deg, #d1fae5, #6ee7b7);
+                color: #065f46;
             }
 
-            .klotski-block[data-number="1"]:hover {
-                background: #e8eaed;
-            }
-
-            .klotski-block[data-number="2"]:hover {
-                background: #dadce0;
-            }
-
-            .klotski-block[data-number="3"]:hover {
-                background: #bdc1c6;
-            }
-
-            /* 解决完成时的庆祝效果 - 更简约 */
             .klotski-demo-container.solved .klotski-block {
-                animation: celebration 0.5s ease-out;
+                animation: klotskiCelebration 0.5s ease-out;
             }
 
-            @keyframes celebration {
+            @keyframes klotskiCelebration {
                 0%, 100% { transform: scale(1); }
                 50% { transform: scale(1.05); }
             }
 
-            /* 空位效果 - 极简 */
             .klotski-cell:empty {
-                background: rgba(0, 0, 0, 0.01);
-                border: 1px dashed rgba(0, 0, 0, 0.06);
+                background: rgba(0, 0, 0, 0.02);
             }
         `;
         document.head.appendChild(style);
@@ -312,26 +287,28 @@ class GameDemoManager {
         style.id = 'game-2048-demo-styles';
         style.textContent = `
             .game-2048-demo-container {
-                position: relative;
-                width: 255px;
-                height: 255px;
-                margin: auto;
+                position: absolute;
+                width: 70%;
+                max-width: 200px;
+                aspect-ratio: 1;
                 top: 50%;
-                transform: translateY(-50%);
+                left: 50%;
+                transform: translate(-50%, -50%);
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
                 grid-template-rows: repeat(3, 1fr);
-                gap: 15px;
-                padding: 18px;
+                gap: 6px;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.6);
+                border-radius: 12px;
+                backdrop-filter: blur(8px);
             }
 
             .game-2048-cell {
-                width: 63px;
-                height: 63px;
-                background: rgba(0, 0, 0, 0.02);
+                aspect-ratio: 1;
+                background: rgba(0, 0, 0, 0.04);
                 border-radius: 6px;
                 position: relative;
-                border: 1px solid rgba(0, 0, 0, 0.05);
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -344,98 +321,80 @@ class GameDemoManager {
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-weight: 500;
-                font-size: 21px;
+                font-weight: 600;
+                font-size: 1.1rem;
                 position: absolute;
                 top: 0;
                 left: 0;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
-                border: 1px solid rgba(0, 0, 0, 0.08);
+                transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
             }
 
-            /* 2048数字块颜色 - 借鉴华容道的现代灰度配色 */
             .game-2048-tile[data-value="2"] { 
-                background: #f1f3f4; 
-                color: #3c4043; 
-                border-left: 3px solid #5f6368;
+                background: #f8fafc; 
+                color: #475569;
             }
             .game-2048-tile[data-value="4"] { 
-                background: #e8eaed; 
-                color: #3c4043; 
-                border-left: 3px solid #80868b;
+                background: #e0f2fe; 
+                color: #0369a1;
             }
             .game-2048-tile[data-value="8"] { 
-                background: #dadce0; 
-                color: #3c4043; 
-                border-left: 3px solid #9aa0a6;
+                background: #bae6fd; 
+                color: #0c4a6e;
             }
             .game-2048-tile[data-value="16"] { 
-                background: #bdc1c6; 
-                color: #3c4043; 
-                border-left: 3px solid #5f6368;
+                background: #7dd3fc; 
+                color: #ffffff;
             }
             .game-2048-tile[data-value="32"] { 
-                background: #9aa0a6; 
-                color: #ffffff; 
-                border-left: 3px solid #5f6368;
+                background: #38bdf8; 
+                color: #ffffff;
             }
             .game-2048-tile[data-value="64"] { 
-                background: #80868b; 
-                color: #ffffff; 
-                border-left: 3px solid #5f6368;
+                background: #0ea5e9; 
+                color: #ffffff;
             }
             .game-2048-tile[data-value="128"] { 
-                background: #5f6368; 
-                color: #ffffff; 
-                border-left: 3px solid #3c4043;
-                font-size: 18px;
+                background: #0284c7; 
+                color: #ffffff;
+                font-size: 0.95rem;
             }
             .game-2048-tile[data-value="256"] { 
-                background: #3c4043; 
-                color: #ffffff; 
-                border-left: 3px solid #202124;
-                font-size: 18px;
+                background: #0369a1; 
+                color: #ffffff;
+                font-size: 0.95rem;
             }
             .game-2048-tile[data-value="512"] { 
-                background: #202124; 
-                color: #ffffff; 
-                border-left: 3px solid #000000;
-                font-size: 18px;
+                background: #075985; 
+                color: #ffffff;
+                font-size: 0.95rem;
             }
 
-            /* 悬停效果 */
             .game-2048-tile:hover {
-                transform: translateY(-1px);
-                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+                transform: scale(1.02);
             }
 
-            /* 新出现的块动画 */
             .game-2048-tile.new {
-                animation: tileAppear 0.3s ease-out;
+                animation: tile2048Appear 0.25s ease-out;
             }
 
-            @keyframes tileAppear {
-                0% { transform: scale(0); }
-                100% { transform: scale(1); }
+            @keyframes tile2048Appear {
+                0% { transform: scale(0); opacity: 0; }
+                100% { transform: scale(1); opacity: 1; }
             }
 
-            /* 合并动画 */
             .game-2048-tile.merged {
-                animation: tileMerge 0.3s ease-out;
+                animation: tile2048Merge 0.25s ease-out;
             }
 
-            @keyframes tileMerge {
+            @keyframes tile2048Merge {
                 0% { transform: scale(1); }
                 50% { transform: scale(1.1); }
                 100% { transform: scale(1); }
             }
 
-            /* 移动中的块 */
             .game-2048-tile.moving {
                 z-index: 10;
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 4px 10px rgba(0, 0, 0, 0.1);
             }
         `;
         document.head.appendChild(style);
@@ -449,83 +408,77 @@ class GameDemoManager {
         style.id = 'minesweeper-demo-styles';
         style.textContent = `
             .minesweeper-demo-container {
-                position: relative;
-                width: 255px;
-                height: 255px;
-                margin: auto;
+                position: absolute;
+                width: 70%;
+                max-width: 200px;
+                aspect-ratio: 1;
                 top: 50%;
-                transform: translateY(-50%);
+                left: 50%;
+                transform: translate(-50%, -50%);
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
                 grid-template-rows: repeat(4, 1fr);
-                gap: 6px;
-                padding: 18px;
+                gap: 4px;
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.6);
+                border-radius: 12px;
+                backdrop-filter: blur(8px);
             }
 
             .minesweeper-cell {
-                width: 52px;
-                height: 52px;
-                background: #bdc1c6;
+                aspect-ratio: 1;
+                background: linear-gradient(145deg, #e2e8f0, #cbd5e1);
                 border-radius: 4px;
                 position: relative;
-                border: 2px outset #bdc1c6;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-weight: 500;
-                font-size: 18px;
+                font-weight: 600;
+                font-size: 0.85rem;
                 cursor: pointer;
-                transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+                transition: all 0.2s ease;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
             }
 
             .minesweeper-cell:hover {
-                background: #dadce0;
+                background: linear-gradient(145deg, #f1f5f9, #e2e8f0);
             }
 
-            /* 已点击的格子 */
             .minesweeper-cell.revealed {
-                background: #f8f9fa;
-                border: 1px inset #e8eaed;
-                color: #3c4043;
+                background: #ffffff;
+                box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
             }
 
-            /* 数字颜色 */
-            .minesweeper-cell.revealed[data-number="1"] { color: #1a73e8; }
-            .minesweeper-cell.revealed[data-number="2"] { color: #34a853; }
-            .minesweeper-cell.revealed[data-number="3"] { color: #ea4335; }
-            .minesweeper-cell.revealed[data-number="4"] { color: #673ab7; }
-            .minesweeper-cell.revealed[data-number="5"] { color: #ff5722; }
-            .minesweeper-cell.revealed[data-number="6"] { color: #795548; }
+            .minesweeper-cell.revealed[data-number="1"] { color: #3b82f6; }
+            .minesweeper-cell.revealed[data-number="2"] { color: #22c55e; }
+            .minesweeper-cell.revealed[data-number="3"] { color: #ef4444; }
+            .minesweeper-cell.revealed[data-number="4"] { color: #8b5cf6; }
+            .minesweeper-cell.revealed[data-number="5"] { color: #f97316; }
+            .minesweeper-cell.revealed[data-number="6"] { color: #06b6d4; }
 
-            /* 雷 */
             .minesweeper-cell.mine {
-                background: #ea4335;
-                color: #ffffff;
-                animation: explode 0.3s ease-out;
+                background: linear-gradient(135deg, #fecaca, #fca5a5);
+                animation: mineExplode 0.3s ease-out;
             }
 
-            @keyframes explode {
+            @keyframes mineExplode {
                 0% { transform: scale(1); }
-                50% { transform: scale(1.2); }
+                50% { transform: scale(1.1); }
                 100% { transform: scale(1); }
             }
 
-            /* 旗帜标记 */
             .minesweeper-cell.flagged {
-                background: #f1f3f4;
-                color: #ea4335;
-                border: 2px inset #e8eaed;
+                background: linear-gradient(145deg, #fef3c7, #fde68a);
             }
 
-            /* 安全区域动画 */
             .minesweeper-cell.safe {
-                animation: safeReveal 0.4s ease-out;
+                animation: mineSafeReveal 0.3s ease-out;
             }
 
-            @keyframes safeReveal {
-                0% { transform: scale(1); background: #bdc1c6; }
-                50% { transform: scale(1.05); background: #e8eaed; }
-                100% { transform: scale(1); background: #f8f9fa; }
+            @keyframes mineSafeReveal {
+                0% { transform: scale(1); background: linear-gradient(145deg, #e2e8f0, #cbd5e1); }
+                50% { transform: scale(1.02); }
+                100% { transform: scale(1); background: #ffffff; }
             }
         `;
         document.head.appendChild(style);
@@ -539,106 +492,86 @@ class GameDemoManager {
         style.id = 'labyrinth-demo-styles';
         style.textContent = `
             .labyrinth-demo-container {
-                position: relative;
-                width: 255px;
-                height: 255px;
-                margin: auto;
+                position: absolute;
+                width: 70%;
+                max-width: 200px;
+                aspect-ratio: 1;
                 top: 50%;
-                transform: translateY(-50%);
+                left: 50%;
+                transform: translate(-50%, -50%);
                 display: grid;
                 grid-template-columns: repeat(5, 1fr);
                 grid-template-rows: repeat(5, 1fr);
                 gap: 3px;
-                padding: 15px;
-                background: #f8f9fa;
-                border-radius: 8px;
-                border: 1px solid rgba(0, 0, 0, 0.08);
+                padding: 10px;
+                background: rgba(255, 255, 255, 0.6);
+                border-radius: 12px;
+                backdrop-filter: blur(8px);
             }
 
             .labyrinth-cell {
-                width: 41px;
-                height: 41px;
-                background: #84756a;
-                border-radius: 2px;
+                aspect-ratio: 1;
+                background: linear-gradient(135deg, #9ca3af, #6b7280);
+                border-radius: 3px;
                 position: relative;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                font-weight: bold;
-                font-size: 16px;
+                font-weight: 600;
+                font-size: 0.7rem;
                 color: #ffffff;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                border: 1px solid rgba(0, 0, 0, 0.1);
+                transition: all 0.25s ease;
             }
 
-            /* 路径（通道） */
             .labyrinth-cell.path {
-                background: #f8f7f0;
-                color: #3c4043;
-                border: 1px solid rgba(0, 0, 0, 0.05);
+                background: #f8fafc;
             }
 
-            /* 起点 */
             .labyrinth-cell.start {
-                background: #58542f;
+                background: linear-gradient(135deg, #86efac, #22c55e);
                 color: #ffffff;
-                font-size: 14px;
-                animation: startPulse 2s ease-in-out infinite;
+                font-size: 0.65rem;
             }
 
-            @keyframes startPulse {
-                0%, 100% { transform: scale(1); }
-                50% { transform: scale(1.05); }
-            }
-
-            /* 终点 */
             .labyrinth-cell.end {
-                background: #564232;
+                background: linear-gradient(135deg, #fca5a5, #ef4444);
                 color: #ffffff;
-                font-size: 14px;
-                animation: endGlow 3s ease-in-out infinite;
+                font-size: 0.65rem;
+                animation: labyrinthEndPulse 2s ease-in-out infinite;
             }
 
-            @keyframes endGlow {
-                0%, 100% { box-shadow: 0 0 0 rgba(86, 66, 50, 0.4); }
-                50% { box-shadow: 0 0 10px rgba(86, 66, 50, 0.8); }
+            @keyframes labyrinthEndPulse {
+                0%, 100% { box-shadow: 0 0 0 rgba(239, 68, 68, 0); }
+                50% { box-shadow: 0 0 8px rgba(239, 68, 68, 0.4); }
             }
 
-            /* 当前位置（玩家） */
             .labyrinth-cell.player {
-                background: rgba(86, 66, 50, 0.4);
+                background: linear-gradient(135deg, #a5b4fc, #6366f1);
                 color: #ffffff;
-                transform: scale(1.1);
-                box-shadow: 0 4px 8px rgba(86, 66, 50, 0.2);
+                transform: scale(1.05);
+                box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
                 z-index: 10;
                 border-radius: 50%;
-                animation: playerMove 0.4s ease-out;
+                animation: labyrinthPlayerMove 0.3s ease-out;
             }
 
-            @keyframes playerMove {
-                0% { transform: scale(1.3); }
-                100% { transform: scale(1.1); }
+            @keyframes labyrinthPlayerMove {
+                0% { transform: scale(1.15); }
+                100% { transform: scale(1.05); }
             }
 
-            /* 已走过的路径 */
             .labyrinth-cell.visited {
-                background: linear-gradient(135deg, #f8f7f0 0%, #e8eaed 100%);
-                border: 1px solid rgba(26, 115, 232, 0.2);
+                background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
             }
 
-            /* 生成动画 */
             .labyrinth-cell.generating {
-                animation: cellGenerate 0.3s ease-out;
+                animation: labyrinthCellGenerate 0.25s ease-out;
             }
 
-            @keyframes cellGenerate {
+            @keyframes labyrinthCellGenerate {
                 0% { 
-                    transform: scale(0) rotate(180deg);
+                    transform: scale(0) rotate(90deg);
                     opacity: 0;
-                }
-                70% { 
-                    transform: scale(1.1) rotate(0deg);
-                    opacity: 0.8;
                 }
                 100% { 
                     transform: scale(1) rotate(0deg);
@@ -646,24 +579,23 @@ class GameDemoManager {
                 }
             }
 
-            /* 获胜动画 */
-            .labyrinth-demo-container.victory .labyrinth-cell.path {
-                animation: victoryWave 0.8s ease-in-out;
+            .labyrinth-demo-container.victory .labyrinth-cell.path,
+            .labyrinth-demo-container.victory .labyrinth-cell.visited {
+                animation: labyrinthVictory 0.6s ease-in-out;
             }
 
-            @keyframes victoryWave {
-                0%, 100% { background: #f8f7f0; }
-                50% { background: #e8f5e8; }
+            @keyframes labyrinthVictory {
+                0%, 100% { background: #f8fafc; }
+                50% { background: #dcfce7; }
             }
 
-            /* 重置动画 */
             .labyrinth-cell.resetting {
-                animation: cellReset 0.2s ease-in-out;
+                animation: labyrinthCellReset 0.2s ease-in-out;
             }
 
-            @keyframes cellReset {
+            @keyframes labyrinthCellReset {
                 0% { opacity: 1; transform: scale(1); }
-                50% { opacity: 0.3; transform: scale(0.8); }
+                50% { opacity: 0.5; transform: scale(0.9); }
                 100% { opacity: 1; transform: scale(1); }
             }
         `;
@@ -1618,14 +1550,8 @@ class LabyrinthDemo {
     async generateMazeWithAnimation() {
         // console.log('开始生成迷宫...');
         
-        // 创建简单但有趣的迷宫布局
-        const mazePattern = [
-            [false, false, true,  false, false],
-            [true,  false, true,  false, true ],
-            [false, false, false, false, false],
-            [true,  false, true,  true,  false],
-            [false, false, false, false, false]
-        ];
+        // 使用随机DFS算法生成迷宫
+        const mazePattern = this.generateRandomMaze();
         
         // 从左上角到右下角的对角线生成动画
         const animationOrder = [];
@@ -1670,6 +1596,204 @@ class LabyrinthDemo {
         }
         
         // console.log('迷宫生成完成');
+    }
+
+    /**
+     * 随机生成迷宫 - 使用递归回溯算法变体
+     * 确保从起点到终点有路径
+     * @returns {boolean[][]} 5x5 的二维数组，true=墙，false=路径
+     *                        保证 maze[0][0] 和 maze[4][4] 为 false（起点和终点）
+     *                        保证从起点到终点存在有效路径
+     */
+    generateRandomMaze() {
+        // 严格定义迷宫尺寸常量
+        const MAZE_SIZE = 5;
+        const MIN_ROW = 0;
+        const MAX_ROW = MAZE_SIZE - 1; // 4
+        const MIN_COL = 0;
+        const MAX_COL = MAZE_SIZE - 1; // 4
+        
+        // 起点和终点位置（严格固定）
+        const START_ROW = 0;
+        const START_COL = 0;
+        const END_ROW = MAX_ROW;
+        const END_COL = MAX_COL;
+        
+        // 辅助函数：检查坐标是否在有效范围内
+        const isValidPosition = (row, col) => {
+            return row >= MIN_ROW && row <= MAX_ROW && col >= MIN_COL && col <= MAX_COL;
+        };
+        
+        // 辅助函数：检查是否为起点或终点
+        const isStartOrEnd = (row, col) => {
+            return (row === START_ROW && col === START_COL) || 
+                   (row === END_ROW && col === END_COL);
+        };
+        
+        // 辅助函数：随机打乱数组
+        const shuffleArray = (arr) => {
+            const newArr = [...arr];
+            for (let i = newArr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+            }
+            return newArr;
+        };
+        
+        // 辅助函数：BFS检查从起点是否能到达终点
+        const canReachEndFromStart = (maze) => {
+            const visited = Array(MAZE_SIZE).fill().map(() => Array(MAZE_SIZE).fill(false));
+            const queue = [[START_ROW, START_COL]];
+            visited[START_ROW][START_COL] = true;
+            
+            const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+            
+            while (queue.length > 0) {
+                const [row, col] = queue.shift();
+                
+                if (row === END_ROW && col === END_COL) {
+                    return true;
+                }
+                
+                for (const [dr, dc] of dirs) {
+                    const newRow = row + dr;
+                    const newCol = col + dc;
+                    
+                    if (isValidPosition(newRow, newCol) && 
+                        !visited[newRow][newCol] && 
+                        !maze[newRow][newCol]) {
+                        visited[newRow][newCol] = true;
+                        queue.push([newRow, newCol]);
+                    }
+                }
+            }
+            
+            return false;
+        };
+        
+        // 初始化迷宫为全墙（严格使用 MAZE_SIZE）
+        const maze = Array(MAZE_SIZE).fill().map(() => Array(MAZE_SIZE).fill(true));
+        
+        // 起点和终点必须是路径
+        maze[START_ROW][START_COL] = false;
+        maze[END_ROW][END_COL] = false;
+        
+        // 使用随机DFS生成迷宫路径
+        const visited = Array(MAZE_SIZE).fill().map(() => Array(MAZE_SIZE).fill(false));
+        const stack = [[START_ROW, START_COL]];
+        visited[START_ROW][START_COL] = true;
+        
+        const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]]; // 上下左右
+        
+        while (stack.length > 0) {
+            const [row, col] = stack[stack.length - 1];
+            const shuffledDirs = shuffleArray(directions);
+            
+            let found = false;
+            for (const [dr, dc] of shuffledDirs) {
+                const newRow = row + dr;
+                const newCol = col + dc;
+                
+                // 严格边界检查
+                if (isValidPosition(newRow, newCol) && !visited[newRow][newCol]) {
+                    visited[newRow][newCol] = true;
+                    maze[newRow][newCol] = false; // 打通路径
+                    stack.push([newRow, newCol]);
+                    found = true;
+                    break;
+                }
+            }
+            
+            if (!found) {
+                stack.pop();
+            }
+        }
+        
+        // 随机添加一些额外的墙壁，增加迷宫复杂度
+        const MIN_EXTRA_WALLS = 2;
+        const MAX_EXTRA_WALLS = 5;
+        const wallCount = Math.floor(Math.random() * (MAX_EXTRA_WALLS - MIN_EXTRA_WALLS + 1)) + MIN_EXTRA_WALLS;
+        
+        for (let i = 0; i < wallCount; i++) {
+            // 严格使用 MAZE_SIZE 范围生成随机坐标
+            const row = Math.floor(Math.random() * MAZE_SIZE);
+            const col = Math.floor(Math.random() * MAZE_SIZE);
+            
+            // 不能封住起点和终点
+            if (isStartOrEnd(row, col)) continue;
+            
+            // 临时设置墙壁
+            const original = maze[row][col];
+            maze[row][col] = true;
+            
+            // 检查是否仍然可达终点
+            if (!canReachEndFromStart(maze)) {
+                maze[row][col] = original; // 恢复
+            }
+        }
+        
+        // 确保有足够的路径使迷宫有趣
+        // 在中间区域（1-3行，1-3列）随机打开一些格子增加多条路径
+        const INNER_MIN = 1;
+        const INNER_MAX = 3;
+        const MIN_EXTRA_OPENINGS = 1;
+        const MAX_EXTRA_OPENINGS = 3;
+        const openCount = Math.floor(Math.random() * (MAX_EXTRA_OPENINGS - MIN_EXTRA_OPENINGS + 1)) + MIN_EXTRA_OPENINGS;
+        
+        for (let i = 0; i < openCount; i++) {
+            // 严格限制在内部区域
+            const row = Math.floor(Math.random() * (INNER_MAX - INNER_MIN + 1)) + INNER_MIN;
+            const col = Math.floor(Math.random() * (INNER_MAX - INNER_MIN + 1)) + INNER_MIN;
+            
+            if (maze[row][col]) {
+                maze[row][col] = false;
+            }
+        }
+        
+        // 最终验证：确保迷宫尺寸正确且路径可达
+        if (maze.length !== MAZE_SIZE || maze[0].length !== MAZE_SIZE) {
+            console.error('迷宫尺寸错误，重新生成');
+            return this.generateRandomMaze();
+        }
+        
+        if (!canReachEndFromStart(maze)) {
+            console.warn('路径不可达，重新生成');
+            return this.generateRandomMaze();
+        }
+        
+        return maze;
+    }
+
+    /**
+     * 检查从起点是否能到达终点
+     */
+    canReachEnd(maze) {
+        const visited = Array(5).fill().map(() => Array(5).fill(false));
+        const queue = [[0, 0]];
+        visited[0][0] = true;
+        
+        const directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+        
+        while (queue.length > 0) {
+            const [row, col] = queue.shift();
+            
+            if (row === 4 && col === 4) {
+                return true;
+            }
+            
+            for (const [dr, dc] of directions) {
+                const newRow = row + dr;
+                const newCol = col + dc;
+                
+                if (newRow >= 0 && newRow < 5 && newCol >= 0 && newCol < 5 
+                    && !visited[newRow][newCol] && !maze[newRow][newCol]) {
+                    visited[newRow][newCol] = true;
+                    queue.push([newRow, newCol]);
+                }
+            }
+        }
+        
+        return false;
     }
 
     findPath() {

@@ -86,24 +86,8 @@ function navDisplay(kind) {
     if (isRecover) document.querySelector("#nav").style.animation = `nav${kind} 1s ease-in-out forwards`;
 }
 function setStyleOfMobileDevice() {
-    Object.assign(document.querySelector("#content").style, {
-        flexDirection: "column",
-        alignItems: "center",
-        backgroundColor: "transparent"
-    });
-    document.querySelectorAll(".gameType").forEach(item => {
-        Object.assign(item.style, {
-            width: "min(72vw, 800px)",
-            height: "calc(min(72vw, 800px) * 1.5)",
-            borderRadius: "calc(min(72vw, 800px) * 0.125)"
-        })
-    });
-    document.querySelectorAll(".gameTypeFooter").forEach(item => {
-        Object.assign(item.style, {
-            borderRadius: "0 0 calc(min(72vw, 800px) * 0.125) calc(min(72vw, 800px) * 0.125)",
-            padding: "20px"
-        })
-    });
+    // 现代简约布局在 CSS 中通过媒体查询处理
+    // 这里只需要处理一些 JS 需要控制的样式
     document.querySelector("#main").style.paddingTop = "0";
 }
 function setScreenBlock(mode = "show", title = "title", explanation = ["explanation"]) {

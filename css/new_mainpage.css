@@ -159,75 +159,236 @@ body {
 /* ==========主内容框架START========== */
 #main {
     opacity: 0;
-    margin-top: 15vh;
-    min-height: 85vh;
+    margin-top: 12vh;
+    min-height: 88vh;
     display: flex;
     transition: all 1s ease;
     flex-direction: column;
-    padding: 5vh calc(50vw - min(90vw, 1000px) / 2) 0;
+    padding: 4vh calc(50vw - min(92vw, 1200px) / 2) 0;
 }
+
 #content {
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 2.5vh;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    padding: 2rem;
     transition: all 0.3s ease;
+    max-width: 1000px;
+    margin: 0 auto;
 }
+
 .gameType {
-    width: 400px;
-    height: 600px;
-    border-radius: 50px;
-    background-color: rgba(255, 255, 255, 0.5);
-    margin: 2.5vh 0;
-    box-shadow: 1px 1px 5px 1px rgba(1, 1, 1, 0.1);
-    transition: all 0.3s ease;
+    position: relative;
+    border-radius: 24px;
+    background: linear-gradient(145deg, #ffffff, #f5f7fa);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.08),
+        0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     overflow: hidden;
+    aspect-ratio: 3 / 4;
+    min-height: 420px;
+    max-height: 560px;
 }
+
+.gameType:hover {
+    transform: translateY(-8px);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.12),
+        0 8px 16px rgba(0, 0, 0, 0.08);
+}
+
 .gameTypeBGScreen {
-    color: rgba(0, 20, 45, 0.75);
-    transition: all .6s .1s linear;
     height: 100%;
-}
-.gameType:hover .gameTypeBGScreen{
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s ease;
     cursor: pointer;
-    background-color: rgb(227, 242, 255);;
-    transition: all .6s .1s linear;
-    /* color: rgb(105, 138, 150); */
 }
+
+.gameType:hover .gameTypeBGScreen {
+    background: linear-gradient(145deg, #f8fbff, #eef4fc);
+}
+
 .gameTypeMain {
-    width: 100%;
-    height: calc(100% * 2 / 3);
-    border-radius: 12.5% 12.5% 0 0;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
+    flex: 1;
+    min-height: 55%;
+    position: relative;
+    background: linear-gradient(180deg, #f8f9fa 0%, #e9ecef 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
+
+.gameTypeMain::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
 .gameTypeFooter {
-    width: 100%;
-    height: calc(100% * 1 / 3);
-    border-radius: 0 0 50px 50px;
-    background-color: rgba(255, 255, 255, 0.5);
-    box-sizing: border-box;
-    padding: 0 20px 20px;
+    padding: 1.5rem;
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
+
 .gameTypeTitle {
-    height: 30%;
-    font-size: 250%;
-    line-height: 180%;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1.2;
 }
+
 .gameTypeExplanation {
-    padding: 10px;
-    padding-left: 30px;
-    overflow: scroll;
-    height: 70%;
-    text-align: left;
-    line-height: 1.5em;
-    font-size: 150%;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    max-height: 120px;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,0.1) transparent;
 }
-.gameTypeExplanation>li {
-    list-style: outside;
+
+.gameTypeExplanation::-webkit-scrollbar {
+    width: 4px;
+}
+
+.gameTypeExplanation::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.gameTypeExplanation::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+
+.gameTypeExplanation > li {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+    position: relative;
+    list-style: none;
+}
+
+.gameTypeExplanation > li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #6366f1, #3b82f6);
+}
+
+/* 各游戏独特的顶部渐变色 */
+#klotski .gameTypeMain {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 50%, #fcd34d 100%);
+}
+
+#game2048 .gameTypeMain {
+    background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 50%, #60a5fa 100%);
+}
+
+#labyrinth .gameTypeMain {
+    background: linear-gradient(135deg, #d1fae5 0%, #6ee7b7 50%, #34d399 100%);
+}
+
+#minesweaping .gameTypeMain {
+    background: linear-gradient(135deg, #fce7f3 0%, #f9a8d4 50%, #f472b6 100%);
+}
+
+/* 深色主题适配 */
+body[style*="rgb(47, 66, 86)"] .gameType,
+body[style*="#2f4256"] .gameType {
+    background: linear-gradient(145deg, #3d5a73, #2a4560);
+    box-shadow: 
+        0 4px 20px rgba(0, 0, 0, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+body[style*="rgb(47, 66, 86)"] .gameTypeFooter,
+body[style*="#2f4256"] .gameTypeFooter {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+body[style*="rgb(47, 66, 86)"] .gameTypeTitle,
+body[style*="#2f4256"] .gameTypeTitle {
+    color: #f1f5f9;
+}
+
+body[style*="rgb(47, 66, 86)"] .gameTypeExplanation > li,
+body[style*="#2f4256"] .gameTypeExplanation > li {
+    color: #94a3b8;
+}
+
+body[style*="rgb(47, 66, 86)"] .gameType:hover .gameTypeBGScreen,
+body[style*="#2f4256"] .gameType:hover .gameTypeBGScreen {
+    background: linear-gradient(145deg, #4a6b85, #35546d);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    #content {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+        gap: 1.5rem;
+        max-width: 480px;
+    }
+    
+    .gameType {
+        border-radius: 20px;
+        min-height: 380px;
+        max-height: 520px;
+    }
+    
+    .gameTypeTitle {
+        font-size: 1.5rem;
+    }
+    
+    .gameTypeExplanation > li {
+        font-size: 0.8rem;
+    }
+}
+
+@media (min-width: 769px) {
+    #content {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 900px;
+    }
+    
+    .gameType {
+        min-height: 420px;
+        max-height: 560px;
+    }
+}
+
+@media (min-width: 1201px) {
+    #content {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 1000px;
+        gap: 3rem;
+    }
+    
+    .gameType {
+        min-height: 450px;
+        max-height: 600px;
+    }
 }
 /* ==========主内容框架END========== */
 
