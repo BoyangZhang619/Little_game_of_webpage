@@ -794,7 +794,7 @@ async function loadUser() {
 
 // 设置页面分类切换功能
 document.querySelectorAll(".settingClass").forEach(settingTab => {
-    settingTab.addEventListener("click", () => {
+    settingTab.addEventListener("click", async () => {
         const targetSetting = settingTab.getAttribute("data-target");
         
         // 移除所有活跃状态
@@ -816,9 +816,51 @@ document.querySelectorAll(".settingClass").forEach(settingTab => {
             targetContent.style.display = "flex";
         }
         
+        // 根据不同的设置页面加载对应数据
+        if (targetSetting === 'progress') {
+            await loadProgressData();
+        } else if (targetSetting === 'data') {
+            await updateStorageInfo();
+        }
+        
         console.log(`切换到设置页面: ${targetSetting}`);
     });
 });
+
+// 加载 Progress 页面数据
+async function loadProgressData() {
+    try {
+        // 确保 GameStorageManager 存在
+        if (typeof GameStorageManager === 'undefined') {
+            console.warn('GameStorageManager 未定义');
+            return;
+        }
+
+        const storage = new GameStorageManager();
+        const currentUserId = await storage.getCurrentUserId();
+        console.log("Progress页面获取到的用户ID:", currentUserId);
+        
+        if (!currentUserId) {
+            console.log('用户未登录，无法显示游戏进度');
+            const tableBody = document.getElementById('progressTableBody');
+            if (tableBody) {
+                tableBody.innerHTML = '<tr><td colspan="9" style="text-align:center;padding:20px;">请先登录以查看游戏进度</td></tr>';
+            }
+            return;
+        }
+
+        // 检查 GameProgressDashboard 是否存在
+        if (typeof GameProgressDashboard !== 'undefined') {
+            const dashboard = new GameProgressDashboard(currentUserId, storage);
+            window.dashboard = dashboard;
+            await dashboard.loadData();
+        } else {
+            console.warn('GameProgressDashboard 未定义');
+        }
+    } catch (error) {
+        console.error('加载进度数据失败:', error);
+    }
+}
 
 // 主题选择功能
 document.querySelectorAll(".themeOption").forEach(option => {
@@ -903,27 +945,216 @@ function initializeSettingsPage() {
 // window.addEventListener("DOMContentLoaded", initializeSettingsPage);
 
 // 数据管理功能
-document.getElementById("exportDataButton")?.addEventListener("click", () => {
-    console.log("导出数据功能（待实现）");
-    alert("导出数据功能正在开发中...");
+document.getElementById("exportDataButton")?.addEventListener("click", async () => {
+    try {
+        const exportData = {
+            exportTime: new Date().toISOString(),
+            version: "1.0.0",
+            userData: null,
+            gameRecords: [],
+            localStorage: {}
+        };
+
+        // 获取当前用户数据
+        const currentUser = await userManager.getCurrentUser();
+        if (currentUser) {
+            exportData.userData = {
+                name: currentUser.name,
+                description: currentUser.description,
+                theme: currentUser.theme,
+                registeredAt: currentUser.registeredAt
+            };
+        }
+
+        // 获取游戏记录（如果有 GameStorageManager）
+        if (typeof GameStorageManager !== 'undefined') {
+            try {
+                const storage = new GameStorageManager();
+                const userId = await getCurrentUserId();
+                if (userId) {
+                    const records = await storage.getUserRecords(userId);
+                    exportData.gameRecords = records;
+                }
+            } catch (e) {
+                console.warn("获取游戏记录失败:", e);
+            }
+        }
+
+        // 获取 localStorage 中的游戏相关数据
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key && (key.includes('game') || key.includes('minesweeper') || key.includes('klotski') || key.includes('labyrinth') || key.includes('2048'))) {
+                exportData.localStorage[key] = localStorage.getItem(key);
+            }
+        }
+
+        // 创建下载文件
+        const dataStr = JSON.stringify(exportData, null, 2);
+        const blob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `little_game_backup_${new Date().toISOString().slice(0, 10)}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        alert("数据导出成功！");
+    } catch (error) {
+        console.error("导出数据失败:", error);
+        alert("导出数据失败: " + error.message);
+    }
 });
 
 document.getElementById("importDataButton")?.addEventListener("click", () => {
-    console.log("导入数据功能（待实现）");
-    alert("导入数据功能正在开发中...");
+    // 创建文件输入元素
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    
+    input.onchange = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        try {
+            const text = await file.text();
+            const importData = JSON.parse(text);
+
+            // 验证数据格式
+            if (!importData.version || !importData.exportTime) {
+                throw new Error("无效的备份文件格式");
+            }
+
+            const confirmed = confirm(
+                `确定要导入此备份吗？\n` +
+                `备份时间: ${new Date(importData.exportTime).toLocaleString()}\n` +
+                `用户: ${importData.userData?.name || '未知'}\n` +
+                `游戏记录: ${importData.gameRecords?.length || 0} 条\n\n` +
+                `注意：导入将覆盖现有的 localStorage 数据！`
+            );
+            
+            if (!confirmed) return;
+
+            // 导入 localStorage 数据
+            if (importData.localStorage) {
+                for (const [key, value] of Object.entries(importData.localStorage)) {
+                    localStorage.setItem(key, value);
+                }
+            }
+
+            // 导入游戏记录（如果有）
+            if (importData.gameRecords && importData.gameRecords.length > 0) {
+                if (typeof GameStorageManager !== 'undefined') {
+                    try {
+                        const storage = new GameStorageManager();
+                        for (const record of importData.gameRecords) {
+                            await storage.saveRecord(record);
+                        }
+                    } catch (e) {
+                        console.warn("导入游戏记录失败:", e);
+                    }
+                }
+            }
+
+            alert(`数据导入成功！\n导入了 ${Object.keys(importData.localStorage || {}).length} 个设置项和 ${importData.gameRecords?.length || 0} 条游戏记录。`);
+            
+            // 刷新页面以应用更改
+            if (confirm("是否刷新页面以应用更改？")) {
+                location.reload();
+            }
+        } catch (error) {
+            console.error("导入数据失败:", error);
+            alert("导入数据失败: " + error.message);
+        }
+    };
+    
+    input.click();
 });
 
-document.getElementById("clearDataButton")?.addEventListener("click", () => {
+document.getElementById("clearDataButton")?.addEventListener("click", async () => {
     const confirmed = confirm("警告：此操作将清除所有本地数据，包括用户信息和游戏记录！\n确定要继续吗？");
-    if (confirmed) {
-        const doubleConfirmed = confirm("请再次确认：您真的要清除所有数据吗？此操作不可恢复！");
-        if (doubleConfirmed) {
-            // 清除数据的逻辑（待实现）
-            console.log("清除所有数据功能（待实现）");
-            alert("清除数据功能正在开发中...");
+    if (!confirmed) return;
+    
+    const doubleConfirmed = confirm("请再次确认：您真的要清除所有数据吗？此操作不可恢复！");
+    if (!doubleConfirmed) return;
+
+    try {
+        // 清除 localStorage
+        const keysToRemove = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key) keysToRemove.push(key);
         }
+        keysToRemove.forEach(key => localStorage.removeItem(key));
+
+        // 清除 IndexedDB
+        const databases = ['UserDB', 'GameRecordsDB'];
+        for (const dbName of databases) {
+            try {
+                await new Promise((resolve, reject) => {
+                    const request = indexedDB.deleteDatabase(dbName);
+                    request.onsuccess = resolve;
+                    request.onerror = reject;
+                    request.onblocked = () => {
+                        console.warn(`数据库 ${dbName} 被阻塞，可能有其他连接`);
+                        resolve();
+                    };
+                });
+            } catch (e) {
+                console.warn(`清除数据库 ${dbName} 失败:`, e);
+            }
+        }
+
+        alert("所有数据已清除！页面将刷新。");
+        location.reload();
+    } catch (error) {
+        console.error("清除数据失败:", error);
+        alert("清除数据失败: " + error.message);
     }
 });
+
+// 更新存储信息显示
+async function updateStorageInfo() {
+    try {
+        // 计算 localStorage 使用量
+        let localStorageSize = 0;
+        for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (key) {
+                localStorageSize += key.length + (localStorage.getItem(key)?.length || 0);
+            }
+        }
+        
+        const usedStorageEl = document.getElementById('usedStorage');
+        if (usedStorageEl) {
+            const sizeKB = (localStorageSize / 1024).toFixed(2);
+            usedStorageEl.textContent = `${sizeKB} KB`;
+        }
+
+        // 计算游戏记录数
+        let totalRecords = 0;
+        if (typeof GameStorageManager !== 'undefined') {
+            try {
+                const storage = new GameStorageManager();
+                const userId = await getCurrentUserId();
+                if (userId) {
+                    const records = await storage.getUserRecords(userId);
+                    totalRecords = records.length;
+                }
+            } catch (e) {
+                console.warn("获取记录数失败:", e);
+            }
+        }
+
+        const totalRecordsEl = document.getElementById('totalRecords');
+        if (totalRecordsEl) {
+            totalRecordsEl.textContent = `${totalRecords} `;
+        }
+    } catch (error) {
+        console.error("更新存储信息失败:", error);
+    }
+}
 
 // 调试方法
 window.debugUserManager = {
