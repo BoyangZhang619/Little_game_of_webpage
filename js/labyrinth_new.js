@@ -28,6 +28,10 @@ class LabyrinthGame {
         this.isPaused = false;
         this.isGameOver = false;
         this.gameId = crypto.randomUUID();
+        
+        // 移动队列（用于连续滑动动画）
+        this.moveQueue = [];
+        this.isAnimating = false;
 
         // -------- DOM --------
         this.gridEl = document.getElementById('maze-grid');
@@ -61,15 +65,38 @@ class LabyrinthGame {
         this.userId = null;
 
         this.timer = null;
+        
+        // 检测是否为手机端
+        this.isMobile = /mobile/i.test(navigator.userAgent);
+        
         this.init();
     }
 
     async init() {
+        // 手机端限制：禁用 41x41 选项
+        if (this.isMobile) {
+            this.restrictMobileOptions();
+        }
         await this.loadUser();
         await this.loadBestSteps();
         this.bindEvents();
         this.newGame();
         this.startTimer();
+    }
+    
+    // 手机端限制难度选项
+    restrictMobileOptions() {
+        const option41 = this.sizeSelect.querySelector('option[value="41"]');
+        if (option41) {
+            option41.disabled = true;
+            option41.textContent += ' (PC Only)';
+        }
+        // 如果当前选中的是 41，强制切换到 31
+        if (this.sizeSelect.value === '41') {
+            this.sizeSelect.value = '31';
+            this.size = 31;
+            this.exit = { x: this.size - 2, y: this.size - 2 };
+        }
     }
 
     // -------- Storage (mirrors 2048.js logic) --------
@@ -175,36 +202,133 @@ class LabyrinthGame {
 
     setupTouchControls() {
         let startX, startY;
+        let lastMoveX, lastMoveY; // 上次触发移动的位置
         const minSwipeDistance = 30;
+        
+        // 设置 touch-action 防止浏览器默认手势
+        this.gridEl.style.touchAction = 'none';
+        
+        // 计算每个格子的像素大小（用于连续滑动）
+        const getCellSize = () => {
+            const gridRect = this.gridEl.getBoundingClientRect();
+            return gridRect.width / this.size;
+        };
 
         this.gridEl.addEventListener('touchstart', e => {
+            e.preventDefault();
             const touch = e.touches[0];
             startX = touch.clientX;
             startY = touch.clientY;
-        }, { passive: true });
+            lastMoveX = startX;
+            lastMoveY = startY;
+        }, { passive: false });
+        
+        this.gridEl.addEventListener('touchmove', e => {
+            e.preventDefault();
+            if (startX === null || startY === null) return;
+            
+            const touch = e.touches[0];
+            const currentX = touch.clientX;
+            const currentY = touch.clientY;
+            
+            // 计算从上次移动位置的偏移
+            const deltaX = currentX - lastMoveX;
+            const deltaY = currentY - lastMoveY;
+            
+            const cellSize = getCellSize();
+            
+            // 检查是否滑过了一个格子的距离
+            if (Math.abs(deltaX) >= cellSize || Math.abs(deltaY) >= cellSize) {
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
+                    // 水平移动
+                    const steps = Math.floor(Math.abs(deltaX) / cellSize);
+                    const direction = deltaX > 0 ? 1 : -1;
+                    for (let i = 0; i < steps; i++) {
+                        this.moveQueue.push({ dx: direction, dy: 0 });
+                    }
+                    // 更新上次移动位置（只更新主方向）
+                    lastMoveX += direction * steps * cellSize;
+                } else {
+                    // 垂直移动
+                    const steps = Math.floor(Math.abs(deltaY) / cellSize);
+                    const direction = deltaY > 0 ? 1 : -1;
+                    for (let i = 0; i < steps; i++) {
+                        this.moveQueue.push({ dx: 0, dy: direction });
+                    }
+                    // 更新上次移动位置（只更新主方向）
+                    lastMoveY += direction * steps * cellSize;
+                }
+                
+                // 如果没有正在处理的动画，开始处理队列
+                if (!this.isAnimating) {
+                    this.processNextMove();
+                }
+            }
+        }, { passive: false });
 
         this.gridEl.addEventListener('touchend', e => {
-            if (!startX || !startY) return;
-
-            const touch = e.changedTouches[0];
-            const deltaX = touch.clientX - startX;
-            const deltaY = touch.clientY - startY;
-
-            if (Math.abs(deltaX) < minSwipeDistance && Math.abs(deltaY) < minSwipeDistance) {
-                return;
-            }
-
-            if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                // 水平滑动
-                this.move(deltaX > 0 ? 1 : -1, 0);
-            } else {
-                // 垂直滑动
-                this.move(0, deltaY > 0 ? 1 : -1);
-            }
-
+            e.preventDefault();
             startX = null;
             startY = null;
-        }, { passive: true });
+            lastMoveX = null;
+            lastMoveY = null;
+        }, { passive: false });
+    }
+    
+    // 连续移动多步，逐步动画
+    moveMultiple(dx, dy, steps) {
+        if (this.isPaused || this.isGameOver) return;
+        
+        // 将移动请求加入队列
+        for (let i = 0; i < steps; i++) {
+            this.moveQueue.push({ dx, dy });
+        }
+        
+        // 如果没有正在处理的动画，开始处理队列
+        if (!this.isAnimating) {
+            this.processNextMove();
+        }
+    }
+    
+    // 处理移动队列中的下一步
+    processNextMove() {
+        if (this.moveQueue.length === 0 || this.isPaused || this.isGameOver) {
+            this.isAnimating = false;
+            return;
+        }
+        
+        this.isAnimating = true;
+        const { dx, dy } = this.moveQueue.shift();
+        
+        const nx = this.player.x + dx;
+        const ny = this.player.y + dy;
+        
+        // 检查是否可以移动
+        if (this.maze[ny]?.[nx] !== 0) {
+            // 遇到障碍，清空同方向的后续移动
+            this.moveQueue = this.moveQueue.filter(m => m.dx !== dx || m.dy !== dy);
+            this.isAnimating = false;
+            this.processNextMove(); // 处理其他方向的移动（如果有）
+            return;
+        }
+        
+        // 执行移动
+        this.player.x = nx;
+        this.player.y = ny;
+        this.steps++;
+        this.updateSteps();
+        this.updatePlayerPosition();
+        
+        // 检查是否到达终点
+        if (nx === this.exit.x && ny === this.exit.y) {
+            this.moveQueue = []; // 清空队列
+            this.isAnimating = false;
+            this.win();
+            return;
+        }
+        
+        // 延迟处理下一步移动（动画间隔）
+        setTimeout(() => this.processNextMove(), 60);
     }
 
     handleKey(e) {
@@ -225,6 +349,9 @@ class LabyrinthGame {
     // -------- Game flow --------
     newGame() {
         this.showLoading();
+        // 清空移动队列
+        this.moveQueue = [];
+        this.isAnimating = false;
         setTimeout(() => {
             this.generateMaze();
             this.player = { x: 1, y: 1 };

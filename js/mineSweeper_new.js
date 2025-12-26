@@ -74,16 +74,46 @@ class MinesweeperGame {
       this.storage = null;
     }
     this.userId = null;
+    
+    // 检测是否为手机端
+    this.isMobile = /mobile/i.test(navigator.userAgent);
+    this.difficultySelect = document.getElementById('difficulty-select');
 
     this.init();
   }
 
   async init() {
+    // 手机端限制：只允许 Easy (9x9)
+    if (this.isMobile) {
+      this.restrictMobileOptions();
+    }
     await this.loadUser();
     await this.loadBestScore();
     this.bindEvents();
     this.newGame();
     this.startTimer();
+  }
+  
+  // 手机端限制难度选项
+  restrictMobileOptions() {
+    // 禁用 normal 和 hard 选项
+    const normalOption = this.difficultySelect.querySelector('option[value="normal"]');
+    const hardOption = this.difficultySelect.querySelector('option[value="hard"]');
+    
+    if (normalOption) {
+      normalOption.disabled = true;
+      normalOption.textContent += ' (PC Only)';
+    }
+    if (hardOption) {
+      hardOption.disabled = true;
+      hardOption.textContent += ' (PC Only)';
+    }
+    
+    // 强制使用 easy 难度
+    this.difficultySelect.value = 'easy';
+    this.difficulty = 'easy';
+    this.size = this.config.easy.size;
+    this.mineCount = this.config.easy.mines;
   }
 
   // ---- Storage (2048-style) ----

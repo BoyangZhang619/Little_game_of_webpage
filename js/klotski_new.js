@@ -240,10 +240,21 @@ class KlotskiGame {
     _setupTouchControls() {
         let sx = 0, sy = 0;
         const min = 30;
+        
+        // 设置 touch-action 防止浏览器默认手势
+        this.puzzleGrid.style.touchAction = 'none';
+        
         this.puzzleGrid.addEventListener('touchstart', (ev) => {
+            ev.preventDefault();
             const t = ev.touches[0]; sx = t.clientX; sy = t.clientY;
-        }, { passive: true });
+        }, { passive: false });
+        
+        this.puzzleGrid.addEventListener('touchmove', (ev) => {
+            ev.preventDefault();
+        }, { passive: false });
+        
         this.puzzleGrid.addEventListener('touchend', (ev) => {
+            ev.preventDefault();
             const t = ev.changedTouches[0];
             const dx = t.clientX - sx; const dy = t.clientY - sy;
             if (Math.abs(dx) < min && Math.abs(dy) < min) return;
@@ -252,7 +263,7 @@ class KlotskiGame {
             } else {
                 dy > 0 ? this.move('down') : this.move('up');
             }
-        }, { passive: true });
+        }, { passive: false });
     }
 
     // ------------ Game lifecycle ------------

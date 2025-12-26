@@ -1196,13 +1196,7 @@ function initializeGameNavigation() {
         const gameUrl = gameMain.dataset.gameUrl;
         if (gameUrl) {
             gameMain.addEventListener('click', (e) => {
-                // 如果点击的是演示动画元素，不触发导航
-                if (e.target.closest('.klotski-demo-container') || 
-                    e.target.classList.contains('klotski-block')) {
-                    return;
-                }
-                
-                // 导航到游戏页面
+                // 导航到游戏页面（demo容器内的点击也会触发）
                 window.location.href = gameUrl;
             });
             

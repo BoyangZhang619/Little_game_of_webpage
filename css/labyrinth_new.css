@@ -543,3 +543,132 @@ body {
         font-size: 0.75rem;
     }
 }
+
+/* ========== Dark Theme ========== */
+body.dark-theme {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+body.dark-theme .container {
+    background: rgba(30, 41, 59, 0.95);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme .game-title {
+    color: #e2e8f0;
+}
+
+body.dark-theme .score-box {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-theme .score-label {
+    color: #a0aec0;
+}
+
+body.dark-theme .score-value {
+    color: #f7fafc;
+}
+
+body.dark-theme .game-info {
+    background: #2d3748;
+}
+
+body.dark-theme .info-label {
+    color: #a0aec0;
+}
+
+body.dark-theme .info-value {
+    color: #e2e8f0;
+}
+
+body.dark-theme #maze-grid {
+    background: #2d3748;
+}
+
+body.dark-theme .maze-cell.wall {
+    background: linear-gradient(145deg, #1a202c 0%, #2d3748 100%);
+}
+
+body.dark-theme .maze-cell.path {
+    background: #4a5568;
+}
+
+body.dark-theme .maze-cell.start {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+}
+
+body.dark-theme .maze-cell.exit {
+    background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+}
+
+body.dark-theme .control-btn {
+    background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+    color: #e2e8f0;
+}
+
+body.dark-theme .control-btn:hover {
+    background: linear-gradient(135deg, #5a6578 0%, #3d4758 100%);
+    transform: translateY(-2px);
+}
+
+body.dark-theme .pause-overlay {
+    background: rgba(26, 26, 46, 0.95);
+}
+
+body.dark-theme .pause-text {
+    color: #e2e8f0;
+}
+
+body.dark-theme .loading-overlay {
+    background: rgba(26, 26, 46, 0.9);
+}
+
+body.dark-theme .loading-text {
+    color: #e2e8f0;
+}
+
+body.dark-theme .modal-content {
+    background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+    color: #e2e8f0;
+}
+
+body.dark-theme .modal-content h2 {
+    color: #f7fafc;
+}
+
+body.dark-theme .modal-stat-label {
+    color: #a0aec0;
+}
+
+body.dark-theme .modal-stat-value {
+    color: #f7fafc;
+}
+
+body.dark-theme select {
+    background: #4a5568;
+    color: #e2e8f0;
+    border-color: #718096;
+}
+
+body.dark-theme select:focus {
+    border-color: #667eea;
+}
+
+/* ========== 滚动条样式 ========== */
+/* container 已在基础样式中隐藏滚动条 */
+
+body.dark-theme select::-webkit-scrollbar {
+    width: 6px;
+}
+
+body.dark-theme select::-webkit-scrollbar-track {
+    background: #2d3748;
+}
+
+body.dark-theme select::-webkit-scrollbar-thumb {
+    background: #4a5568;
+    border-radius: 3px;
+}
+

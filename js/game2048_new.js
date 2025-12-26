@@ -172,13 +172,22 @@ class Game2048 {
         let startX, startY;
         const minSwipeDistance = 30;
         
+        // 设置 touch-action 防止浏览器默认手势
+        this.gameGrid.style.touchAction = 'none';
+        
         this.gameGrid.addEventListener('touchstart', (e) => {
+            e.preventDefault();
             const touch = e.touches[0];
             startX = touch.clientX;
             startY = touch.clientY;
-        }, { passive: true });
+        }, { passive: false });
+        
+        this.gameGrid.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+        }, { passive: false });
         
         this.gameGrid.addEventListener('touchend', (e) => {
+            e.preventDefault();
             if (!startX || !startY) return;
             
             const touch = e.changedTouches[0];
@@ -186,6 +195,8 @@ class Game2048 {
             const deltaY = touch.clientY - startY;
             
             if (Math.abs(deltaX) < minSwipeDistance && Math.abs(deltaY) < minSwipeDistance) {
+                startX = null;
+                startY = null;
                 return;
             }
             
@@ -207,7 +218,7 @@ class Game2048 {
             
             startX = null;
             startY = null;
-        }, { passive: true });
+        }, { passive: false });
     }
     
     handleKeyPress(e) {
