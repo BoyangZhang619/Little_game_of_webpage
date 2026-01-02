@@ -27,11 +27,22 @@ const MagicCursor = {
         darkMode: false
     },
     
+    // 运行时标记：检测是否为移动设备并可以禁用
+    isMobile: (/Mobi|Android|iPhone|iPad|Windows Phone|mobile/i.test(navigator.userAgent) || ('ontouchstart' in window && navigator.maxTouchPoints > 0)),
+    disabled: false,
+
     // 初始化
     init(options = {}) {
         // 合并配置
         this.options = { ...this.options, ...options };
-        
+
+        // 在移动设备上禁用魔法光标以避免干扰触摸体验
+        if (this.isMobile) {
+            console.log('⚠️ 魔法光标在移动设备上已禁用以避免影响触摸体验');
+            this.disabled = true;
+            return;
+        }
+
         // 创建光标DOM
         this.createCursorElements();
         
@@ -228,9 +239,9 @@ const MagicCursor = {
 
 // 自动初始化（页面加载完成后）
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => MagicCursor.init());
+    document.addEventListener('DOMContentLoaded', () => { if (!MagicCursor.isMobile) MagicCursor.init(); });
 } else {
-    MagicCursor.init();
+    if (!MagicCursor.isMobile) MagicCursor.init();
 }
 
 // 导出到全局
