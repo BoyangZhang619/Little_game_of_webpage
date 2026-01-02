@@ -389,6 +389,11 @@ class UserManager {
             document.querySelector("body").style.backgroundColor = "aliceblue";
             if (!isPhone) document.querySelector("#content").style.backgroundColor = "rgba(255, 255, 255, 0.3)";
             
+            // 同步更新魔法光标的深色模式
+            if (typeof MagicCursor !== 'undefined' && MagicCursor.setDarkMode) {
+                MagicCursor.setDarkMode(false);
+            }
+            
             // 重置设置页面中的主题选项状态
             document.querySelectorAll(".themeOption").forEach(opt => {
                 opt.classList.remove("active");
@@ -711,6 +716,11 @@ function updateUI(user) {
         if (!isPhone) document.querySelector("#content").style.backgroundColor = "rgba(255, 255, 255, 0.3)";
     }
     
+    // 同步更新魔法光标的深色模式
+    if (typeof MagicCursor !== 'undefined' && MagicCursor.setDarkMode) {
+        MagicCursor.setDarkMode(userTheme === "dark");
+    }
+    
     // 同步设置页面中的主题选项状态
     document.querySelectorAll(".themeOption").forEach(opt => {
         opt.classList.remove("active");
@@ -748,6 +758,11 @@ function resetUI() {
     document.querySelector("body").style.backgroundColor = "aliceblue";
     if (!isPhone) {
         document.querySelector("#content").style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+    }
+    
+    // 同步更新魔法光标的深色模式
+    if (typeof MagicCursor !== 'undefined' && MagicCursor.setDarkMode) {
+        MagicCursor.setDarkMode(false);
     }
     
     // 清空输入框
@@ -868,6 +883,11 @@ document.querySelectorAll(".themeOption").forEach(option => {
             theme = false;
             document.querySelector("body").style.backgroundColor = "aliceblue";
             if (!isPhone) document.querySelector("#content").style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+        }
+        
+        // 同步更新魔法光标的深色模式
+        if (typeof MagicCursor !== 'undefined' && MagicCursor.setDarkMode) {
+            MagicCursor.setDarkMode(selectedTheme === "dark");
         }
         
         // 如果用户已登录，保存主题设置到用户数据

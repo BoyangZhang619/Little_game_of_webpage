@@ -129,6 +129,11 @@ class ThemeManager {
         } else {
             document.body.classList.remove('dark-theme');
         }
+        
+        // 同步更新魔法光标的深色模式
+        if (typeof MagicCursor !== 'undefined' && MagicCursor.setDarkMode) {
+            MagicCursor.setDarkMode(theme === 'dark');
+        }
     }
 
     /**
