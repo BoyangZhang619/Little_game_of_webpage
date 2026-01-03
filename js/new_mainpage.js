@@ -917,6 +917,131 @@ document.querySelectorAll(".languageOption").forEach(option => {
     });
 });
 
+// ========================================
+// 光标设置功能 - 仅PC端
+// ========================================
+(function initCursorSettings() {
+    const particleToggle = document.getElementById('cursorParticleToggle');
+    const coreToggle = document.getElementById('cursorCoreToggle');
+    const ringToggle = document.getElementById('cursorRingToggle');
+    const previewArea = document.getElementById('cursorPreviewArea');
+    
+    // 如果找不到这些元素（可能是移动端隐藏了），直接返回
+    if (!particleToggle || !coreToggle || !ringToggle) {
+        console.log('光标设置元素未找到（可能是移动端）');
+        return;
+    }
+
+    // 初始化预览粒子
+    function initPreviewParticles() {
+        const particlesContainer = previewArea?.querySelector('.preview-particles');
+        if (!particlesContainer) return;
+        
+        const colors = ['#a78bfa', '#818cf8', '#f093fb', '#34d399', '#667eea', '#f5576c'];
+        for (let i = 0; i < 6; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'preview-particle';
+            particle.style.background = colors[i % colors.length];
+            particle.style.boxShadow = `0 0 6px ${colors[i % colors.length]}`;
+            particle.style.left = `${30 + Math.random() * 40}%`;
+            particle.style.top = `${30 + Math.random() * 40}%`;
+            particle.style.animationDelay = `${i * 0.3}s`;
+            particlesContainer.appendChild(particle);
+        }
+    }
+    
+    // 更新预览
+    function updatePreview() {
+        if (!previewArea) return;
+        
+        const coreEl = previewArea.querySelector('.preview-cursor-core');
+        const ringEl = previewArea.querySelector('.preview-cursor-ring');
+        const particlesEl = previewArea.querySelector('.preview-particles');
+        
+        if (coreEl) {
+            coreEl.classList.toggle('hidden', !coreToggle.checked);
+        }
+        if (ringEl) {
+            ringEl.classList.toggle('hidden', !ringToggle.checked || !coreToggle.checked);
+        }
+        if (particlesEl) {
+            particlesEl.classList.toggle('hidden', !particleToggle.checked);
+        }
+    }
+    
+    // 从MagicCursor加载当前设置
+    function loadCurrentSettings() {
+        if (typeof MagicCursor !== 'undefined') {
+            const settings = MagicCursor.getSettings();
+            particleToggle.checked = settings.enableParticles;
+            coreToggle.checked = settings.enableCore;
+            ringToggle.checked = settings.enableRing;
+        }
+        updatePreview();
+    }
+    
+    // 粒子开关
+    particleToggle.addEventListener('change', () => {
+        if (typeof MagicCursor !== 'undefined') {
+            MagicCursor.setParticles(particleToggle.checked);
+        }
+        updatePreview();
+        console.log('粒子效果:', particleToggle.checked ? '开启' : '关闭');
+    });
+    
+    // 圆心块开关
+    coreToggle.addEventListener('change', () => {
+        if (typeof MagicCursor !== 'undefined') {
+            MagicCursor.setCore(coreToggle.checked);
+        }
+        // 如果圆心块关闭，也关闭旋转圆环的复选框
+        if (!coreToggle.checked) {
+            ringToggle.checked = false;
+            ringToggle.disabled = true;
+        } else {
+            ringToggle.disabled = false;
+        }
+        updatePreview();
+        console.log('圆心块:', coreToggle.checked ? '开启' : '关闭');
+    });
+    
+    // 旋转圆环开关
+    ringToggle.addEventListener('change', () => {
+        // 必须要有圆心块才能开启旋转圆环
+        if (ringToggle.checked && !coreToggle.checked) {
+            ringToggle.checked = false;
+            alert('旋转圆环需要先开启圆心块！');
+            return;
+        }
+        if (typeof MagicCursor !== 'undefined') {
+            MagicCursor.setRing(ringToggle.checked);
+        }
+        updatePreview();
+        console.log('旋转圆环:', ringToggle.checked ? '开启' : '关闭');
+    });
+    
+    // 初始化
+    initPreviewParticles();
+    
+    // 等待MagicCursor初始化完成后加载设置
+    if (typeof MagicCursor !== 'undefined' && !MagicCursor.isMobile) {
+        setTimeout(loadCurrentSettings, 100);
+    } else {
+        // 如果MagicCursor还没准备好，监听它
+        const checkInterval = setInterval(() => {
+            if (typeof MagicCursor !== 'undefined' && MagicCursor.cursor.main) {
+                loadCurrentSettings();
+                clearInterval(checkInterval);
+            }
+        }, 200);
+        // 5秒后停止检查
+        setTimeout(() => clearInterval(checkInterval), 5000);
+    }
+    
+    // 初始化旋转圆环的禁用状态
+    ringToggle.disabled = !coreToggle.checked;
+})();
+
 // 辅助函数：获取当前用户ID
 async function getCurrentUserId() {
     try {

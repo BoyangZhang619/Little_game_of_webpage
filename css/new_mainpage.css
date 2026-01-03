@@ -1403,6 +1403,288 @@ textarea.form-input {
     text-align: center;
 }
 
+/* ========================================
+   炫酷光标设置样式 - 仅PC端可见
+   ======================================== */
+
+/* 仅PC端显示 */
+.cursorSettingBlock.pc-only {
+    display: block;
+}
+
+@media (max-width: 1024px), (hover: none) {
+    .cursorSettingBlock.pc-only {
+        display: none !important;
+    }
+}
+
+.cursor-setting-desc {
+    color: rgba(102, 126, 234, 0.8);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.cursorOptions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.cursorOptionItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.cursorOptionItem:hover {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: rgba(102, 126, 234, 0.3);
+    transform: translateX(4px);
+}
+
+.cursor-option-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cursor-option-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+    border-radius: 10px;
+}
+
+.cursor-option-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.cursor-option-title {
+    font-weight: 600;
+    color: #333;
+    font-size: 1rem;
+}
+
+.cursor-option-subtitle {
+    font-size: 0.8rem;
+    color: rgba(100, 100, 100, 0.8);
+}
+
+/* Toggle开关样式 */
+.cursor-toggle {
+    position: relative;
+    display: inline-block;
+    width: 52px;
+    height: 28px;
+}
+
+.cursor-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.cursor-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(150, 150, 150, 0.4);
+    border-radius: 28px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cursor-toggle-slider:before {
+    position: absolute;
+    content: "";
+    height: 22px;
+    width: 22px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.cursor-toggle input:checked + .cursor-toggle-slider {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.5);
+}
+
+.cursor-toggle input:checked + .cursor-toggle-slider:before {
+    transform: translateX(24px);
+}
+
+.cursor-toggle input:disabled + .cursor-toggle-slider {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 光标预览区域 */
+.cursor-preview-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.cursor-preview-box {
+    width: 100%;
+    max-width: 300px;
+    background: linear-gradient(135deg, rgba(30, 30, 50, 0.9), rgba(50, 50, 80, 0.9));
+    border-radius: 16px;
+    padding: 1rem;
+    border: 1px solid rgba(102, 126, 234, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.cursor-preview-label {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.cursor-preview-area {
+    height: 120px;
+    border-radius: 12px;
+    background: radial-gradient(circle at center, rgba(102, 126, 234, 0.1), transparent);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* 预览元素样式 */
+.preview-cursor-core {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a78bfa, #818cf8);
+    box-shadow: 
+        0 0 10px rgba(167, 139, 250, 0.8),
+        0 0 20px rgba(129, 140, 248, 0.5);
+    position: absolute;
+    z-index: 3;
+    animation: previewCorePulse 1.5s ease-in-out infinite;
+    transition: opacity 0.3s ease;
+}
+
+.preview-cursor-core.hidden {
+    opacity: 0;
+}
+
+@keyframes previewCorePulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+.preview-cursor-ring {
+    width: 44px;
+    height: 44px;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    background: 
+        linear-gradient(rgba(30, 30, 50, 1), rgba(30, 30, 50, 1)) padding-box,
+        linear-gradient(135deg, #667eea, #764ba2, #f093fb, #f5576c) border-box;
+    position: absolute;
+    z-index: 2;
+    animation: previewRingRotate 3s linear infinite;
+    transition: opacity 0.3s ease;
+}
+
+.preview-cursor-ring.hidden {
+    opacity: 0;
+}
+
+@keyframes previewRingRotate {
+    to { transform: rotate(360deg); }
+}
+
+.preview-particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.preview-particles.hidden {
+    opacity: 0;
+}
+
+.preview-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    animation: previewParticleFloat 2s ease-in-out infinite;
+}
+
+@keyframes previewParticleFloat {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    20% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    80% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0) translateY(-20px);
+    }
+}
+
+/* 深色主题适配 */
+body[style*="rgb(47, 66, 86)"] .cursor-option-title,
+body[style*="#2f4256"] .cursor-option-title {
+    color: #e9ecef;
+}
+
+body[style*="rgb(47, 66, 86)"] .cursor-option-subtitle,
+body[style*="#2f4256"] .cursor-option-subtitle {
+    color: rgba(200, 200, 200, 0.7);
+}
+
+body[style*="rgb(47, 66, 86)"] .cursorOptionItem,
+body[style*="#2f4256"] .cursorOptionItem {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body[style*="rgb(47, 66, 86)"] .cursorOptionItem:hover,
+body[style*="#2f4256"] .cursorOptionItem:hover {
+    background: rgba(102, 126, 234, 0.15);
+    border-color: rgba(102, 126, 234, 0.4);
+}
+
+body[style*="rgb(47, 66, 86)"] .cursor-setting-desc,
+body[style*="#2f4256"] .cursor-setting-desc {
+    color: rgba(167, 139, 250, 0.9);
+}
+
 /* 语言设置样式 */
 .languageOptions {
     display: flex;

@@ -282,7 +282,7 @@ class Game2048 {
     setupGrid() {
         // Clear existing grid
         this.gameGrid.innerHTML = '';
-        this.gameGrid.className = `game-grid size-${this.gridSize}`;
+        this.gameGrid.className = `game-grid size-${this.gridSize} cursor-game-zone`;
         
         // Create grid cells
         for (let i = 0; i < this.gridSize * this.gridSize; i++) {

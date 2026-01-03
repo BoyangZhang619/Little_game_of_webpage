@@ -183,7 +183,7 @@ class KlotskiGame {
         // create CSS grid structure inside puzzleGrid depending on gridSize
         this.puzzleGrid.innerHTML = '';
         this.puzzleGrid.style.position = 'relative';
-        this.puzzleGrid.className = `puzzle-grid size-${this.gridSize}`;
+        this.puzzleGrid.className = `puzzle-grid size-${this.gridSize} cursor-game-zone`;
 
         for (let i = 0; i < this.gridSize * this.gridSize; i++) {
             const cell = document.createElement('div');

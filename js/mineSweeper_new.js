@@ -428,7 +428,7 @@ class MinesweeperGame {
   // ---- UI ----
   render() {
     this.gridEl.innerHTML = '';
-    this.gridEl.className = `mine-grid size-${this.difficulty}`;
+    this.gridEl.className = `mine-grid size-${this.difficulty} cursor-game-zone`;
 
     for (let y = 0; y < this.size; y++) {
       for (let x = 0; x < this.size; x++) {

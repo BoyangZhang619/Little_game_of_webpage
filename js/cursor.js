@@ -24,16 +24,57 @@ const MagicCursor = {
     // 配置选项
     options: {
         enableParticles: true,
+        enableCore: true,
+        enableRing: true,
         darkMode: false
     },
+
+    // localStorage键名
+    STORAGE_KEY: 'magicCursorSettings',
     
     // 运行时标记：检测是否为移动设备并可以禁用
     isMobile: (/Mobi|Android|iPhone|iPad|Windows Phone|mobile/i.test(navigator.userAgent) || ('ontouchstart' in window && navigator.maxTouchPoints > 0)),
     disabled: false,
+    
+    // 游戏区域状态
+    inGameZone: false,
+
+    // 从localStorage加载设置
+    loadSettings() {
+        try {
+            const saved = localStorage.getItem(this.STORAGE_KEY);
+            if (saved) {
+                const settings = JSON.parse(saved);
+                this.options.enableParticles = settings.enableParticles !== false;
+                this.options.enableCore = settings.enableCore !== false;
+                this.options.enableRing = settings.enableRing !== false;
+                console.log('✅ 光标设置已加载:', this.options);
+            }
+        } catch (e) {
+            console.warn('加载光标设置失败:', e);
+        }
+    },
+
+    // 保存设置到localStorage
+    saveSettings() {
+        try {
+            localStorage.setItem(this.STORAGE_KEY, JSON.stringify({
+                enableParticles: this.options.enableParticles,
+                enableCore: this.options.enableCore,
+                enableRing: this.options.enableRing
+            }));
+            console.log('💾 光标设置已保存');
+        } catch (e) {
+            console.warn('保存光标设置失败:', e);
+        }
+    },
 
     // 初始化
     init(options = {}) {
-        // 合并配置
+        // 加载已保存的设置
+        this.loadSettings();
+        
+        // 合并配置（传入的选项优先级最低）
         this.options = { ...this.options, ...options };
 
         // 在移动设备上禁用魔法光标以避免干扰触摸体验
@@ -70,6 +111,9 @@ const MagicCursor = {
             this.cursor.wrapper.classList.add('cursor-dark');
         }
         
+        // 应用初始设置
+        this.applySettings();
+        
         // 绑定事件
         this.bindEvents();
         
@@ -77,6 +121,51 @@ const MagicCursor = {
         this.animate();
         
         console.log('✨ 魔法光标已启用');
+    },
+
+    // 应用当前设置到DOM
+    applySettings() {
+        if (!this.cursor.main || !this.cursor.trail) return;
+        
+        // 圆心块
+        if (this.options.enableCore) {
+            this.cursor.main.classList.remove('cursor-element-hidden');
+            document.body.classList.add('cursor-core-active');
+        } else {
+            this.cursor.main.classList.add('cursor-element-hidden');
+            document.body.classList.remove('cursor-core-active');
+        }
+        
+        // 旋转圆环 - 依赖圆心块
+        if (this.options.enableRing && this.options.enableCore) {
+            this.cursor.trail.classList.remove('cursor-element-hidden');
+        } else {
+            this.cursor.trail.classList.add('cursor-element-hidden');
+        }
+    },
+
+    // 检测是否在游戏区域内
+    isInGameZone(x, y) {
+        const gameZones = document.querySelectorAll('.cursor-game-zone');
+        for (const zone of gameZones) {
+            const rect = zone.getBoundingClientRect();
+            if (x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom) {
+                return true;
+            }
+        }
+        return false;
+    },
+
+    // 设置游戏区域内的光标隐藏状态
+    setGameZoneState(inGameZone) {
+        if (this.inGameZone === inGameZone) return; // 状态没变，不处理
+        this.inGameZone = inGameZone;
+        
+        if (inGameZone) {
+            this.cursor.wrapper?.classList.add('cursor-in-game-zone');
+        } else {
+            this.cursor.wrapper?.classList.remove('cursor-in-game-zone');
+        }
     },
     
     // 创建光标DOM元素
@@ -102,12 +191,16 @@ const MagicCursor = {
             this.pos.x = e.clientX;
             this.pos.y = e.clientY;
             
+            // 检测是否在游戏区域内
+            const inGameZone = this.isInGameZone(this.pos.x, this.pos.y);
+            this.setGameZoneState(inGameZone);
+            
             // 主光标立即跟随
             this.cursor.main.style.left = this.pos.x + 'px';
             this.cursor.main.style.top = this.pos.y + 'px';
             
-            // 生成粒子
-            if (this.options.enableParticles) {
+            // 生成粒子（游戏区域内不生成）
+            if (this.options.enableParticles && !inGameZone) {
                 this.maybeSpawnParticle();
             }
         });
@@ -123,6 +216,9 @@ const MagicCursor = {
         
         // 点击效果
         document.addEventListener('mousedown', () => {
+            // 游戏区域内不显示点击效果
+            if (this.inGameZone) return;
+            
             this.cursor.wrapper?.classList.add('cursor-click');
             if (this.options.enableParticles) {
                 this.burstParticles(8);
@@ -228,6 +324,39 @@ const MagicCursor = {
     // 切换粒子效果
     setParticles(enabled) {
         this.options.enableParticles = enabled;
+        this.saveSettings();
+    },
+
+    // 切换圆心块
+    setCore(enabled) {
+        this.options.enableCore = enabled;
+        // 如果关闭圆心块，也要关闭旋转圆环
+        if (!enabled) {
+            this.options.enableRing = false;
+        }
+        this.applySettings();
+        this.saveSettings();
+    },
+
+    // 切换旋转圆环（必须圆心块开启才能生效）
+    setRing(enabled) {
+        if (enabled && !this.options.enableCore) {
+            console.warn('⚠️ 旋转圆环需要圆心块开启才能生效');
+            return false;
+        }
+        this.options.enableRing = enabled;
+        this.applySettings();
+        this.saveSettings();
+        return true;
+    },
+
+    // 获取当前设置状态
+    getSettings() {
+        return {
+            enableParticles: this.options.enableParticles,
+            enableCore: this.options.enableCore,
+            enableRing: this.options.enableRing
+        };
     },
     
     // 销毁

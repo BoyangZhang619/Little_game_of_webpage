@@ -440,6 +440,7 @@ class LabyrinthGame {
         this.gridEl.innerHTML = '';
         this.gridEl.style.gridTemplateColumns = `repeat(${this.size}, 1fr)`;
         this.gridEl.style.position = 'relative';
+        this.gridEl.classList.add('cursor-game-zone');
         
         for (let y = 0; y < this.size; y++) {
             for (let x = 0; x < this.size; x++) {

@@ -438,6 +438,65 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- 炫酷光标设置 - 仅PC端可见 -->
+                        <div class="settingItem cursorSettingBlock pc-only">
+                            <h3>✨ 𝙲𝚞𝚛𝚜𝚘𝚛 𝙴𝚏𝚏𝚎𝚌𝚝𝚜</h3>
+                            <p class="cursor-setting-desc">Customize your magic cursor effects (PC only)</p>
+                            <div class="cursorOptions">
+                                <!-- 粒子效果开关 -->
+                                <div class="cursorOptionItem">
+                                    <div class="cursor-option-info">
+                                        <span class="cursor-option-icon">🌟</span>
+                                        <div class="cursor-option-text">
+                                            <span class="cursor-option-title">𝙿𝚊𝚛𝚝𝚒𝚌𝚕𝚎𝚜</span>
+                                            <span class="cursor-option-subtitle">Sparkle trail effect</span>
+                                        </div>
+                                    </div>
+                                    <label class="cursor-toggle">
+                                        <input type="checkbox" id="cursorParticleToggle" checked>
+                                        <span class="cursor-toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <!-- 圆心块开关 -->
+                                <div class="cursorOptionItem">
+                                    <div class="cursor-option-info">
+                                        <span class="cursor-option-icon">⚫</span>
+                                        <div class="cursor-option-text">
+                                            <span class="cursor-option-title">𝙲𝚘𝚛𝚎 𝙳𝚘𝚝</span>
+                                            <span class="cursor-option-subtitle">Central glowing dot</span>
+                                        </div>
+                                    </div>
+                                    <label class="cursor-toggle">
+                                        <input type="checkbox" id="cursorCoreToggle" checked>
+                                        <span class="cursor-toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <!-- 空心旋转圆开关 -->
+                                <div class="cursorOptionItem">
+                                    <div class="cursor-option-info">
+                                        <span class="cursor-option-icon">⭕</span>
+                                        <div class="cursor-option-text">
+                                            <span class="cursor-option-title">𝚁𝚘𝚝𝚊𝚝𝚒𝚗𝚐 𝚁𝚒𝚗𝚐</span>
+                                            <span class="cursor-option-subtitle">Spinning outer ring (requires Core Dot)</span>
+                                        </div>
+                                    </div>
+                                    <label class="cursor-toggle">
+                                        <input type="checkbox" id="cursorRingToggle" checked>
+                                        <span class="cursor-toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="cursor-preview-container">
+                                <div class="cursor-preview-box">
+                                    <div class="cursor-preview-label">Preview</div>
+                                    <div class="cursor-preview-area" id="cursorPreviewArea">
+                                        <div class="preview-cursor-core"></div>
+                                        <div class="preview-cursor-ring"></div>
+                                        <div class="preview-particles"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
                 <section id="languagePart" class="settingContent" data-setting="language" style="display: none;">

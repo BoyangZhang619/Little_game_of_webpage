@@ -3,10 +3,22 @@
    可在任意页面引入使用
    ============================================ */
 
-/* 隐藏默认光标 */
-.cursor-enabled,
-.cursor-enabled * {
+/* 隐藏默认光标 - 仅在有Core Dot时 */
+.cursor-enabled.cursor-core-active,
+.cursor-enabled.cursor-core-active * {
     cursor: none !important;
+}
+
+/* Core Dot关闭时显示系统光标 */
+.cursor-enabled:not(.cursor-core-active),
+.cursor-enabled:not(.cursor-core-active) * {
+    cursor: auto !important;
+}
+
+/* 游戏区域强制显示系统光标，隐藏魔法光标 */
+.cursor-game-zone,
+.cursor-game-zone * {
+    cursor: auto !important;
 }
 
 .cursor-wrapper {
@@ -154,4 +166,18 @@
 .cursor-hidden .cursor-trail {
     opacity: 0;
     transition: opacity 0.2s;
+}
+
+/* 单独隐藏光标元素 */
+.cursor-element-hidden {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+/* 游戏区域内隐藏所有光标元素 */
+.cursor-in-game-zone .cursor-main,
+.cursor-in-game-zone .cursor-trail {
+    opacity: 0 !important;
+    pointer-events: none;
+    transition: opacity 0.15s ease;
 }
