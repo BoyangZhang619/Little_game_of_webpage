@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sudoku - Simple & Clean</title>
+
+    <link rel="stylesheet" href="../css/sudoku.css" />
+    <link rel="stylesheet" href="../css/cursor.css" />
+    <link rel="icon" href="../img/icon.jpg" type="image/x-icon" />
+    <script src="../js/themeManager.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="game-title">Sudoku</h1>
+            <div class="score-container">
+                <div class="score-box">
+                    <div class="score-label">Mistakes</div>
+                    <div class="score-value" id="mistake-count">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">Hints</div>
+                    <div class="score-value" id="hint-count">0</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Game Info -->
+        <div class="game-info">
+            <div class="info-item">
+                <span class="info-label">Time:</span>
+                <span class="info-value" id="game-time">00:00</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Moves:</span>
+                <span class="info-value" id="move-count">0</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Difficulty:</span>
+                <select id="difficulty-select" class="difficulty-select">
+                    <option value="easy">Easy (4x4)</option>
+                    <option value="normal" selected>Normal (9x9)</option>
+                    <option value="hard">Hard (16x16)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-container">
+            <div class="sudoku-board-wrap">
+                <div class="sudoku-board size-9" id="sudoku-board" aria-label="Sudoku Board"></div>
+            </div>
+        </div>
+
+        <!-- Mobile Keypad (only visible on mobile) -->
+        <div class="mobile-keypad" id="mobile-keypad" aria-label="Mobile Keypad">
+            <!-- JS will render 5x2 keypad buttons here -->
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="controls">
+            <button class="control-btn primary" id="new-game-btn">New Game</button>
+            <button class="control-btn" id="hint-btn">Hint</button>
+            <button class="control-btn" id="undo-btn" disabled>Undo</button>
+            <button class="control-btn" id="pause-btn">Pause</button>
+            <button class="control-btn" id="back-btn" onclick="window.location.href='../index.html'">Back</button>
+        </div>
+
+        <!-- Game Instructions -->
+        <div class="instructions">
+            <p>
+                Use <kbd>Arrow Keys</kbd> to move selection, type <kbd>1-9</kbd> (and <kbd>A-G</kbd> for 16×16) to fill.
+            </p>
+            <p>
+                Press <kbd>Backspace</kbd>/<kbd>Delete</kbd> to clear. Conflicts will be highlighted.
+            </p>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2 id="modal-title">You Win!</h2>
+            <div class="modal-stats">
+                <div class="stat-item">
+                    <span class="stat-label">Time:</span>
+                    <span class="stat-value" id="final-time">00:00</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Moves:</span>
+                    <span class="stat-value" id="final-moves">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Mistakes:</span>
+                    <span class="stat-value" id="final-mistakes">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Hints Used:</span>
+                    <span class="stat-value" id="final-hints">0</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" id="try-again-btn">Try Again</button>
+                <button class="modal-btn" id="close-modal-btn">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div class="pause-overlay" id="pause-overlay">
+        <div class="pause-content">
+            <h2>Game Paused</h2>
+            <p>Press any key or tap to continue</p>
+        </div>
+    </div>
+
+    <script src="../js/fullScreen.js"></script>
+    <script src="../js/gameStorageManager.js"></script>
+    <script src="../js/sudoku.js"></script>
+</body>
+</html>
